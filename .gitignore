@@ -1,0 +1,11 @@
+/tools/venv
+/tools/venv/
+/tools/logs/
+/dist/
+/build/
+! /build/*.iss
+**/__pycache__/
+**/.old/
+/data/
+! /**/.keep
+.idea/
