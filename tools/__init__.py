@@ -6,6 +6,7 @@ from tools.logger import logger  # import logger and set default working directo
 
 # try to import required modules
 _msg_ptrn = " ok"
+test_module = '[nothing tested yet]'
 try:
     # numpy
     test_module = 'numpy'
@@ -54,7 +55,7 @@ except ImportError as err:
     print("Opening Python debugger...")
     pdb.set_trace()
 
-__version__ = '1.0.0'
+__version__ = '1.0.1'
 __description__ = "Main tools"
 
 __icon__ = '\n'

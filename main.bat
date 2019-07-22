@@ -1,7 +1,4 @@
 @echo off
 echo This terminal is here for debug purposes. Don't close it unless you want to terminate the program!
-REM load virtualenv, run main.py (with debug mode) and pause if an error occurs (otherwise close the window)
-call tools\venv\Scripts\activate.bat && pythonw main.py || echo Loading virtualenv failed! Trying to launch default python... && main.py || echo An error occurred! && pause
-pause
-REM tools\venv\Scripts\pythonw.exe main.py
-REM main.py
+REM activate virtualenv, run main.py and pause if an error occurs (otherwise close the window)
+call (tools\venv\Scripts\activate.bat || echo Virtual environment activation failed! Trying to launch the program with default python environment...) && pythonw main.py || (echo An error occurred! Could not start the program && pause)
