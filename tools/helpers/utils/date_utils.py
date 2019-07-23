@@ -17,8 +17,10 @@ import numpy as np
 from tools.helpers.interface import get_user_date
 from tools.helpers.utils.decorators import handle_datetime_dataframe, handle_datetime_pandas_objects
 
-STRFTIME_DICT = {'year': "%Y", "month": "%Y-%m", "quarter": "%Y-%m", "week": "%Y-W%W", "day": "%Y-%m-%d",
-                 "hour": "%H:%M", "minute": "%H:%M", "second": "%H:%M:%S"}  # WARN: week format don't respect ISO 8601
+STRFTIME_DICT = {'year': "%Y", "month": "%Y-%m", "quarter": "%Y-%m",
+                 "week": "%Y-W%W",  # WARN: week format don't respect ISO 8601 here
+                 "day": "%Y-%m-%d", None: "%Y-%m-%d",
+                 "hour": "%H:%M", "minute": "%H:%M", "second": "%H:%M:%S"}
 
 
 # Reset time
@@ -389,7 +391,7 @@ def get_period(nb_period=1, period_type='week', date_start=None, date_end=None,
     if isinstance(date_start, str) and date_start in ['ask']:
         title = title_1 or "Start date"
         date_start = get_user_date(title, **get_user_date_kwargs)
-    if isinstance(date_start, str) and date_end in ['ask']:
+    if isinstance(date_end, str) and date_end in ['ask']:
         title = title_1 or "End date"
         date_end = get_user_date(title, **get_user_date_kwargs)
     elif isinstance(date_start, str) and date_end in ['latest', 'today', 'now']:
@@ -409,23 +411,30 @@ def get_periods(date_start=None, date_end=None, nb_period=1, period_type=None, f
     """Get a list of nb_period periods from date_start and/or to date_end.
     Monday is the first day of week (following ISO 8601).
 
-    >>> get_periods(date_end = datetime.datetime(2019, 2, 5), nb_period=1)
+    >>> get_periods(date_end = datetime.datetime(2019, 2, 5), nb_period=1, period_type='week')
     [(Timestamp('2019-01-28 00:00:00'), Timestamp('2019-02-04 00:00:00'))]
 
     >>> get_periods(date_end = datetime.datetime(2019, 2, 5), nb_period=1, period_type='week', full_periods=False)
     [(Timestamp('2019-01-29 00:00:00'), Timestamp('2019-02-05 00:00:00'))]
 
+    >>> get_periods(date_start = datetime.datetime(2019, 2, 3), date_end = datetime.datetime(2019, 2, 5))
+    [(Timestamp('2019-02-03 00:00:00'), Timestamp('2019-02-05 00:00:00'))]
+
     :param date_start: minimum date
     :param date_end: maximum date
     :param nb_period: number of periods
     :param period_type: one of: 'year', 'month', 'week', 'day', 'hour', 'minute', 'second'.
+                        If None, date_start and date_end must be different from None (otherwise, an error is raised),
+                        nb_period and full_periods arguments are ignored and then [(date_start, date_end)] is returned.
     :param full_periods: if True, get first date of periods
     :return: list of tuples of date_start (to include), date_end (to exclude)
     """
     if date_start and date_end:  # use the min of nb_month and date_end - date_start
         if date_end < date_start:
             date_start, date_end = date_end, date_start
-        nb_period = min(nb_period, datetime_delta(date_start, date_end, period_type=period_type) + 1)
+        if period_type is None:  # particular case
+            return [(pd.to_datetime(date_start), pd.to_datetime(date_end))]
+        nb_period = min(nb_period, datetime_delta(date_start, date_end, period_type=period_type))
         date_end = None
     if nb_period < 1:
         return []
