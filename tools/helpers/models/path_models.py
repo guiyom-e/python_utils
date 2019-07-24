@@ -3,11 +3,13 @@ import os
 from typing import Tuple
 from copy import copy, deepcopy
 
+from tools.helpers.models.metaclasses import LockChangeAttr
 from tools.logger import logger
 from tools.helpers.utils import isiterable
 
 
 class _CustomStr(str):
+    """str-like object with some enhanced functions"""
     _SETTABLE_ATTR = ['_data']  # Allowed attributes to be set once after __new__ is called.
     _ALLOW_CASTING = True  # Allow non-string objects to be casted.
     _ALLOW_MULTIPLE = False  # Allow collections of objects. Priority over _ALLOW_CASTING
@@ -104,15 +106,18 @@ class _CustomStr(str):
 
 
 class _CollectionCustomStr(list):  # Collection (list) of _CustomStr objects (1 dimension only)
+    """list-like model which permit to apply methods to every element in the object"""
     _STR_CLS = _CustomStr
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for i, ele in enumerate(self):
+            self[i] = self._STR_CLS(ele)
 
     def __str__(self):
         return str([str(ele) for ele in self])
 
     def __getattr__(self, item):
-        if item in dir(self):
-            print('already in dir')
-            return self.__getattribute__(item)
         if item in dir(self._STR_CLS):  # Beta version
             if '__call__' not in dir(getattr(self._STR_CLS, item)):  # attribute or property
                 return self.__class__([getattr(ele, item) for ele in self])
@@ -142,6 +147,14 @@ class _CollectionCustomStr(list):  # Collection (list) of _CustomStr objects (1 
         other = [self._STR_CLS(ele) for ele in other]
         return self.__class__(other + self)
 
+    def __getitem__(self, item):
+        if isinstance(item, slice):
+            return self.__class__(self.__getitem__(item))
+        return super().__getitem__(item)
+
+    def copy(self):
+        return self.__class__(super().copy())
+
     def append(self, obj) -> None:
         obj = self._STR_CLS(obj)
         super().append(obj)
@@ -155,9 +168,97 @@ class _CollectionCustomStr(list):  # Collection (list) of _CustomStr objects (1 
         super().insert(index, obj)
 
 
-class _DynamicCustomStr(_CustomStr):  # Allow iterable
+class _DynamicCustomStr(_CustomStr):  # Allow iterable iputs
+    """Depending on argument passed when calling the class, create a _CustomStr object or a _CollectionCustomStr.
+
+    # Default behavior
+    >>> _DynamicCustomStr('abc')
+    _DynamicCustomStr: abc
+    >>> _DynamicCustomStr(['abc'])
+    [_DynamicCustomStr: abc]
+    >>> _CollectionCustomStr(['abc'])
+    [_CustomStr: abc]
+
+    # Types
+    >>> isinstance(_DynamicCustomStr('abc'), _DynamicCustomStr)
+    True
+    >>> isinstance(_DynamicCustomStr('abc'), _CustomStr)
+    True
+    >>> isinstance(_DynamicCustomStr(['abc']), _DynamicCustomStr)
+    False
+    >>> isinstance(_DynamicCustomStr(['abc']), _CollectionCustomStr)
+    True
+    >>> isinstance(_DynamicCustomStr(['abc'])[0], _DynamicCustomStr)
+    True
+    >>> isinstance(_DynamicCustomStr(['abc'])[0], _CustomStr)
+    True
+
+    ################
+    # Inheritances #
+    ################
+    # 1st case: not modifying inplace the associated collection (_MODIFY_COLLECTION_INPLACE is False)
+    >>> class OtherDynamicCS(_DynamicCustomStr): pass
+    >>> OtherDynamicCS('abc')
+    OtherDynamicCS: abc
+    >>> OtherDynamicCS(['abc'])
+    [OtherDynamicCS: abc]
+    >>> _CollectionCustomStr(['abc'])  # still the same behavior
+    [_CustomStr: abc]
+
+    # Collections classes are independent
+    >>> OtherDynamicCS._DYNAMIC_COLLECTIONS[OtherDynamicCS]
+    <class 'path_models._DynamicCustomStr._get_dynamic_collection.<locals>._DynamicCollectionCustomStr'>
+    >>> OtherDynamicCS._DYNAMIC_COLLECTIONS[_DynamicCustomStr]
+    <class 'path_models._DynamicCustomStr._get_dynamic_collection.<locals>._DynamicCollectionCustomStr'>
+    >>> OtherDynamicCS._DYNAMIC_COLLECTIONS[OtherDynamicCS] == OtherDynamicCS._DYNAMIC_COLLECTIONS[_DynamicCustomStr]
+    False
+
+    >>> OtherDynamicCS._COLLECTION_CLS is _CollectionCustomStr
+    True
+    >>> OtherDynamicCS._DYNAMIC_COLLECTIONS[OtherDynamicCS] is _CollectionCustomStr
+    False
+
+    >>> type(OtherDynamicCS(['abc'])) == type(_DynamicCustomStr(['abc']))
+    False
+    >>> type(OtherDynamicCS(['abc'])) is type(_CollectionCustomStr(['abc']))
+    False
+
+    # 2nd case: modifying inplace the associated collection by setting _MODIFY_COLLECTION_INPLACE to True:
+    # WARNING: risky behavior if no initialization!
+    >>> class FrozenDynamicCS(_DynamicCustomStr):_MODIFY_COLLECTION_INPLACE = True
+    >>> _CollectionCustomStr(['abc'])  # _CollectionCustomStr has the same behavior as before
+    [_CustomStr: abc]
+    >>> FrozenDynamicCS('abc')
+    FrozenDynamicCS: abc
+    >>> FrozenDynamicCS(['abc'])
+    [FrozenDynamicCS: abc]
+    >>> _CollectionCustomStr(['abc'])  # change: _CollectionCustomStr has been modified inplace
+    [FrozenDynamicCS: abc]
+
+    # Collections classes are dependent
+    >>> FrozenDynamicCS._DYNAMIC_COLLECTIONS[FrozenDynamicCS]
+    <class 'path_models._CollectionCustomStr'>
+    >>> FrozenDynamicCS._DYNAMIC_COLLECTIONS[_DynamicCustomStr]  # still stored in the
+    <class 'path_models._DynamicCustomStr._get_dynamic_collection.<locals>._DynamicCollectionCustomStr'>
+    >>> FrozenDynamicCS._DYNAMIC_COLLECTIONS[FrozenDynamicCS] == _CollectionCustomStr
+    True
+
+    >>> FrozenDynamicCS._COLLECTION_CLS is _CollectionCustomStr  # same
+    True
+    >>> FrozenDynamicCS._DYNAMIC_COLLECTIONS[FrozenDynamicCS] is _CollectionCustomStr  # different
+    True
+
+    # _DynamicCustomStr not changed because initialized before
+    >>> type(FrozenDynamicCS(['abc'])) is type(_DynamicCustomStr(['abc']))
+    False
+    >>> type(FrozenDynamicCS(['abc'])) is type(_CollectionCustomStr(['abc']))  # _CollectionCustomStr modified inplace
+    True
+    """
     _COLLECTION_CLS = _CollectionCustomStr
     _ALLOW_MULTIPLE = True  # Allow collections of objects. Priority over _ALLOW_CASTING
+    _DYNAMIC_COLLECTIONS = {}
+    _MODIFY_COLLECTION_INPLACE = False
+    # if True, _COLLECTION_CLS._STR_CLS will be defined to this class, when the first object is created.
 
     def __new__(cls, *args, **kwargs):
         if (len(args) > 1) or (len(kwargs) > 1) or (args and kwargs):
@@ -166,14 +267,29 @@ class _DynamicCustomStr(_CustomStr):  # Allow iterable
         data = args[0] if args else kwargs.popitem()[1] if kwargs else None
         data = cls._check_input(data)
         if isiterable(data):  # create a collection of _CustomStr
-            ls = cls._COLLECTION_CLS()
-            for sub_data in data:
-                ls.append(cls.__new__(cls, sub_data))
+            ls = cls._get_dynamic_collection()(data)
             return ls
+
         return _CustomStr.__new__(cls, data)
+
+    @classmethod
+    def _get_dynamic_collection(cls):
+        if cls in cls._DYNAMIC_COLLECTIONS:
+            return cls._DYNAMIC_COLLECTIONS[cls]
+        if cls._MODIFY_COLLECTION_INPLACE:
+            cls._COLLECTION_CLS._STR_CLS = cls
+            cls._DYNAMIC_COLLECTIONS[cls] = cls._COLLECTION_CLS
+            return cls._COLLECTION_CLS
+        else:
+            class _DynamicCollectionCustomStr(cls._COLLECTION_CLS):
+                _STR_CLS = cls
+
+            cls._DYNAMIC_COLLECTIONS[cls] = _DynamicCollectionCustomStr
+            return _DynamicCollectionCustomStr
 
 
 class FileExt(_CustomStr):  # not dynamic
+    """File extension class model"""
     EXT_SEP = os.extsep  # standard extension separator is '.'
 
     @classmethod
@@ -220,8 +336,9 @@ class DefaultFiletypesDict:
 
 
 class _BasePath(_DynamicCustomStr):
-    _ALLOW_MULTIPLE = False  # Allow collections of objects: mandatory for filedialog.askopenfilenames
-    _ALLOW_CASTING = False  # Allow non-string objects to be casted.
+    """Path model class where methods and properties are defined."""
+    _ALLOW_MULTIPLE = False  # Allow collections of objects: no.
+    _ALLOW_CASTING = False  # Allow non-string objects to be casted: no.
     _FILE_EXT_CLS = FileExt
 
     # Path properties
@@ -231,7 +348,7 @@ class _BasePath(_DynamicCustomStr):
 
     @property
     def abspath(self) -> '_BasePath':
-        return __class__(os.path.abspath(self.path))
+        return self.__class__(os.path.abspath(self.path))
 
     @property
     def exists(self) -> bool:
@@ -256,7 +373,7 @@ class _BasePath(_DynamicCustomStr):
     @property
     def split_path(self) -> Tuple['_BasePath', '_BasePath']:
         dirname, filename = os.path.split(self.path)
-        return __class__(dirname), __class__(filename)
+        return self.__class__(dirname), self.__class__(filename)
 
     @property
     def splitext(self) -> Tuple['_BasePath', _FILE_EXT_CLS]:
@@ -317,7 +434,7 @@ class _BasePath(_DynamicCustomStr):
             raise TypeError(err_msg)
         if not ext.startswith(self._FILE_EXT_CLS.EXT_SEP):
             ext = self._FILE_EXT_CLS.EXT_SEP + ext
-        return self.__class__(self._data + ext)
+        return self.__class__(self.path + ext)
 
     def replace_ext(self, ext) -> '_BasePath':
         return self.radix.join_ext(ext)
@@ -340,18 +457,45 @@ class _BasePath(_DynamicCustomStr):
         os.makedirs(self, mode=mode, exist_ok=exist_ok)
 
 
-class PathCollection(_CollectionCustomStr):
-    _STR_CLS = _BasePath
-
-    @property
-    def filenames(self):
-        return self.filename()
-        # return PathCollection([ele.filename for ele in self])
+class PathCollection(_CollectionCustomStr, metaclass=LockChangeAttr):
+    """Collection of Path objects, inherited from list built-in type"""
+    _STR_CLS = None  # Path object must be initialized prior this can be used.
 
 
 class Path(_BasePath):
+    """Class defining a path, inherited from str built-in type.
+    If an iterable is passed, return a PathCollection of multiple Path objects.
+
+    >>> Path('a/b/c.d')
+    Path: a/b/c.d
+    >>> Path(None)
+    Path: None
+    >>> Path('a/b/c.d').filename
+    Path: c.d
+
+    >>> p_c = Path(['a/b/c.d', 'e/f/g.h'])
+    >>> p_c
+    [Path: a/b/c.d, Path: e/f/g.h]
+    >>> p_c.filename
+    [Path: c.d, Path: g.h]
+
+    # As _MODIFY_COLLECTION_INPLACE is True, PathCollection object has the same behavior as Path:
+    >>> PathCollection(['a/b/c.d']) == Path(['a/b/c.d'])
+    True
+    >>> PathCollection(['a/b/c.d'])
+    [Path: a/b/c.d]
+
+    # Types of supported iterables: list, tuple, set and inherited objects.
+    >>> Path(['a/b/c.d', ['e/f/g.h'], ('i/j/k.l',), {'m/n/o.p'}])
+    [Path: a/b/c.d, [Path: e/f/g.h], [Path: i/j/k.l], [Path: m/n/o.p]]
+    """
     _COLLECTION_CLS = PathCollection
     _ALLOW_MULTIPLE = True  # Allow collections of objects: mandatory for filedialog.askopenfilenames
+    _MODIFY_COLLECTION_INPLACE = True  # Make PathCollection._STR_CLS be Path
+
+
+# Modification of PathCollection inplace:
+Path([])
 
 
 # Testing purposes
