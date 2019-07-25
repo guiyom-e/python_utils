@@ -2,10 +2,106 @@
 import os
 from typing import Tuple
 from copy import copy, deepcopy
+import functools
+
+from tools.logger import logger
 
 from tools.helpers.models.metaclasses import LockChangeAttr
-from tools.logger import logger
+from tools.helpers.models.types_models import Property
 from tools.helpers.utils import isiterable
+
+
+def add_tag(tag='tag', tag_value=True):
+    """Set an attribute to a function."""
+    def decorator(func):
+        if type(func) is property:
+            wrapper = Property(func.fget, func.fset, func.fdel, func.__doc__)
+            wrapper.__setattr__(tag, tag_value)
+            return wrapper
+
+        func.__setattr__(tag, tag_value)
+        return func
+    return decorator
+
+
+def keep_type(func_type='function'):
+    """Set the attribute 'keep_type' to a method or property and convert result to original class.
+
+    Handle functions, methods, properties, class methods.
+    """
+    flag = 'function'
+    if func_type in {classmethod, 'classmethod'}:
+        flag = 'classmethod'
+    elif func_type in {staticmethod, 'staticmethod'}:
+        flag = 'staticmethod'
+    elif func_type in {property, 'property'}:
+        flag = 'property'
+
+    def decorator(func):
+        if type(func) is staticmethod or flag == 'staticmethod':
+            raise TypeError("keep_type decorator can not be applied to staticmethod descriptors")
+
+        def wrapper1(self, *args, **kwargs):
+            if type(func) is property:
+                res = func.__get__(self)
+            else:
+                res = func(self, *args, **kwargs)
+            if flag == 'classmethod':
+                return self(res)
+            return self.__class__(res)
+        if type(func) is property:
+            wrapper1 = property(wrapper1, func.fset, func.fdel, func.__doc__)
+        elif flag == 'property':
+            wrapper1 = property(wrapper1, None, None, func.__doc__)
+        else:
+            functools.update_wrapper(wrapper1, func)
+
+        wrapper2 = add_tag(tag='keep_type')(wrapper1)
+        if flag == 'classmethod':
+            wrapper2 = classmethod(wrapper2)
+        return wrapper2
+    return decorator
+
+
+class TestKeepType:
+    def __init__(self, *args):
+        if args:
+            self.disp = args[0]
+        else:
+            self.disp = 8
+        print('init: {}'.format(args))
+        super().__init__()
+
+    def __repr__(self):
+        return super().__repr__() + "_{}".format(self.disp)
+
+    @keep_type()
+    @property
+    def a1(self):
+        return 4
+
+    @keep_type(property)
+    def a2(self):
+        return 4
+
+    @keep_type()
+    def b(self):
+        return 5
+
+    # buggy
+    @classmethod
+    @keep_type()
+    def c1(cls):
+        return 6
+
+    @keep_type('classmethod')
+    def c2(cls):
+        return 6
+
+    @staticmethod
+    @keep_type
+    def d():
+        return 7
 
 
 class _CustomStr(str):
@@ -70,38 +166,49 @@ class _CustomStr(str):
         return self._data is None
 
     # Returning class objects
+    @keep_type()
     def format(self, *args, **kwargs):
-        return self.__class__(super().format(*args, **kwargs))
+        return super().format(*args, **kwargs)
 
+    @keep_type()
     def upper(self, *args, **kwargs):
-        return self.__class__(super().upper(*args, **kwargs))
+        return super().upper(*args, **kwargs)
 
+    @keep_type()
     def lower(self, *args, **kwargs):
-        return self.__class__(super().lower(*args, **kwargs))
+        return super().lower(*args, **kwargs)
 
+    @keep_type()
     def swapcase(self, *args, **kwargs):
-        return self.__class__(super().swapcase(*args, **kwargs))
+        return super().swapcase(*args, **kwargs)
 
+    @keep_type()
     def join(self, *args, **kwargs):
-        return self.__class__(super().join(*args, **kwargs))
+        return super().join(*args, **kwargs)
 
+    @keep_type()
     def title(self, *args, **kwargs):
-        return self.__class__(super().title(*args, **kwargs))
+        return super().title(*args, **kwargs)
 
+    @keep_type()
     def capitalize(self, *args, **kwargs):
-        return self.__class__(super().capitalize(*args, **kwargs))
+        return super().capitalize(*args, **kwargs)
 
+    @keep_type()
     def strip(self, *args, **kwargs):
-        return self.__class__(super().strip(*args, **kwargs))
+        return super().strip(*args, **kwargs)
 
+    @keep_type()
     def lstrip(self, *args, **kwargs):
-        return self.__class__(super().lstrip(*args, **kwargs))
+        return super().lstrip(*args, **kwargs)
 
+    @keep_type()
     def rstrip(self, *args, **kwargs):
-        return self.__class__(super().rstrip(*args, **kwargs))
+        return super().rstrip(*args, **kwargs)
 
+    @keep_type()
     def replace(self, *args, **kwargs):
-        return self.__class__(super().replace(*args, **kwargs))
+        return super().replace(*args, **kwargs)
     # TODO: add more methods
 
 
@@ -118,13 +225,16 @@ class _CollectionCustomStr(list):  # Collection (list) of _CustomStr objects (1 
         return str([str(ele) for ele in self])
 
     def __getattr__(self, item):
-        if item in dir(self._STR_CLS):  # Beta version
-            if '__call__' not in dir(getattr(self._STR_CLS, item)):  # attribute or property
-                return self.__class__([getattr(ele, item) for ele in self])
+        if item in dir(self._STR_CLS):
+            obj = getattr(self._STR_CLS, item)
+            keep_coll = not (not hasattr(obj, 'keep_type') or not obj.keep_type)
+            if not callable(getattr(self._STR_CLS, item)):  # attribute or property
+                res = [getattr(ele, item) for ele in self]
+                return self.__class__(res) if keep_coll else res
 
             def method(*args, **kwargs):  # method
-                res = self.__class__([getattr(ele, item)(*args, **kwargs) for ele in self])
-                return res
+                res = [getattr(ele, item)(*args, **kwargs) for ele in self]
+                return self.__class__(res) if keep_coll else res
 
             return method
         return self.__getattribute__(item)
@@ -168,7 +278,7 @@ class _CollectionCustomStr(list):  # Collection (list) of _CustomStr objects (1 
         super().insert(index, obj)
 
 
-class _DynamicCustomStr(_CustomStr):  # Allow iterable iputs
+class _DynamicCustomStr(_CustomStr):  # Allow iterable inputs
     """Depending on argument passed when calling the class, create a _CustomStr object or a _CollectionCustomStr.
 
     # Default behavior
@@ -267,8 +377,7 @@ class _DynamicCustomStr(_CustomStr):  # Allow iterable iputs
         data = args[0] if args else kwargs.popitem()[1] if kwargs else None
         data = cls._check_input(data)
         if isiterable(data):  # create a collection of _CustomStr
-            ls = cls._get_dynamic_collection()(data)
-            return ls
+            return cls._get_dynamic_collection()(data)
 
         return _CustomStr.__new__(cls, data)
 
@@ -346,9 +455,9 @@ class _BasePath(_DynamicCustomStr):
     def path(self) -> str:
         return self._data or ''
 
-    @property
+    @keep_type(property)
     def abspath(self) -> '_BasePath':
-        return self.__class__(os.path.abspath(self.path))
+        return os.path.abspath(self.path)
 
     @property
     def exists(self) -> bool:
@@ -370,22 +479,22 @@ class _BasePath(_DynamicCustomStr):
     def isabs(self) -> bool:
         return os.path.isabs(self.path)
 
-    @property
-    def split_path(self) -> Tuple['_BasePath', '_BasePath']:
+    @keep_type(property)
+    def split_path(self) -> Tuple['_BasePath', '_BasePath']:  # not real output
         dirname, filename = os.path.split(self.path)
-        return self.__class__(dirname), self.__class__(filename)
+        return dirname, filename
 
     @property
     def splitext(self) -> Tuple['_BasePath', _FILE_EXT_CLS]:
         radix, ext = os.path.splitext(self.path)
         return self.__class__(radix), self._FILE_EXT_CLS(ext)
 
-    @property
+    @keep_type(property)
     def dirname(self) -> '_BasePath':
-        return self.__class__(os.path.dirname(self.path))
+        return os.path.dirname(self.path)
         # return self.split_path[0]  # should be equivalent
 
-    @property
+    @keep_type(property)
     def filename(self) -> '_BasePath':
         return self.split_path[1]
 
@@ -397,34 +506,36 @@ class _BasePath(_DynamicCustomStr):
     def extension(self) -> _FILE_EXT_CLS:
         return self.ext
 
-    @property
+    @keep_type(property)
     def radix(self) -> '_BasePath':
         return self.splitext[0]
 
-    @property
+    @keep_type(property)
     def basis(self) -> '_BasePath':
         return self.radix
 
-    @property
+    @keep_type(property)
     def filename_radix(self) -> '_BasePath':
         return self.filename.radix
 
-    @property
+    @keep_type(property)
     def filename_basis(self) -> '_BasePath':
         return self.filename_radix
 
-    @property
+    @keep_type(property)
     def parent_dirname(self) -> '_BasePath':
         return self.dirname.dirname
 
-    @property
+    @keep_type(property)
     def short_dirname(self) -> '_BasePath':
         return self.dirname.split_path[-1]
 
+    @keep_type()
     def join_path(self, other) -> '_BasePath':
         n_path = os.path.join(self.path, other)
-        return self.__class__(n_path)
+        return n_path
 
+    @keep_type()
     def join_ext(self, ext) -> '_BasePath':
         if ext is None:
             return self
@@ -434,22 +545,26 @@ class _BasePath(_DynamicCustomStr):
             raise TypeError(err_msg)
         if not ext.startswith(self._FILE_EXT_CLS.EXT_SEP):
             ext = self._FILE_EXT_CLS.EXT_SEP + ext
-        return self.__class__(self.path + ext)
+        return self.path + ext
 
+    @keep_type()
     def replace_ext(self, ext) -> '_BasePath':
         return self.radix.join_ext(ext)
 
+    @keep_type()
     def __add__(self, other) -> '_BasePath':
         if isinstance(other, _BasePath):
             return self.join_path(other)
         elif isinstance(other, self._FILE_EXT_CLS):
             return self.join_ext(other)
         else:
-            return self.__class__(self._data + other)
+            return self._data + other
 
+    @keep_type()
     def copy(self) -> '_BasePath':
         return copy(self)
 
+    @keep_type()
     def deepcopy(self) -> '_BasePath':
         return deepcopy(self)
 
@@ -466,18 +581,28 @@ class Path(_BasePath):
     """Class defining a path, inherited from str built-in type.
     If an iterable is passed, return a PathCollection of multiple Path objects.
 
-    >>> Path('a/b/c.d')
+    >>> p = Path('a/b/c.d')
+    >>> p
     Path: a/b/c.d
     >>> Path(None)
     Path: None
-    >>> Path('a/b/c.d').filename
+    >>> p.filename
     Path: c.d
+    >>> p.isdir
+    False
+    >>> p.split_path
+    [Path: a/b, Path: c.d]
 
+    # Collections
     >>> p_c = Path(['a/b/c.d', 'e/f/g.h'])
     >>> p_c
     [Path: a/b/c.d, Path: e/f/g.h]
     >>> p_c.filename
     [Path: c.d, Path: g.h]
+    >>> p_c.isdir
+    [False, False]
+    >>> p_c.split_path
+    [[Path: a/b, Path: c.d], [Path: e/f, Path: g.h]]
 
     # As _MODIFY_COLLECTION_INPLACE is True, PathCollection object has the same behavior as Path:
     >>> PathCollection(['a/b/c.d']) == Path(['a/b/c.d'])
