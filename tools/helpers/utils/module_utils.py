@@ -19,6 +19,8 @@ def reload_functions(module, functions: Union[list, tuple, Callable]):
             fn = func
         if '__name__' in dir(fn):  # case of functions and classes
             name = fn.__name__
+            if name == '<lambda>':
+                continue
         elif isinstance(fn, str) and fn in dir(module):  # particular case of __all__ list
             name = fn
         else:
