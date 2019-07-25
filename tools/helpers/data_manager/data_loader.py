@@ -7,9 +7,9 @@ from tools.helpers.data_manager.file_utils import check_path_arguments
 from tools.helpers.data_manager.filepath_manager import open_file, handle_permission_error
 
 
-def _read_csv(path):
+def _read_csv(path, **kwargs):
     try:
-        df = pd.read_csv(path)
+        df = pd.read_csv(path, **kwargs)
     except PermissionError as err:
         df = handle_permission_error(err, func=_read_csv, path=path, change_path_func=open_file)
     return df
@@ -53,8 +53,8 @@ def read_data_file(path=None, config_dict=None, config_key=None, date_columns=No
         open_file_kwargs['filetype'] = 'data' if 'filetype' not in open_file_kwargs else open_file_kwargs['filetype']
         path = open_file(**open_file_kwargs)
     ext = path.ext
-    if ext == '.csv':
-        df = _read_csv(path)
+    if ext in ['.csv', '.txt']:
+        df = _read_csv(path, **read_kwargs)
         logger.debug('File {} loaded in pandas dataframe.'.format(path))
         if date_columns:
             if isinstance(date_columns, str):
