@@ -458,7 +458,7 @@ class _Config(BaseDict):
         self._path = self._default_path.copy()
         dico = self.default_config.deepcopy()
         sections = {sections} if isinstance(sections, str) else sections
-        n_dico = {k: dico[k] for k in sections & dico} if sections is None else dico
+        n_dico = dico if sections is None else {k: dico[k] for k in sections & dico.keys()}
         self.merge(n_dico, how=how, inplace=True)
         if write:
             self.save_config(overwrite=True, backup=backup)
