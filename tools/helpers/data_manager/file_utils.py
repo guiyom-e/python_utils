@@ -17,7 +17,8 @@ FILETYPE_TO_EXTENSION = {'excel': FileExt(".xlsx"),
                          }
 
 
-def check_path_arguments(path: Union[Path, str], config_dict: Dict, config_key: str) -> Union[Path, str]:
+def check_path_arguments(path: Union[Path, str], config_dict: Dict,
+                         config_key: str) -> Union[Path, str]:
     """User should use either 'path' or 'config_dict' and 'config_key' arguments to indicate a path."""
     if (path and (config_dict or config_key)) or (bool(config_dict) != bool(config_key)):
         msg = "Arguments must be 'path' or 'config_dict' and 'config_key'."
@@ -25,11 +26,12 @@ def check_path_arguments(path: Union[Path, str], config_dict: Dict, config_key: 
         raise TypeError(msg)
     if config_dict:
         path = config_dict.get(config_key, None)
-    return Path(path)
+    return path
 
 
-def choose_filedialog(dialog_type, multiple_files=False, return_on_cancellation=None, behavior_on_cancellation='ignore',
-                      initialdir=None, filetypes=None, title=None, **kwargs) -> Union[tuple, Path]:
+def choose_filedialog(dialog_type: str, multiple_files: bool = False, return_on_cancellation: str = None,
+                      behavior_on_cancellation: str = 'ignore', initialdir: str = None, filetypes: list = None,
+                      title: str = None, **kwargs) -> Union[tuple, Path]:
     """Open a filedialog window."""
     # Check dialog type.
     if dialog_type == 'save':
@@ -61,7 +63,7 @@ def choose_filedialog(dialog_type, multiple_files=False, return_on_cancellation=
     if not path:  # if no file selected
         # raise an anomaly with flag behavior_on_cancellation ('ask', 'ignore', 'warning' or 'error').
         raise_no_file_selected_anomaly(flag=behavior_on_cancellation)
-        return return_on_cancellation
+        return Path(return_on_cancellation)
     return Path(path)
 
 
@@ -93,22 +95,19 @@ def check_extension(path: Union[Path, list, tuple, set], extension=None,
     """Check extension of path or collection of paths which must arg 'extension' or
     extension linked to 'filetype', unless they are None"""
     if isiterable(path):
-        ls_check = []
         for ele in path:
             chk_ext = check_extension(ele, extension=extension, filetype=filetype,
                                       check_ext=check_ext)
-            ls_check.append(chk_ext)
-        if False in ls_check:
-            return False
+            if chk_ext is False:
+                return False
         return True
     ext1 = FILETYPE_TO_EXTENSION.get(filetype, None)
     ext2 = FileExt(extension) if extension is not None else None
     file_ext = path.ext
     # Path extension must match 'extension' and/or 'filetype' (or not considered).
-    is_ok = file_ext == ext1 or file_ext == ext2 or (ext1 is None and ext2 is None)
-    if is_ok:
+    if (file_ext == ext1) or (file_ext == ext2) or (ext1 is None and ext2 is None):
         return True
-    expected_ext = "{}{}{}".format(ext1 or '', " or " if ext1 and ext2 else '', ext2 or '')
+    expected_ext = " or ".join([ext for ext in [ext1, ext2] if ext])
     msg = "The selected file has a bad extension '{}'. Expected '{}'.".format(file_ext, expected_ext)
     if check_ext == 'retry':
         msg += "\n\nPlease try again."

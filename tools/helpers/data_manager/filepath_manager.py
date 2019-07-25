@@ -17,24 +17,63 @@ from tools.helpers.data_manager.file_utils import (FILETYPE_TO_FILEDIALOG_FILETY
                                                    check_path_arguments, add_file_extension, check_extension)
 
 
-def open_dir(**kwargs) -> Path:
-    return choose_filedialog(dialog_type='open_dir', **kwargs)
+# Select directory or file(s) to open
+def _filedialog_open(path_type, **kwargs) -> Union[Path, PathCollection]:
+    if path_type == 'file':
+        dialog_type = 'open'
+    elif path_type == 'dir':
+        dialog_type = 'open_dir'
+    else:
+        raise ValueError(path_type)
+    kwargs.pop('dialog_type', None)
+    return choose_filedialog(dialog_type=dialog_type, **kwargs)
 
 
-def _filedialog_open(**kwargs) -> Union[Path, PathCollection]:
-    return choose_filedialog(dialog_type='open', **kwargs)
+# Select a directory
+def open_dir(*args, **kwargs) -> Union[Path, PathCollection]:
+    """Check path and open file dialog(s) to select directory(ies) if needed.
+
+    >>> dir1 = os.path.dirname(__file__)
+    >>> open_dir(dir1).filename
+    Path: data_manager
+
+    >>> open_dir(None, ask_path=False)
+    Path: None
+
+    >>> open_dir([dir1, dir1, None], multiple_paths=True, ask_path=False).filename
+    [Path: data_manager, Path: data_manager, Path: ]
+    """
+    kwargs.pop('path_type', None)
+    return open_file_or_dir(*args, path_type='dir', **kwargs)
 
 
-def open_file(path: Union[str, Path, list, tuple, set] = None, config_dict=None, config_key=None,
-              multiple_files=False, return_on_cancellation=Path(None),
-              behavior_on_cancellation='warning', filetype=None, extension=None,
-              check_ext='ignore', ask_path=True, **kwargs) -> Union[Path, PathCollection]:
+def open_file(*args, **kwargs) -> Union[Path, PathCollection]:
+    """Check path and open file dialog(s) to select file(s) if needed.
+
+    >>> open_file(__file__).filename
+    Path: filepath_manager.py
+
+    >>> open_file(None, ask_path=False)
+    Path: None
+
+    >>> open_file([__file__, __file__, None], multiple_paths=True, ask_path=False).filename
+    [Path: filepath_manager.py, Path: filepath_manager.py, Path: ]
+    """
+    kwargs.pop('path_type', None)
+    return open_file_or_dir(*args, path_type='file', **kwargs)
+
+
+# Select file(s)
+def open_file_or_dir(path: Union[str, list, tuple, set] = None, config_dict=None, config_key=None,
+                     multiple_paths=False, return_on_cancellation: str = None,
+                     behavior_on_cancellation='warning', filetype=None, extension=None,
+                     check_ext='ignore', ask_path=True, path_type='file', **kwargs) -> Union[Path, PathCollection]:
     """Check path and open file dialogs if needed.
 
     :param path: path to check. If path is None, a file dialog is opened to choose path, unless 'ask_path' is False
     :param config_dict: instead of path, use config_dict and config_key. path will be set to config_dict[config_key]
     :param config_key: instead of path, use config_dict and config_key. path will be set to config_dict[config_key]
-    :param multiple_files: if True, multiple files are allowed and returned as PathCollection (instead of Path)
+    :param multiple_paths: if True, multiple files are allowed and returned as PathCollection (instead of Path)
     :param return_on_cancellation: return on user cancellation. Default: Path(None) (highly recommended)
     :param behavior_on_cancellation: error flag used to raise anomaly 'raise_no_file_selected_anomaly' on cancellation .
                                      Must be 'ask', 'ignore', 'warning', or 'error'.
@@ -42,66 +81,78 @@ def open_file(path: Union[str, Path, list, tuple, set] = None, config_dict=None,
     :param extension: final extension to check. If extension is None, extension is not checked.
     :param check_ext: error flag used to raise anomaly 'raise_bad_extension_anomaly'
     :param ask_path: if True and path is None, ask path to the user
+    :param path_type: 'file' or 'dir'. 'file by default
     :param kwargs: keywords arguments for filedialog methods, such as 'title', 'message', 'filetypes', etc.
     :return: path or collection of paths
     """
-    # Check of input arguments and conversion to Path type.
+    # Check of input arguments path_type, path, config_dict and config_key
     path = check_path_arguments(path, config_dict, config_key)
+    if path_type not in {'file', 'dir', None}:
+        msg = "path_type '{}' is not valid".format(path_type)
+        logger.error(msg)
+        raise ValueError(msg)
+    is_path = 'isdir' if path_type == 'dir' else 'isfile'
+    path_name = "directory" if path_type == 'dir' else "file"
+    path_names = "directories" if path_type == 'dir' else "files"
 
     # If path is an iterable, explore it recursively.
-    if isiterable(path) and multiple_files:
+    if isiterable(path) and multiple_paths:
         result = PathCollection()
         for r_path in path:
-            result.append(open_file(path=r_path,
-                                    multiple_files=False,
-                                    return_on_cancellation=return_on_cancellation,
-                                    behavior_on_cancellation=behavior_on_cancellation,
-                                    filetype=filetype, extension=extension,
-                                    check_ext='ignore', **kwargs))
+            result.append(open_file_or_dir(path=r_path,
+                                           multiple_paths=False,
+                                           return_on_cancellation=return_on_cancellation,
+                                           behavior_on_cancellation=behavior_on_cancellation,
+                                           filetype=filetype, extension=extension,
+                                           check_ext=check_ext, ask_path=ask_path, path_type=path_type, **kwargs))
         return result
 
     # Invalid type for path.
     if path is not None and not isinstance(path, str):
         messagebox.showwarning(title='Python type error!',
-                               message="Path passed to the function is of type '{}', not str.\n"
-                                       "N.B.: to add multiple files, 'multiple_files' argument must be True.\n\n"
-                                       "Path has to be set manually.".format(type(path)))
+                               message="Path passed to the function is of type '{}', not str.\n\n"
+                                       "N.B.: to add multiple {}, 'multiple_paths' argument must be True.\n\n"
+                                       "Path has to be set manually.".format(path_names, type(path)))
         path = None
 
     path = Path(path)  # Convert path to type Path
     if path.isnone and not ask_path:
         pass
-    elif not path.isfile:  # If path is not a file path (includes None path), open filedialog.
+    elif not getattr(path, is_path):  # If path is not a file/dir path (includes None path), open filedialog.
         if not path.isnone:  # Shows a warning if wrong path (do not include None path)
-            messagebox.showwarning(title='Error while trying to find the file!',
-                                   message="The path '{}' doesn't correspond to any file. "
-                                           "Path has to be set manually.".format(path))
-        if 'filetypes' not in kwargs:
+            messagebox.showwarning(title='Error while trying to find the {}!'.format(path_name),
+                                   message="The path '{}' doesn't correspond to any {}. "
+                                           "Path has to be set manually.".format(path, path_name))
+        if 'filetypes' not in kwargs and path_type == 'file':
             kwargs['filetypes'] = FILETYPE_TO_FILEDIALOG_FILETYPES[filetype]
         if 'title' not in kwargs:
-            kwargs['title'] = "Open file(s)" if path.isnone else "Open '{}' file(s)".format(path.filename)
-        path = _filedialog_open(multiple_files=multiple_files, return_on_cancellation=return_on_cancellation,
-                                behavior_on_cancellation=behavior_on_cancellation, **kwargs) or Path(None)
+            kwargs['title'] = "Open {}".format(path_names if multiple_paths else path_name) if path.isnone \
+                else "Open '{}' {}".format(path.filename, path_name)
+        path = _filedialog_open(path_type, multiple_files=multiple_paths, return_on_cancellation=return_on_cancellation,
+                                behavior_on_cancellation=behavior_on_cancellation, **kwargs)
 
-    if isiterable(path) or not path.isnone:  # TODO: return_on_cancellation should be Path(None)
+    # Check extension
+    if (isiterable(path) or not path.isnone) and path_type == 'file':
         chk_ext = check_extension(path, extension=extension, filetype=filetype, check_ext=check_ext)
         if not chk_ext:
-            return open_file(path=None,
-                             multiple_files=multiple_files,
-                             return_on_cancellation=return_on_cancellation,
-                             behavior_on_cancellation=behavior_on_cancellation,
-                             filetype=filetype, extension=extension,
-                             check_ext=check_ext, **kwargs)
+            return open_file_or_dir(path=None,
+                                    multiple_paths=multiple_paths,
+                                    return_on_cancellation=return_on_cancellation,
+                                    behavior_on_cancellation=behavior_on_cancellation,
+                                    filetype=filetype, extension=extension,
+                                    check_ext=check_ext, ask_path=ask_path, path_type=path_type, **kwargs)
     if config_dict:  # save path in config dict
         config_dict[config_key] = path
     return path
 
 
+# Select file to save
 def _filedialog_save(**kwargs) -> Path:
+    kwargs.pop('dialog_type', None)
     return choose_filedialog(dialog_type='save', **kwargs)
 
 
-def _set_writable(path):
+def _set_writable(path: str):
     if Path(path).isfile and not os.access(path, os.W_OK):
         try:
             os.chmod(path, stat.S_IWUSR | stat.S_IREAD)  # if read-only existing file, make it writable
@@ -339,7 +390,7 @@ def handle_file_not_found_error(err, func, path, args=None, kwargs=None,
 # Testing purposes
 if __name__ == '__main__':
     print(open_file())
-    print(open_file(['a', 'b'], multiple_files=False))
+    print(open_file(['a', 'b'], multiple_paths=False))
 
     # pdb.set_trace()
     print(open_file('a.b', extension="txt", check_ext='retry'))
