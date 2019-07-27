@@ -4,25 +4,8 @@ import tkinter as tk
 from tkinter import ttk, TclError
 
 from tools.helpers.utils import isiterable
+from tools.helpers.interface.basics import CustomTk, center
 from tools.helpers.interface.tooltip import ToolTip
-
-
-def center(win, width=None, height=None):
-    """Centers a tkinter window.
-    :param win: the root or Toplevel window to center
-    :param width: custom width for center computation
-    :param height: custom height for center computation
-    """
-    win.update_idletasks()
-    width = win.winfo_width() if width is None else width
-    frm_width = win.winfo_rootx() - win.winfo_x()
-    win_width = width + 2 * frm_width
-    height = win.winfo_height() if height is None else height
-    titlebar_height = win.winfo_rooty() - win.winfo_y()
-    win_height = height + titlebar_height + frm_width
-    x = win.winfo_screenwidth() // 2 - win_width // 2
-    y = win.winfo_screenheight() // 2 - win_height // 2
-    win.geometry('+{}+{}'.format(x, y))
 
 
 def _format_answers(answers):
@@ -97,27 +80,23 @@ class CustomQuestionFrame(ttk.Frame):
             self.change_res.set(self.change_res.get() + 1)
             if self._auto_destroy:
                 self.master.destroy()
+                # self.quit()  # todo: ??
 
         return _return_answer
 
 
-class CustomQuestion(tk.Tk):
+class CustomQuestionTk(CustomTk):
     """Window which looks like a messagebox window, but with custom answers (list of tuples)."""
-    def __init__(self, title: str = None, message: str = None, answers: Union[list, dict] = None,
-                 icon_path: str = 'tools/favicon.ico', **options):
+    def __init__(self, title: str = None, message: str = None, answers: Union[list, dict] = None, **options):
         super().__init__(**options)
         self.withdraw()  # Hide the window et first time
-        try:  # Add icon
-            self.iconbitmap(icon_path)
-        except TclError:
-            pass
         self.title('' if title is None else title)
         self._frame = CustomQuestionFrame(master=self, message=message, answers=answers)
         self._frame.grid(column=0, row=0, sticky="nsew")
         self.columnconfigure(0, weight=1, minsize=300)
         self.rowconfigure(0, weight=1, minsize=200)
-        center(self)
         self.deiconify()
+        center(self)
         self.lift()
 
     def return_answer(self, answer):
@@ -137,7 +116,7 @@ class CustomQuestion(tk.Tk):
 
 
 def ask_custom_question(title: str = None, message: str = None, answers: Union[list, dict] = None, **options):
-    win = CustomQuestion(title, message, answers, **options)
+    win = CustomQuestionTk(title, message, answers, **options)
     win.mainloop()
     try:
         win.destroy()
@@ -154,11 +133,11 @@ if __name__ == "__main__":
     print(ask_custom_question('Custom question', message=msg,
                               answers=_answers))
     print('ok ask_custom_question')
-    root = CustomQuestion(message=msg, answers=_answers)
+    root = CustomQuestionTk(message=msg, answers=_answers)
     root.mainloop()
     # root.destroy()
     print(root.res, root.change_res.get())
-    print('ok CustomQuestion')
+    print('ok CustomQuestionTk')
     root2 = tk.Tk()
     frame = CustomQuestionFrame(master=root2, message=msg, answers=_answers)
     frame.pack()

@@ -4,13 +4,11 @@
 # Version: 1.0.7
 # Compatibility with Python 2 has not been tested
 #
-# Uncomment the next line to see my email
-# print("Author's email: %s"%"61706c69636163696f6e616d656469646140676d61696c2e636f6d".decode("hex"))
 
 """
 These are the default bindings:
     Click button 1 on entry: Show calendar
-    Click button 1 outsite calendar and entry: Hide calendar
+    Click button 1 outside calendar and entry: Hide calendar
     Escape: Hide calendar
     CTRL + PAGE UP: Move to the previous month.
     CTRL + PAGE DOWN: Move to the next month.

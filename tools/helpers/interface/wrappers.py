@@ -3,14 +3,17 @@
 Modified messagebox and filedialog (tkinter modules)
 to avoid empty windows that cannot be closed before the end of the program.
 """
-
+import tkinter as tk
 from typing import List, Tuple
-from tkinter import Tk
+from tkinter import Tk, TclError
 from tkinter import TclError
 from tkinter import messagebox as msg_box
 from tkinter import filedialog as f_dialog
 
+# Import and rename
 from tools.helpers.interface.custom_messagebox import ask_custom_question
+from tools.helpers.interface.selector_messagebox import ask_multiple_questions, ask_option
+from tools.helpers.interface.text_frame import showtext
 
 
 def _wrapper(module, item, withdraw=True):
@@ -80,7 +83,14 @@ class _MessageBox:
     showinfo = _mock_messagebox_func
     showerror = _mock_messagebox_func
     showwarning = _mock_messagebox_func
+
+    showtext = showtext
     askcustomquestion = ask_custom_question
+    ask_multiple_questions = ask_multiple_questions
+    askoption = ask_option
+    _custom_msgbox = {'showtext': showtext, 'askcustomquestion': askcustomquestion,
+                      'ask_multiple_questions': ask_multiple_questions, 'askoption': askoption,
+                      }
 
     def __init__(self):
         attr_to_drop = [attr for attr in dir(self) if not attr.startswith("_") and attr.lower() in dir(self)]
@@ -88,8 +98,8 @@ class _MessageBox:
             delattr(_MessageBox, attr)
 
     def __getattr__(self, item):
-        if item == 'askcustomquestion':
-            return ask_custom_question
+        if item in self._custom_msgbox:
+            return self._custom_msgbox[item]
         if not item.startswith("_") and item.lower() in dir(msg_box):
             return _wrapper(msg_box, item, withdraw=True)
         return getattr(msg_box, item)
@@ -106,3 +116,6 @@ if __name__ == "__main__":
     print(messagebox.askyesno('Question (modified)'))
     # print(f_dialog.askopenfilenames(title='Yes or No ? (Original)'))
     print(filedialog.askopenfilenames(title='Yes or No ? (Modified)'))
+    print(messagebox.showtext(text="Hello!"))
+    print(messagebox.askcustomquestion(answers=[1, 2]))
+    print(messagebox.ask_multiple_questions(answers=[[1, 2]]))

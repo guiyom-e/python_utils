@@ -34,17 +34,16 @@ class LoggingHandlerFrame(TextFrame):
 
 
 # For testing purposes
-def worker():
-    # Skeleton worker function, runs in separate thread (see below)
-    while True:
-        # Report time / date at 2-second intervals
-        time.sleep(2)
-        timeStr = time.asctime()
-        msg = 'Current time: ' + timeStr
-        logging.info(msg)
-
-
 if __name__ == '__main__':
+    def worker():
+        # Skeleton worker function, runs in separate thread (see below)
+        while True:
+            # Report time / date at 2-second intervals
+            time.sleep(2)
+            time_str = time.asctime()
+            msg = 'Current time: ' + time_str
+            logging.info(msg)
+
     root = Tk()
     frame = LoggingHandlerFrame(root)
     frame.pack()
