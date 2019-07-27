@@ -6,7 +6,7 @@ import datetime
 from typing import Union
 
 from tools.logger import logger
-from tools.helpers.models import Path, Reference, Wildcard
+from tools.helpers.models import Path, Reference, Wildcard, BaseDict
 from tools.helpers.utils import merge_dict_preprocessing
 from tools.helpers.config_manager.config_conversion import convert_dict_from_str, convert_dict_to_str
 
@@ -37,88 +37,6 @@ def to_section(*args):
         logger.exception(te)
         return None
     return n_str
-
-
-class BaseDict:
-    """Abstract class of dictionary-like objects, parent of SectionDict and ConfigDict."""
-    TO_KEY_FUNC = lambda _, x: x
-    _DEFAULT_DICT = _DEFAULT_DICT
-
-    def __init__(self, *args, **kwargs):
-        self._cfg = self._DEFAULT_DICT(*args, **kwargs)
-
-    def __repr__(self):
-        return "{}:\n{}".format(self.__class__.__name__, self._cfg)
-
-    def __iter__(self):
-        for key in self._cfg:
-            yield key
-
-    def __len__(self):
-        return len(self._cfg)
-
-    def __getitem__(self, item):
-        n_item = self.TO_KEY_FUNC(item)
-        return self._cfg[n_item]
-
-    def __setitem__(self, key, value):
-        self._cfg[key] = value
-
-    def __eq__(self, other):
-        return self._cfg == other
-
-    # Inherited from dict
-    @staticmethod
-    def fromkeys(*args, **kwargs):
-        n_dict = _DEFAULT_DICT.fromkeys(*args, **kwargs)
-        return __class__(n_dict)
-
-    def get(self, item, default=None):
-        item = self.TO_KEY_FUNC(item)
-        return self._cfg.get(item, default)
-
-    def copy(self):
-        return copy(self)
-
-    def deepcopy(self):
-        return deepcopy(self)
-
-    def setdefault(self, k, default=None):
-        k = self.TO_KEY_FUNC(k)
-        self._cfg.setdefault(k, default)
-        return self[k]
-
-    def clear(self):
-        self._cfg.clear()
-
-    def keys(self):
-        return self._cfg.keys()
-
-    def values(self):
-        return self._cfg.values()
-
-    def items(self):
-        return self._cfg.items()
-
-    def update(self, other):
-        self.update(other)
-        return None
-
-    def pop(self, item, default=None):
-        return self._cfg.pop(item, default)
-
-    def popitem(self, item):
-        return self._cfg.popitem(item)
-
-    # Inherited from OrderedDict
-    def move_to_end(self, key):
-        key = self.TO_KEY_FUNC(key)
-        return self._cfg.move_to_end(key)
-
-    # Inherited from pandas dataframe
-    @classmethod
-    def from_dict(cls, dico):
-        return cls(dico)
 
 
 class SectionDict(BaseDict):
@@ -632,6 +550,7 @@ class ConfigDict(BaseDict):
     @staticmethod
     def merge_config_dict(left_dict: 'ConfigDict', right_dict: 'ConfigDict',
                           how='outer', how_section=None) -> 'ConfigDict':
+        """Modify left_dict inplace, updated with right_dict"""
         how_section = how if how_section is None else how_section
         keys, update = merge_dict_preprocessing(left_dict, right_dict, how=how)
         if not update:
@@ -665,4 +584,4 @@ class ConfigDict(BaseDict):
         return self.merge(other, how='outer', how_section='outer', inplace=True)
 
     def append(self, other: Union[dict, 'ConfigDict']) -> None:
-        return self.merge(other, how='append', how_section='append', inplace=True)
+        return self.merge(other, how='outer', how_section='append', inplace=True)

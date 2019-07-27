@@ -8,9 +8,9 @@ from tools.logger import logger
 from tools.exceptions import UnknownError
 from tools.helpers.interface import raise_anomaly
 from tools.helpers.data_manager import open_file, save_file
-from tools.helpers.models import Path, Singleton, Wildcard
+from tools.helpers.models import Path, Singleton, Wildcard, BaseDict
 from tools.helpers.config_manager.config_conversion import convert_dict_to_str
-from tools.helpers.config_manager.config_dict import BaseDict, ConfigDict
+from tools.helpers.config_manager.config_dict import ConfigDict
 
 DEFAULT_SECTION = "default"
 ENCODING = "utf-8"
@@ -104,7 +104,7 @@ class _Config(BaseDict):
              auto_load: bool = True, default_section: str = DEFAULT_SECTION, section: str = None,
              conversion_dict: dict = None, force_load: bool = False, load_empty: bool = False,
              auto_cast: bool = False, write_flags: bool = None, ask_path: bool = True,
-             search_in_default_config: bool = True, merge_default_how: str = 'outer', **kwargs):
+             search_in_default_config: bool = True, merge_default_how: str = 'right', **kwargs):
         """cf. __init__
 
         :param path: path of the current configuration file.
@@ -217,30 +217,39 @@ class _Config(BaseDict):
         return self._cfg.setdefault(k, default)
 
     def __call__(self, *args, **kwargs):
-        """Access to a value with a specific section. Pattern: CONFIG(section, key)
+        """Access to a value with a specific section. Pattern: CONFIG(section, key, default)
 
-        >>> config = _Config({DEFAULT_SECTION: {1: 12}, 2:{1: 15}, 'other2':{1: 16}}, ask_path=False)
-        >>> config(1)
+        >>> config = _Config({DEFAULT_SECTION: {1: 12, 2: 17}, 2:{1: 15}, 'other2':{1: 16, 3: 18}}, ask_path=False)
+        >>> config.default_section
+        'default'
+        >>> config(1)  # search key 1 in default section
         12
-        >>> config('other2', 1)
+        >>> config('other2', 1)  # search key 1 in section 'other2'
         16
-        >>> config(1, section=2)
+        >>> config(1, section=2)  # search key 1 in section 2
         15
+        >>> config(3, default=8)  # search key 3 in default section, return 8 if not found
+        8
+        >>> config('other2', 2, default=9)  # search key 2 in section 'other2', then default section if not found
+        17
 
-        :param args: [key] or [section, key]
-        :param kwargs: {} or {'section': [section]}
+        # search key 3 in section 2, then in default section if not found; return 10 if not found
+        >>> config(3, section=2, default=10)
+        10
+
+        :param args: [key] or [section, key] o [section, key, default]
+        :param kwargs: {} or {'section': section} or {'default': default_value}
         :return: self.get_section(section)[key]
         default_section is used if not passed as argument
         """
-        if kwargs and len(args) == 2:
-            raise TypeError("Excepted 1 positional argument and keyword argument 'section' or 2 positional arguments"
-                            .format(kwargs.keys()))
-        if not args or len(args) > 2:
-            raise TypeError("Excepted 1 or 2 positional arguments, got {}".format(len(args)))
-        section = args[0] if len(args) == 2 else kwargs.pop('section', self.default_section)
-        if kwargs:
+        if not args or (len(args) + len(kwargs) > 3):
+            raise TypeError("Excepted 1 mandatory positional argument and keyword arguments 'section' and 'default'"
+                            "or 1 to 2 other positional arguments".format(kwargs.keys()))
+        section = args[0] if len(args) >= 2 else kwargs.pop('section', self.default_section)
+        default = args[2] if len(args) == 3 else kwargs.pop('default', self._WILDCARD)
+        if kwargs:  # if other kwargs
             raise TypeError("Keyword arguments '{}' are not supported".format(kwargs.keys()))
-        key = args[1] if len(args) == 2 else args[0]
+        key = args[1] if len(args) >= 2 else args[0]
         # search in the section of the current configuration
         if key in self.get_section(section):
             return self.get_section(section)[key]
@@ -253,6 +262,8 @@ class _Config(BaseDict):
         # search in the default section of the default configuration
         elif key in self._default_config.get_section(self.default_section) and self._search_in_default_config:
             return self._default_config.get_section(self._default_config.default_section)[key]
+        elif default is not self._WILDCARD:
+            return default
         else:
             err_msg = "'{}' is not a valid key for the configuration".format(key)
             logger.error(err_msg)
@@ -315,6 +326,9 @@ class _Config(BaseDict):
         if isinstance(config_dict, _Config):
             config_dict = config_dict.config
         return self._cfg.merge(config_dict, how=how, how_section=how_section, inplace=inplace)
+
+    def append(self, other):
+        return self.merge(other, how='outer', how_section='append', inplace=True)
 
     def update(self, other):
         return self.merge(other, how='outer', how_section='outer', inplace=True)
@@ -451,7 +465,7 @@ class _Config(BaseDict):
                 self.add_section(section, exist_ok=True)
         self.merge(n_dico, how='append', inplace=True)
 
-    def reload_default(self, write=True, backup=True, how='right', sections=None):
+    def reload_default(self, write=True, backup=True, how='right', how_section=None, sections=None):
         """Set path and config to default values.
         If write is True, overwrite default file with default configuration."""
         # self._cfg = self.default_config.deepcopy()
@@ -459,7 +473,7 @@ class _Config(BaseDict):
         dico = self.default_config.deepcopy()
         sections = {sections} if isinstance(sections, str) else sections
         n_dico = dico if sections is None else {k: dico[k] for k in sections & dico.keys()}
-        self.merge(n_dico, how=how, inplace=True)
+        self.merge(n_dico, how=how, how_section=how_section, inplace=True)
         if write:
             self.save_config(overwrite=True, backup=backup)
             logger.info("Configuration reloaded and saved to '{}'.".format(self._path))
@@ -574,6 +588,7 @@ class _Config(BaseDict):
 
 class Config(_Config, metaclass=Singleton):
     """Unique configuration (singleton)"""
+
     def __init__(self, *args, **kwargs):
         if args or kwargs:
             logger.warning("Config object doesn't take any argument.")
