@@ -1,4 +1,4 @@
-# encoding utf-8
+# -*- coding: utf-8 -*-
 import pdb
 
 __id_filename__ = ".ID_tools-3DF36B5D-694A-4743-96A4-C02B269C95D5"  # must be before logger import
@@ -56,7 +56,7 @@ except ImportError as err:
     print("Opening Python debugger...")
     pdb.set_trace()
 
-__version__ = '1.1.1'
+__version__ = '1.2.0'
 __description__ = "Main tools"
 
 __icon__ = '\n'

@@ -1,5 +1,6 @@
-from tkinter import ttk, Scrollbar, N, S, E, Text, W, END
-from tools.helpers.interface.basics import CustomTk, frame_integration, dialog_function
+from tkinter import ttk, Scrollbar, N, S, E, Text, W, END, BOTH
+from tools.helpers.interface.basics import CustomTk
+from tools.helpers.interface.wrappers import frame_integration, dialog_function, CustomDialog
 
 
 class TextFrame(ttk.Frame):
@@ -25,13 +26,26 @@ class TextFrame(ttk.Frame):
         self.scrollbar.config(command=self.text.yview)
 
 
-@frame_integration(TextFrame, okcancel=False)
 class TextTk(CustomTk):
+    """Text window"""
+
+    def __init__(self, title=None, text="", **options):
+        title = title or ""
+        super().__init__(title=title)
+        options.pop('master', None)
+        self._frame = TextFrame(master=self, text=text, **options)
+        self._frame.pack(fill=BOTH, expand=True)
+
+
+@frame_integration(TextFrame, okcancel=False)
+class TextDialog(CustomDialog):
+    """Text frame integrated in a dialog"""
     pass
 
 
-@dialog_function(TextTk)
+@dialog_function(TextDialog)
 def showtext(title: str = None, text: str = None, **options):
+    """Show a long text in a Tk window"""
     pass
 
 

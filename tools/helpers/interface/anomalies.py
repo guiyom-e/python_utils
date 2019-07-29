@@ -3,7 +3,7 @@ import sys
 
 from tools.logger import logger
 from tools.exceptions import UnknownError
-from tools.helpers.interface import messagebox
+from tools.helpers.interface.wrappers import _messagebox as messagebox  # no advanced dialog
 
 
 def raise_anomaly(flag="ask", error=None, title=None, message=None, use_messagebox=True):

@@ -49,6 +49,7 @@ except ImportError:  # py3k
     from tkinter import messagebox
 
 from tools.logger import logger
+from tools.helpers.interface.basics import CustomTk
 from tools.helpers.interface.anomalies import raise_anomaly
 
 
@@ -131,7 +132,7 @@ class Calendar(ttk.Frame):
         days_of_the_week = self._cal.formatweekheader(3).split()
 
         for i, day_of_the_week in enumerate(days_of_the_week):
-            Tkinter.Label(self, text=day_of_the_week, background='grey90').grid(row=1, column=i, sticky=N + E + W + S)
+            ttk.Label(self, text=day_of_the_week, background='grey90').grid(row=1, column=i, sticky=N + E + W + S)
 
         for i in range(6):
             for j in range(7):
@@ -509,7 +510,7 @@ class Datepicker(ttk.Entry):
                 self.hide_calendar()
 
 
-class MainDateTk(Tk):
+class MainDateTk(CustomTk):
     def __init__(self):
         super().__init__()
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
@@ -532,13 +533,13 @@ class MainDateTk(Tk):
 class DatePickerFrame(MainDateTk):
     def __init__(self, title=None, message=None, default_date=None, dateformat="%Y-%m-%d"):
         super().__init__()
-        self.geometry("500x300")
+        self.geometry("300x250")
         self.title(title)
 
         self.main_frame = Frame(self, pady=15, padx=15)
         self.main_frame.pack(expand=True, fill="both")
 
-        Label(self.main_frame, justify="left", text=message).grid(row=0, columnspan=2, sticky=W + E)
+        ttk.Label(self.main_frame, justify="left", text=message).grid(row=0, columnspan=2, sticky=W + E)
 
         self.date_picker = Datepicker(self.main_frame, dateformat=dateformat)
         if default_date is None:

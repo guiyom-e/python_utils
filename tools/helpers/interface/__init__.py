@@ -11,16 +11,19 @@ Files:
     - main_interface: simple interface with multiple parts. Each button correspond to a script
 """
 from tools.helpers.interface.basics import CustomTk, center   # Must be the first import
-from tools.helpers.interface.wrappers import messagebox, filedialog   # Must be the second import
+
 from tools.helpers.interface.date_picker import get_user_date
+from tools.helpers.interface.custom_dialog import OptionMenuDialog, RadioSelectorDialog, CheckBoxSelectorDialog
+from tools.helpers.interface.custom_messagebox import CustomQuestionDialog, CustomQuestionFrame
+from tools.helpers.interface.text_frame import TextFrame
 from tools.helpers.interface.anomalies import (raise_anomaly, raise_bad_extension_anomaly,
                                                raise_no_file_selected_anomaly)
+from tools.helpers.interface.advanced_wrappers import messagebox, filedialog, simpledialog
+
 from tools.helpers.interface.main_interface import MainTk
-from tools.helpers.interface.selector_messagebox import TkSelector
 from tools.helpers.interface.tooltip import ToolTip
-from tools.helpers.interface.text_frame import TextFrame
 from tools.helpers.interface.logger_widget import LoggingHandlerFrame
-from tools.helpers.interface.custom_messagebox import CustomQuestionTk, CustomQuestionFrame
+
 
 __all__ = [
     'CustomTk',
@@ -28,6 +31,7 @@ __all__ = [
 
     'messagebox',
     'filedialog',
+    'simpledialog',
 
     'get_user_date',
 
@@ -37,12 +41,14 @@ __all__ = [
 
     'MainTk',
 
-    'TkSelector',
+    'OptionMenuDialog',
+    'RadioSelectorDialog',
+    'CheckBoxSelectorDialog',
     'ToolTip',
     'TextFrame',
     'LoggingHandlerFrame',
-    'CustomQuestionTk',
+    'CustomQuestionDialog',
     'CustomQuestionFrame',
 ]
 
-__version__ = '1.5.0'
+__version__ = '2.0.0'

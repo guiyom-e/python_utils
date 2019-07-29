@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # open source
 import logging
 import tkinter as tk
@@ -48,7 +49,7 @@ class _MainPart(ttk.LabelFrame):
         self.master = master
         answers = self._format_answers(answers)
         logger.debug("Possible functions: {}".format(answers))
-        self.question_frame = CustomQuestionFrame(master=self, answers=answers, auto_quit=False,
+        self.question_frame = CustomQuestionFrame(master=self, choices=answers, auto_quit=False,
                                                   geometry_manager=geometry_manager, geometry_options=geometry_options)
         self.question_frame.pack(fill=tk.BOTH)
         self.question_frame.change_res.trace(mode='w', callback=self.exec_func)  # exec func on click
@@ -77,8 +78,8 @@ class _MainPart(ttk.LabelFrame):
 
     def exec_func(self, _varname, _elementname, _mode):
         # logger.debug("varname, elementname, mode: {}, {}, {}".format(_varname, _elementname, _mode))
-        func = self.question_frame.res
-        func_name = self.question_frame.res_str
+        func = self.question_frame.result
+        func_name = self.question_frame.result_keys
         if func:
             logger.info("***************\nStarting function '{}'...".format(func_name))
             self.master.progressbar.grid(row=0, column=1)
@@ -109,6 +110,7 @@ class MainTk(CustomTk):
         self.help_text = help_msg
         self.help_win = None
         self.load_help()
+        self.bind('<F1>', func=self.open_help)
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
         self.parts = OrderedDict()
         for i, (title, answers) in enumerate(parts.items()):
@@ -157,6 +159,8 @@ class MainTk(CustomTk):
         # Destroy the window
         self.destroy()
         logger.debug("Main window destroyed.")
+        self.quit()
+        logger.debug("Main window quitted.")
         return True
 
     def activate_all(self):
@@ -172,10 +176,9 @@ class MainTk(CustomTk):
     def load_help(self):
         self.help_win = TextTk(title="Help", text=self.help_text, height=600, width=800)
         self.help_win.withdraw()
-        self.bind('<F1>', func=lambda _: self.open_help())
-        self.help_win.bind('<F1>', func=self.__easter_egg)
+        self.bind('<F1>', func=self.open_help)
 
-    def open_help(self):
+    def open_help(self, _event=None):
         exists = False
         try:
             if self.help_win.winfo_exists():
@@ -184,12 +187,13 @@ class MainTk(CustomTk):
             pass
         if not exists:
             self.load_help()
+            self.help_win.bind('<Control-F1>', func=self.__easter_egg)
         self.help_win.deiconify()
         self.help_win.mainloop()
         self.help_win.quit()
 
     def __easter_egg(self, *_args, **_kwargs):
-        if not hasattr(self, '_cnt_eastr'):
+        if not hasattr(self, '_cntpwin'):
             self._cntpwin = 1
         else:
             self._cntpwin += 1

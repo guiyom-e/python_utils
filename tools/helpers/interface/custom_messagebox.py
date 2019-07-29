@@ -4,22 +4,25 @@ import tkinter as tk
 from tkinter import ttk, TclError
 
 from tools.helpers.utils import isiterable
-from tools.helpers.interface.basics import CustomTk, center
+from tools.helpers.interface.wrappers import dialog_function, CustomDialog, frame_integration, _format_list_to_dict
 from tools.helpers.interface.tooltip import ToolTip
 
 
 def _format_answers(answers):
     """Returns a list of tuples [(string to show in messagebox, value returned, tooltip, *args), ...]"""
     if isinstance(answers, (str, int, float, bool)):
-        return [(str(answers), answers)]
+        return [{'value': answers}]
     if not isiterable(answers):
-        return [('None', None)]
+        return [{'value': None}]
     n_answers = []
     for answer in answers:
-        if isiterable(answer) and len(answer) >= 2:
-            n_answers.append((str(answer[0]), *answer[1:]))
+        if isiterable(answer):
+            if len(answer) > 2:
+                n_answers.append({'name': answer[0], 'value': answer[1], 'tooltip': answer[2]})
+            elif len(answer) > 1:
+                n_answers.append({'name': answer[0], 'value': answer[1]})
         else:
-            n_answers.append((str(answer), answer, ""))
+            n_answers.append({'value': answer})
     return n_answers
 
 
@@ -43,15 +46,16 @@ def _auto_column(length, default=3):
 
 class CustomQuestionFrame(ttk.Frame):
     """Frame with custom answers displayed as tkinter buttons."""
-    def __init__(self, master=None, message: str = None, answers: Union[list, dict] = None,
+
+    def __init__(self, master=None, message: str = None, choices: Union[list, dict] = None,
                  auto_quit=True, geometry_manager='pack', geometry_options=None, **options):
         super().__init__(master, **options)
-        self.res = None  # Result var
-        self.res_str = ''
+        self.result = None  # Result var
+        self.result_keys = ''
         self.change_res = tk.IntVar(value=0)
         self._auto_destroy = auto_quit
         message = '' if message is None else message
-        self._answers = _format_answers(answers)
+        self._choices = _format_list_to_dict(_format_answers(choices), default_key='value')
         if message:
             ttk.Label(master=self, text=message, wraplengt=290).pack()
         # pack or grid questions
@@ -61,68 +65,47 @@ class CustomQuestionFrame(ttk.Frame):
         if geometry_manager not in ('pack', 'grid'):
             geometry_manager = 'pack'
             geometry_options = {}
-        nb_columns = geometry_options.pop('nb_columns', _auto_column(len(answers)))
+        nb_columns = geometry_options.pop('nb_columns', _auto_column(len(choices)))
         self.options = []
-        for i, answer in enumerate(self._answers):
-            but = ttk.Button(master=self._ans_frame, text=answer[0], command=self.return_answer(answer))
-            if len(answer) >= 3 and answer[2]:
-                ToolTip(but, answer[2])
+        for i, (key, config) in enumerate(self._choices.items()):
+            name = str(config.get('name', config['value']))
+            tooltip = str(config.get('tooltip', ""))
+            but = ttk.Button(master=self._ans_frame, text=name, command=self.return_answer(key))
+            if tooltip:
+                ToolTip(but, tooltip)
             if geometry_manager == 'grid':
                 geometry_options['row'] = i // nb_columns
                 geometry_options['column'] = i % nb_columns
             getattr(but, geometry_manager)(**geometry_options)
             self.options.append(but)
 
-    def return_answer(self, answer):
+    def return_answer(self, key):
         def _return_answer():
-            self.res_str = answer[0]
-            self.res = answer[1]
+            self.result_keys = key
+            self.result = self._choices[key]['value']
             self.change_res.set(self.change_res.get() + 1)
-            if self._auto_destroy:
-                self.master.destroy()
-                # self.quit()  # todo: ??
+            if self._auto_destroy:  # destroy the master window if possible
+                func = getattr(self.master, 'ok', None)
+                if not func:
+                    func = getattr(self.master, 'destroy', None)
+                if func:
+                    func()
 
         return _return_answer
 
+    def validate(self):
+        return True
 
-class CustomQuestionTk(CustomTk):
+
+@frame_integration(CustomQuestionFrame, okcancel=False)
+class CustomQuestionDialog(CustomDialog):
     """Window which looks like a messagebox window, but with custom answers (list of tuples)."""
-    def __init__(self, title: str = None, message: str = None, answers: Union[list, dict] = None, **options):
-        super().__init__(**options)
-        self.withdraw()  # Hide the window et first time
-        self.title('' if title is None else title)
-        self._frame = CustomQuestionFrame(master=self, message=message, answers=answers)
-        self._frame.grid(column=0, row=0, sticky="nsew")
-        self.columnconfigure(0, weight=1, minsize=300)
-        self.rowconfigure(0, weight=1, minsize=200)
-        self.deiconify()
-        center(self)
-        self.lift()
-
-    def return_answer(self, answer):
-        return self._frame.return_answer(answer)
-
-    @property
-    def res(self):
-        return self._frame.res
-
-    @property
-    def res_str(self):
-        return self._frame.res_str
-
-    @property
-    def change_res(self):
-        return self._frame.change_res
+    pass
 
 
-def ask_custom_question(title: str = None, message: str = None, answers: Union[list, dict] = None, **options):
-    win = CustomQuestionTk(title, message, answers, **options)
-    win.mainloop()
-    try:
-        win.destroy()
-    except TclError:  # if window already destroyed
-        pass
-    return win.res
+@dialog_function(CustomQuestionDialog)
+def ask_custom_question(title: str = None, message: str = None, choices: Union[list, dict] = None, **options):
+    pass
 
 
 # For testing purposes
@@ -131,16 +114,17 @@ if __name__ == "__main__":
           'wrapped  by the program which was made by an amazing developer!'
     _answers = ['First possible answer', 2, 3, '4', None, True, ['list']]
     print(ask_custom_question('Custom question', message=msg,
-                              answers=_answers))
-    print('ok ask_custom_question')
-    root = CustomQuestionTk(message=msg, answers=_answers)
-    root.mainloop()
-    # root.destroy()
-    print(root.res, root.change_res.get())
-    print('ok CustomQuestionTk')
+                              choices=_answers))
+    print('ok askcustomquestion')
+    root = tk.Tk()
+    root.withdraw()
+    dialog = CustomQuestionDialog(message=msg, choices=_answers)
+    root.destroy()
+    print(dialog.result, dialog.result_keys)
+    print('ok CustomQuestionDialog')
     root2 = tk.Tk()
-    frame = CustomQuestionFrame(master=root2, message=msg, answers=_answers)
+    frame = CustomQuestionFrame(master=root2, message=msg, choices=_answers)
     frame.pack()
     root2.mainloop()
-    print(frame.res, frame.change_res.get())
+    print(frame.result)
     print('ok CustomQuestionFrame')
