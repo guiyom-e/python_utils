@@ -29,7 +29,7 @@ def check_path_arguments(path: Union[Path, str], config_dict: Dict,
     return path
 
 
-def choose_filedialog(dialog_type: str, multiple_files: bool = False, return_on_cancellation: str = None,
+def choose_filedialog(dialog_type: str, multiple_paths: bool = False, return_on_cancellation: str = None,
                       behavior_on_cancellation: str = 'ignore', initialdir: str = None, filetypes: list = None,
                       title: str = None, **kwargs) -> Union[tuple, Path]:
     """Open a filedialog window."""
@@ -37,7 +37,7 @@ def choose_filedialog(dialog_type: str, multiple_files: bool = False, return_on_
     if dialog_type == 'save':
         user_input_func = filedialog.asksaveasfilename
     elif dialog_type == 'open':
-        if multiple_files:  # selection of multiple files
+        if multiple_paths:  # selection of multiple files
             user_input_func = filedialog.askopenfilenames
         else:  # selection of a unique file
             user_input_func = filedialog.askopenfilename

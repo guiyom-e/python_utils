@@ -3,6 +3,7 @@ import pandas as pd
 
 from tools.logger import logger
 from tools.helpers.models import Path
+from tools.helpers.interface import messagebox
 from tools.helpers.data_manager.file_utils import check_path_arguments
 from tools.helpers.data_manager.filepath_manager import open_file, handle_permission_error
 
@@ -26,8 +27,8 @@ def _read_excel(path, sheet_name=0, **kwargs):
 
 
 def read_data_file(path=None, config_dict=None, config_key=None, date_columns=None, sheet_name=0,
-                   check_path=False, behaviour_on_error='error', open_file_kwargs=None, read_kwargs=None,
-                   to_datetime_kwargs=None,):
+                   check_path=False, ask_header=False, behaviour_on_error='error', open_file_kwargs=None,
+                   read_kwargs=None, to_datetime_kwargs=None):
     """Returns a dataframe with the content of the selected CSV or Excel file.
 
     :param path: file path. Must be CSV or Excel file (to be checked before with 'open_file' function).
@@ -36,6 +37,8 @@ def read_data_file(path=None, config_dict=None, config_key=None, date_columns=No
     :param date_columns: column or list of columns to format as datetime
     :param sheet_name: name or index of the Excel sheet (not used for CSV)
     :param check_path: if True, use open_file to check path
+    :param ask_header: if True and key 'header' is not in read_kwargs, ask whether the file has a header or not
+                       and update read_kwargs['header'] to 0 or None.
     :param behaviour_on_error: 'error' (default): raise an error, 'ignore': return None
     :param open_file_kwargs: kwargs for open_file function ONLY.
     :param read_kwargs: kwargs for read functions pd.read_excel ONLY.  # can evolve in the future
@@ -53,6 +56,10 @@ def read_data_file(path=None, config_dict=None, config_key=None, date_columns=No
         open_file_kwargs['filetype'] = 'data' if 'filetype' not in open_file_kwargs else open_file_kwargs['filetype']
         path = open_file(**open_file_kwargs)
     ext = path.ext
+    if ask_header and 'header' not in read_kwargs:
+        msg = "Does your data file '{}' has an header (column names)?".format(path.filename)
+        res = messagebox.askyesno(title="Header", message=msg)
+        read_kwargs['header'] = 0 if res else None  # only level 0 can be a header
     if ext in ['.csv', '.txt']:
         df = _read_csv(path, **read_kwargs)
         logger.debug('File {} loaded in pandas dataframe.'.format(path))

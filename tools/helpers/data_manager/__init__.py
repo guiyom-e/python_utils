@@ -19,18 +19,23 @@ logger, utils, models, interface
                                  |-> data_writer
 """
 
-from tools.helpers.data_manager.filepath_manager import open_file, save_file, open_dir  # Should be the first import
+from tools.helpers.data_manager.filepath_manager import open_file, save_file, open_dir  # Must be the first import
 from tools.helpers.data_manager.data_loader import read_data_file
 from tools.helpers.data_manager.data_writer import save_excel_file, export_img_to_powerpoint
+from tools.helpers.data_manager.plots import save_plot, save_error_graph
 
 
 __all__ = [
     'open_file',
     'open_dir',
     'save_file',
+
     'read_data_file',
     'save_excel_file',
     'export_img_to_powerpoint',
+
+    'save_plot',
+    'save_error_graph',
 ]
 
-__version__ = '1.4.1'
+__version__ = '1.4.2'

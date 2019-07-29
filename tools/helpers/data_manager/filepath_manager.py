@@ -128,7 +128,8 @@ def open_file_or_dir(path: Union[str, list, tuple, set] = None, config_dict=None
         if 'title' not in kwargs:
             kwargs['title'] = "Open {}".format(path_names if multiple_paths else path_name) if path.isnone \
                 else "Open '{}' {}".format(path.filename, path_name)
-        path = _filedialog_open(path_type, multiple_files=multiple_paths, return_on_cancellation=return_on_cancellation,
+
+        path = _filedialog_open(path_type, multiple_paths=multiple_paths, return_on_cancellation=return_on_cancellation,
                                 behavior_on_cancellation=behavior_on_cancellation, **kwargs)
 
     # Check extension
@@ -166,8 +167,8 @@ def _handle_existing_file_conflict(path: Path, overwrite='ask', backup=False, **
     if overwrite == 'ask':
         logger.warning('User action needed!')
         res = messagebox.askyesnocancel(title="File existing",
-                                        message="File {} already exists. Do you want to overwrite it?"
-                                                "If you select 'No', the file will be "
+                                        message="File {} already exists.\nDo you want to overwrite it?"
+                                                "\n\nIf you select 'No', the file will be "
                                                 "renamed automatically.".format(path))
         if res is None:
             logger.info("'Save file' operation cancelled by the user.".format(path))
@@ -195,7 +196,7 @@ def _handle_existing_file_conflict(path: Path, overwrite='ask', backup=False, **
     if backup and path.isfile:
         suffix = datetime.datetime.now().strftime("-%Y-%m-%d_%H-%M_") + uuid.uuid4().hex[:5]
         try:
-            shutil.copyfile(path, "{}{}.{}".format(path.radix, suffix, path.ext))
+            shutil.copyfile(path, path.radix + suffix + path.ext)
         except (PermissionError, FileNotFoundError) as err:
             logger.exception(err)
             logger.error("Failed to backup previous configuration file.")
@@ -251,7 +252,7 @@ def save_file(path: Union[Path, str] = None, config_dict=None, config_key=None,
 
     # Check file directory
     file_dir = path.dirname
-    if not file_dir.isdir:
+    if not file_dir.isdir and not path.isnone:
         if auto_mkdir:
             try:
                 file_dir.makedir()
@@ -300,6 +301,8 @@ def handle_file_error(err, func, path, args=None, kwargs=None,
     :param pos_path: position of the positional argument path in func (only if key_path is None)
     :param key_path: name of the keyword argument path in func (if None, positional argument is used)
     :param change_path_func: function to get a new path, with no positional argument and 'initialdir' keyword argument
+    :param title: title of the error
+    :param msg: message of the error
     :param return_if_ignore: return if Ignore option is selected
     :return:
     """
@@ -335,7 +338,7 @@ def handle_file_error(err, func, path, args=None, kwargs=None,
     elif res == "Ignore":
         logger.warning("Function ignored!")
         logger.debug("Function '{}' with path '{}' ignored!")
-        return None
+        return return_if_ignore
     elif res == "Debug (developer only)":
         pdb.set_trace()
     elif res in [None, "Cancel"]:
