@@ -25,6 +25,19 @@ def isinstance_filetypes(filetypes):
     return True
 
 
+def isinlist(obj, iterable):
+    s_objects = (np.ndarray, np.matrix, pd.DataFrame, pd.Series)
+    for ele in iterable:
+        # avoid ValueError "The truth value (...) is ambiguous"
+        if isinstance(ele, s_objects) or isinstance(obj, s_objects):
+            if obj is ele:
+                return True
+        else:
+            if obj == ele:
+                return True
+    return False
+
+
 def shorten_dataframe_str(df: pd.DataFrame, column_name: str, max_length: int,
                           replacement_str: str = '...', inplace: bool = False) -> pd.DataFrame:
     """Shorten string values that are longer than 'max_length' in column 'column_name'.
@@ -127,6 +140,17 @@ def merge_dict_preprocessing(left_dict: dict, right_dict: dict,
                      "'right', 'outer', 'append', 'none' or 'clear".format(how))
         return None, None
     return keys, update
+
+
+def merge_dict(left_dict: dict, right_dict: dict, how: str = 'outer', inplace=True) -> dict:
+    keys, update = merge_dict_preprocessing(left_dict, right_dict, how=how)
+    if not inplace:
+        left_dict = left_dict.copy()
+    if not update:
+        left_dict.clear()
+    for key in keys:
+        left_dict[key] = right_dict[key]
+    return left_dict
 
 
 def coordinates_to_distance(lat1, lon1, lat2, lon2):
