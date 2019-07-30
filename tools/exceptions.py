@@ -1,5 +1,7 @@
+# -*- coding: utf-8 -*-
+# open source project
 """
-Customized exceptions.
+Custom exceptions.
 """
 
 

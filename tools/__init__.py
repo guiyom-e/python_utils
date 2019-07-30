@@ -1,4 +1,8 @@
 # -*- coding: utf-8 -*-
+# open source project
+"""
+Tools.
+"""
 import pdb
 
 __id_filename__ = ".ID_tools-3DF36B5D-694A-4743-96A4-C02B269C95D5"  # must be before logger import
@@ -7,47 +11,48 @@ from tools.logger import logger  # import logger and set default working directo
 
 # try to import required modules
 _msg_ptrn = " ok"
-test_module = '[nothing tested yet]'
+test_lib = '[nothing tested yet]'
 try:
     # numpy
-    test_module = 'numpy'
+    test_lib = 'numpy'
     import numpy
 
-    logger.debug(_msg_ptrn.format(test_module))
+    logger.debug(_msg_ptrn.format(test_lib))
 
     # pandas
-    test_module = 'pandas'
+    test_lib = 'pandas'
     import pandas
 
-    logger.debug(_msg_ptrn.format(test_module))
+    logger.debug(_msg_ptrn.format(test_lib))
 
     # matplotlib
-    test_module = 'matplotlib'
+    test_lib = 'matplotlib'
     import matplotlib
 
-    logger.debug(_msg_ptrn.format(test_module))
-    test_module = 'matplotlib.pyplot'
+    logger.debug(_msg_ptrn.format(test_lib))
+    test_lib = 'matplotlib.pyplot'
     import matplotlib.pyplot
 
-    logger.debug(_msg_ptrn.format(test_module))
-    test_module = 'matplotlib.patches'
+    logger.debug(_msg_ptrn.format(test_lib))
+    test_lib = 'matplotlib.patches'
     import matplotlib.patches
 
-    logger.debug(_msg_ptrn.format(test_module))
+    logger.debug(_msg_ptrn.format(test_lib))
 
     # seaborn
-    test_module = 'seaborn'
+    test_lib = 'seaborn'
     import seaborn
 
-    logger.debug(_msg_ptrn.format(test_module))
+    logger.debug(_msg_ptrn.format(test_lib))
 
     # python-pptx
-    test_module = 'pptx'
+    test_lib = 'pptx'
     import pptx
 
-    logger.debug(_msg_ptrn.format(test_module))
+    logger.debug(_msg_ptrn.format(test_lib))
+    test_lib = 'all libraries ok'
 except ImportError as err:
-    logger.error("Error while trying to import Python modules! Failed to import '{}'.".format(test_module))
+    logger.error("Error while trying to import Python modules! Failed to import '{}'.".format(test_lib))
     logger.error(err)
     if 'DLL load failed' in str(err):
         logger.error("Error may be linked to Anaconda distribution.\n"

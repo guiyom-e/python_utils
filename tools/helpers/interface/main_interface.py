@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 # open source
+"""
+Interface with multiple parts containing buttons corresponding to one function each.
+Includes a logger frame and a help window.
+"""
 import logging
 import tkinter as tk
 from collections import OrderedDict
@@ -16,6 +20,7 @@ from tools.helpers.models import IdentityDict
 
 
 class _ThreadedTask(threading.Thread):
+    """Daemon thread where functions are run."""
     def __init__(self, queue, func, func_name=None, *args, **kwargs):
         threading.Thread.__init__(self, daemon=True)  # daemon: this thread will exit if the main thread exits
         self.queue = queue
@@ -104,6 +109,7 @@ class _MainPart(ttk.LabelFrame):
 
 
 class MainTk(CustomTk):
+    """Main Tk window"""
     def __init__(self, parts: OrderedDict, logger_level=logging.INFO,
                  nb_columns=3, help_msg="No help_msg available.", title="main", **options):
         super().__init__(title=title, **options)
@@ -160,7 +166,7 @@ class MainTk(CustomTk):
         self.destroy()
         logger.debug("Main window destroyed.")
         self.quit()
-        logger.debug("Main window quitted.")
+        logger.debug("Main window quited.")
         return True
 
     def activate_all(self):

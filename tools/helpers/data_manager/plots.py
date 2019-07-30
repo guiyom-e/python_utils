@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+# open source project
+"""
+Functions to save graphs.
+"""
+
 from matplotlib import pyplot as plt
 
 from tools.logger import logger

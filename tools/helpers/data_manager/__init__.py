@@ -1,5 +1,5 @@
-# open source
-
+# -*- coding: utf-8 -*-
+# open source project
 """
 Data manager
 
@@ -9,6 +9,7 @@ Provides high level function to check paths, open and read data files
 - filepath_manager: functions to check paths, using file dialogs
 - data_loader: functions to open files: CSV or Excel
 - date_writer: functions to write files: Excel or PowerPoint
+- plots: functions to create simple plots
 
 Imports:
 logger, utils, models, interface

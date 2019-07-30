@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+# open source project
+"""
+Add advanced dialogs in the wrapped messagebox, simpledialog and filedialog module-like objects.
+Import messagebox, simpledialog and filedialog from this file instead from tkinter to benefit from enhanced modules.
+"""
 from tools.helpers.interface.wrappers import (_messagebox, _MessageBox,
                                               _simpledialog, _SimpleDialog,
                                               _filedialog, _FileDialog)
@@ -47,16 +53,16 @@ class _AdvancedFileDialog(_FileDialog):  # inheritance is just for IDE to show a
     _base_module = _filedialog
 
 
-messagebox = _AdvancedMessageBox()
-simpledialog = _AdvancedSimpleDialog()
-filedialog = _AdvancedFileDialog()
+messagebox = _AdvancedMessageBox()  # WARN: tkinter messagebox modified
+simpledialog = _AdvancedSimpleDialog()  # WARN: tkinter simpledialog modified
+filedialog = _AdvancedFileDialog()  # WARN: tkinter filedialog modified
 
 if __name__ == '__main__':
-    print(messagebox.askokcancel(message='OK?'))
+    print(messagebox.askokcancel(message='OK?'))  # based on tkinter messagebox
     print(messagebox.showtext(text="Hello!"))
     print(messagebox.askcustomquestion(choices=[1, 2]))
 
-    print(simpledialog.askinteger(title='title', prompt='Integer?'))
+    print(simpledialog.askinteger(title='title', prompt='Integer?'))  # based on tkinter simpledialog
     print(simpledialog.askdate(title='title'))
     print(simpledialog.askoption(choices=[4, 5]))
     print(simpledialog.askcheckbox(choices=[4, 5]))

@@ -1,4 +1,8 @@
 # open source
+"""
+Basic utils that can be used in the whole project
+This module should not need of other modules (except logger).
+"""
 from typing import Tuple, KeysView, Union
 
 import numpy as np
@@ -8,6 +12,7 @@ from tools.logger import logger
 
 
 def isiterable(obj):
+    """Returns whether an object is "iterable" or not. Are considered iterable tuple, list, set and inherited classes"""
     # return '__iter__' in dir(obj)  # can be misleading because str objects are iterable.
     return isinstance(obj, (tuple, list, set))
 
@@ -26,6 +31,19 @@ def isinstance_filetypes(filetypes):
 
 
 def isinlist(obj, iterable):
+    """Returns whether an object is in the iterable or not.
+
+    Support is granted for numpy and pandas objects which have multiple definitions of truth.
+    One numpy/pandas object is considered in the iterable if the object itself is in the iterable.
+    Therefore, if a copy but not the object is present in the iterable, isinlist returns False.
+
+    >>> df = pd.DataFrame()
+    >>> ls = [5, 'a', np.array([5, 4]), df]
+    >>> isinlist(5, ls), isinlist(6, ls), isinlist('a', ls), isinlist('b', ls)
+    (True, False, True, False)
+    >>> isinlist(df, ls), isinlist(df.copy(), ls), isinlist(np.array([5, 4]), ls)
+    (True, False, False)
+    """
     s_objects = (np.ndarray, np.matrix, pd.DataFrame, pd.Series)
     for ele in iterable:
         # avoid ValueError "The truth value (...) is ambiguous"
@@ -70,6 +88,7 @@ def merge_dict_preprocessing(left_dict: dict, right_dict: dict,
     """Returns the tuple (keys, update) which permit to update a 'left_dict' with a 'right_dict' with the method 'how'.
 
     Examples:
+
     >>> left_dict, right_dict = {1: "a", 2: "b", 3: "c"}, {1: "d", 4: "e"}
     >>> merge_dict_preprocessing(left_dict, right_dict, how='left')
     ({1}, True)
@@ -91,6 +110,7 @@ def merge_dict_preprocessing(left_dict: dict, right_dict: dict,
     (None, None)
 
     Example of use:
+
     >>> keys, update = merge_dict_preprocessing(left_dict, right_dict, how='outer')
     >>> if not update: left_dict.clear()
     >>> left_dict.update([(k, right_dict[k]) for k in keys])
@@ -143,6 +163,7 @@ def merge_dict_preprocessing(left_dict: dict, right_dict: dict,
 
 
 def merge_dict(left_dict: dict, right_dict: dict, how: str = 'outer', inplace=True) -> dict:
+    """Merges a right_dict into a left_dict with the method how. left_dict can be copied or modified inplace."""
     keys, update = merge_dict_preprocessing(left_dict, right_dict, how=how)
     if not inplace:
         left_dict = left_dict.copy()

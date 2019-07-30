@@ -1,4 +1,8 @@
-# open source
+# -*- coding: utf-8 -*-
+# open source project
+"""
+Dictionary-like classes
+"""
 from collections import UserDict, OrderedDict
 from copy import copy, deepcopy
 
@@ -17,8 +21,8 @@ class IdentityDict(UserDict):
 
 
 class BaseDict:
-    """Abstract class of dictionary-like objects, parent of SectionDict and ConfigDict."""
-    TO_KEY_FUNC = lambda _, x: x
+    """Base class of ordered-dictionary-like objects where keys have a specified format."""
+    TO_KEY_FUNC = lambda _, x: x  # function to convert a key to a specified format
     _DEFAULT_DICT = OrderedDict
 
     def __init__(self, *args, **kwargs):
@@ -34,7 +38,7 @@ class BaseDict:
             yield key
 
     def __contains__(self, item):
-        return self.TO_KEY_FUNC(item) in self.keys() or item in self.keys()
+        return self.TO_KEY_FUNC(item) in self.keys()  # or item in self.keys()
 
     def __len__(self):
         return len(self._cfg)
@@ -50,7 +54,7 @@ class BaseDict:
     def __eq__(self, other):
         return self._cfg == other
 
-    # Inherited from dict
+    # "Inherited" from dict
     @classmethod
     def fromkeys(cls, *args, **kwargs):
         n_dict = cls._DEFAULT_DICT.fromkeys(*args, **kwargs)
@@ -93,12 +97,12 @@ class BaseDict:
     def popitem(self, item):
         return self._cfg.popitem(item)
 
-    # Inherited from OrderedDict
+    # "Inherited" from OrderedDict
     def move_to_end(self, key):
         key = self.TO_KEY_FUNC(key)
         return self._cfg.move_to_end(key)
 
-    # Inherited from pandas dataframe
+    # Inspired by pandas dataframe
     @classmethod
     def from_dict(cls, dico):
         return cls(dico)

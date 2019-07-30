@@ -1,4 +1,8 @@
-# open source
+# -*- coding: utf-8 -*-
+# open source project
+"""
+Functions to load CSV and Excel files to dataframes.
+"""
 import pandas as pd
 
 from tools.logger import logger
@@ -9,20 +13,21 @@ from tools.helpers.data_manager.filepath_manager import open_file, handle_permis
 
 
 def _read_csv(path, **kwargs):
+    """CSV reader based on pandas.read_csv, handling permission errors."""
     try:
         df = pd.read_csv(path, **kwargs)
     except PermissionError as err:
-        df = handle_permission_error(err, func=_read_csv, path=path, change_path_func=open_file)
+        df = handle_permission_error(err, func=_read_csv, path=path, kwargs=kwargs, change_path_func=open_file)
     return df
 
 
 def _read_excel(path, sheet_name=0, **kwargs):
+    """Excel reader based on pandas.read_excel, handling permission errors."""
     try:
         df = pd.read_excel(path, sheet_name=sheet_name, **kwargs)
     except PermissionError as err:
         kwargs.update({'sheet_name': sheet_name})
-        df = handle_permission_error(err, func=_read_excel, path=path,
-                                     kwargs=kwargs, change_path_func=open_file)
+        df = handle_permission_error(err, func=_read_excel, path=path, kwargs=kwargs, change_path_func=open_file)
     return df
 
 
@@ -49,6 +54,8 @@ def read_data_file(path=None, config_dict=None, config_key=None, date_columns=No
     open_file_kwargs = open_file_kwargs or {}
     to_datetime_kwargs = to_datetime_kwargs or {}
     read_kwargs = read_kwargs or {}
+
+    # Check if the path is correct using open_file function
     if check_path:
         open_file_kwargs['path'] = path if 'path' not in open_file_kwargs else open_file_kwargs['path']
         open_file_kwargs['title'] = "Open '{}' file".format(Path(path).filename) \
@@ -56,10 +63,15 @@ def read_data_file(path=None, config_dict=None, config_key=None, date_columns=No
         open_file_kwargs['filetype'] = 'data' if 'filetype' not in open_file_kwargs else open_file_kwargs['filetype']
         path = open_file(**open_file_kwargs)
     ext = path.ext
+
+    # Ask whether the data file has an header or not.
+    # If not asked (ask_header is False), header is 0 by default or can be defined in read_kwargs.
     if ask_header and 'header' not in read_kwargs:
         msg = "Does your data file '{}' has an header (column names)?".format(path.filename)
         res = messagebox.askyesno(title="Header", message=msg)
         read_kwargs['header'] = 0 if res else None  # only level 0 can be a header
+
+    # CSV or text file. WARN: text files must be encoded properly!
     if ext in ['.csv', '.txt']:
         df = _read_csv(path, **read_kwargs)
         logger.debug('File {} loaded in pandas dataframe.'.format(path))
@@ -73,12 +85,16 @@ def read_data_file(path=None, config_dict=None, config_key=None, date_columns=No
         if config_dict:  # save path in config dict
             config_dict[config_key] = path
         return df
+
+    # Excel file
     if ext.startswith('.xls'):
         df = _read_excel(path, sheet_name=sheet_name, **read_kwargs)
         logger.debug('File {} loaded in pandas dataframe.'.format(path))
         if config_dict:  # save path in config dict
             config_dict[config_key] = path
         return df
+
+    # Unknown extension
     logger.error('Invalid file extension {} for file {}'.format(ext, path))
     if behaviour_on_error == 'error':
         raise ValueError("No data loaded because path '{}' is invalid".format(path))

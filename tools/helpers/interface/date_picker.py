@@ -1,9 +1,13 @@
-# open source
-# Author: Miguel Martinez Lopez
-# Adapted by Guillaume Égée in 2019-04 (added: MainTk and get_user_date, changed: minor visual changes)
+# -*- coding: utf-8 -*-
+# open source project
+"""
+Defines a dialog to select a date with a calendar.
+"""
+# Original author: Miguel Martinez Lopez
 # Version: 1.0.7
-# Compatibility with Python 2 has not been tested
 #
+# Adapted by Guillaume Égée in 2019-04 (added: MainTk and get_user_date, changed: minor visual changes)
+# Compatibility with Python 2 has not been tested
 
 """
 These are the default bindings:
@@ -510,6 +514,7 @@ class Datepicker(ttk.Entry):
                 self.hide_calendar()
 
 
+# TODO: convert to dialog
 class MainDateTk(CustomTk):
     def __init__(self):
         super().__init__()
@@ -533,7 +538,7 @@ class MainDateTk(CustomTk):
 class DatePickerFrame(MainDateTk):
     def __init__(self, title=None, message=None, default_date=None, dateformat="%Y-%m-%d"):
         super().__init__()
-        self.geometry("300x250")
+        self.geometry("400x250")
         self.title(title)
 
         self.main_frame = Frame(self, pady=15, padx=15)

@@ -1,4 +1,8 @@
-# open source
+# -*- coding: utf-8 -*-
+# open source project
+"""
+Functions to export data files to Excel or images to PowerPoint.
+"""
 import pandas as pd
 import pptx
 import pptx.util
@@ -12,6 +16,7 @@ from tools.helpers.data_manager.filepath_manager import (save_file,
 
 
 def _write_powerpoint(output_path, prs):
+    """Save a PowerPoint presentation."""
     try:
         prs.save(output_path)
     except PermissionError as err:
@@ -40,14 +45,14 @@ def export_img_to_powerpoint(img_paths, output_path=None):
 
 
 def _write_excel(path, dataframes, sheet_names, index=False, **kwargs):
-    """
+    """Save dataframes to an Excel workbook.
 
-    :param path:
+    :param path: output path
     :param dataframes: list of dataframes
     :param sheet_names: list of sheet names (same index as dataframes)
     :param index: if True, index names are exported
     :param kwargs: keyword arguments for pd.DataFrame.to_excel function
-    :return:
+    :return: final output path
     """
     if path is None or path.isnone:
         logger.warning('No path set to write data to Excel! No file has been created.')

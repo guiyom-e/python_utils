@@ -1,4 +1,8 @@
-# open source
+# -*- coding: utf-8 -*-
+# open source project
+"""
+Defines a text frame updated by a logger handler. Support multi-threading.
+"""
 import time
 import threading
 import logging
@@ -9,6 +13,7 @@ from tools.helpers.interface.text_frame import TextFrame
 
 
 class LoggingHandlerFrame(TextFrame):
+    """Text frame updated by a logger handler."""
     class Handler(logging.Handler):
         def __init__(self, widget, level=logging.INFO):
             logging.Handler.__init__(self)
@@ -28,6 +33,7 @@ class LoggingHandlerFrame(TextFrame):
         self.logging_handler = LoggingHandlerFrame.Handler(self.text, level=level)
 
     def quit(self):
+        """Detach logger before closing"""
         self.logging_handler.close()
         logger.removeHandler(self.logging_handler)
         super().quit()
@@ -49,10 +55,10 @@ if __name__ == '__main__':
     frame.pack()
     t1 = threading.Thread(target=worker, args=[])
     t1.start()
-    logger.info('testa')
+    logger.info('test_a')
     logger.addHandler(frame.logging_handler)
-    logger.info('testb')
+    logger.info('test_b')
     root.mainloop()
     frame.quit()
-    logger.info('testd')
+    logger.info('test_c')
     t1.join()

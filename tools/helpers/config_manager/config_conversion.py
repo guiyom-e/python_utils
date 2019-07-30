@@ -1,4 +1,8 @@
-# open source
+# -*- coding: utf-8 -*-
+# open source project
+"""
+Functions to load/save configuration with typed values.
+"""
 import ast
 import re
 import pandas as pd
@@ -26,7 +30,7 @@ def to_char(v):
 
 
 def to_list(v, sep=','):  # deprecated, replaced by ast.literal_eval
-    logger.debug("DeprecationWarning: to_list function is deprecated. You should use ast.literal_eval instead.")
+    logger.debug("DeprecationWarning: to_list function is deprecated. Use ast.literal_eval instead.")
     assert isinstance(sep, str)
     _s = str(v).strip().lstrip('[').rstrip(']').strip()
     _l = _s.split(sep)
@@ -272,16 +276,19 @@ def convert_dict_from_str(dico, allow_multiple=True, error='ignore', drop_none=F
     :return: dictionary-like object (same type as 'dico')
 
     # Simple test
+
     >>> test_dict = {"a": "without_flag", "@i-b": "1", "@f-c": "9.2", "@b-d": "", "@b-e": "5",  "@b-f": "False"}
     >>> convert_dict_from_str(test_dict)
     {'a': 'without_flag', 'b': 1, 'c': 9.2, 'd': False, 'e': True, 'f': False}
 
     # Numbers test
+
     >>> num_dict = {"@f-d1": "1.6", "@i-d2": "1.7", "@f-@i-d3": "1.8", "@i-@f-d4": "1.9", "d5": 2.0, "@ftwsdc-d6": "2 252,9"}
     >>> convert_dict_from_str(num_dict)
     {'d1': 1.6, 'd2': '1.7', 'd3': 1, 'd4': 1.9, 'd5': 2.0, 'd6': 2252.9}
 
     # Duplicates handling test
+
     >>> dup_dict = OrderedDict([("@s-overwritten", "value1"), ("overwritten", "value2"), ("@auto-overwritten", "value3")])
     >>> convert_dict_from_str(dup_dict, duplicates='rename')
     OrderedDict([('overwritten', 'value1'), ('overwritten_1', 'value2'), ('overwritten_2', 'value3')])
@@ -291,6 +298,7 @@ def convert_dict_from_str(dico, allow_multiple=True, error='ignore', drop_none=F
     OrderedDict([('overwritten', 'value3')])
 
     # Date test
+
     >>> date_dict = {"@date-date": "2019-04-01", "@date-date2": "04-13-2018", "@date-date3": "13/04/2018"}
     >>> convert_dict_from_str(date_dict)
     {'date': Timestamp('2019-04-01 00:00:00'), 'date2': Timestamp('2018-04-13 00:00:00'), 'date3': Timestamp('2018-04-13 00:00:00')}
@@ -299,11 +307,13 @@ def convert_dict_from_str(dico, allow_multiple=True, error='ignore', drop_none=F
     {'date_std': Timestamp('2018-04-11 00:00:00'), 'date_day_before': Timestamp('2018-11-04 00:00:00')}
 
     # List test
+
     >>> list_dict = {"@auto-list1": "[18, 13]", "@l-list2": "[19, 13]", "@auto-list3": "[{(18, 13): 'a'}, 'end']"}
     >>> convert_dict_from_str(list_dict)
     {'list1': [18, 13], 'list2': ['19', '13'], 'list3': [{(18, 13): 'a'}, 'end']}
 
     # Auto conversion test
+
     >>> auto_dict = {"a": "True", "b": "False", "c": "None", "d": "[{(18, 13): 'a'}, 'end']", "e": '9.9', "f": 9.9}
     >>> convert_dict_from_str(auto_dict, no_flag="auto-conversion")
     {'a': True, 'b': False, 'c': None, 'd': [{(18, 13): 'a'}, 'end'], 'e': 9.9, 'f': 9.9}

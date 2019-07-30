@@ -1,4 +1,8 @@
-# open source
+# -*- coding: utf-8 -*-
+# open source project
+"""
+Functions to select and validate file or directory paths.
+"""
 import os
 import stat
 import datetime
@@ -19,6 +23,7 @@ from tools.helpers.data_manager.file_utils import (FILETYPE_TO_FILEDIALOG_FILETY
 
 # Select directory or file(s) to open
 def _filedialog_open(path_type, **kwargs) -> Union[Path, PathCollection]:
+    """Select the correct 'open' dialog whether the path type is a file or a directory."""
     if path_type == 'file':
         dialog_type = 'open'
     elif path_type == 'dir':
@@ -115,10 +120,11 @@ def open_file_or_dir(path: Union[str, list, tuple, set] = None, config_dict=None
                                        "Path has to be set manually.".format(path_names, type(path)))
         path = None
 
-    path = Path(path)  # Convert path to type Path
-    if path.isnone and not ask_path:
+    # Convert path to type Path
+    path = Path(path)
+    if path.isnone and not ask_path:  # If path and ask_path are both None, pass
         pass
-    elif not getattr(path, is_path):  # If path is not a file/dir path (includes None path), open filedialog.
+    elif not getattr(path, is_path):  # If path is not a file/dir path (includes None path), open a file dialog.
         if not path.isnone:  # Shows a warning if wrong path (do not include None path)
             messagebox.showwarning(title='Error while trying to find the {}!'.format(path_name),
                                    message="The path '{}' doesn't correspond to any {}. "
@@ -142,18 +148,20 @@ def open_file_or_dir(path: Union[str, list, tuple, set] = None, config_dict=None
                                     behavior_on_cancellation=behavior_on_cancellation,
                                     filetype=filetype, extension=extension,
                                     check_ext=check_ext, ask_path=ask_path, path_type=path_type, **kwargs)
-    if config_dict:  # save path in config dict
+    if config_dict:  # save the new path in config dict
         config_dict[config_key] = path
     return path
 
 
 # Select file to save
 def _filedialog_save(**kwargs) -> Path:
+    """Select the correct 'save' dialog."""
     kwargs.pop('dialog_type', None)
     return choose_filedialog(dialog_type='save', **kwargs)
 
 
 def _set_writable(path: str):
+    """Make a file writable if it exists and is read-only."""
     if Path(path).isfile and not os.access(path, os.W_OK):
         try:
             os.chmod(path, stat.S_IWUSR | stat.S_IREAD)  # if read-only existing file, make it writable
@@ -164,6 +172,8 @@ def _set_writable(path: str):
 
 
 def _handle_existing_file_conflict(path: Path, overwrite='ask', backup=False, **kwargs) -> Union[Path, None]:
+    """Handle conflict if a file already exist by opening adapted dialog."""
+    # overwrite 'ask': ask user to modify overwrite arg into 'overwrite' (Yes) or 'rename' (No) or return None (Cancel)
     if overwrite == 'ask':
         logger.warning('User action needed!')
         res = messagebox.askyesnocancel(title="File existing",
@@ -179,11 +189,13 @@ def _handle_existing_file_conflict(path: Path, overwrite='ask', backup=False, **
             overwrite = 'overwrite'
         else:
             overwrite = 'rename'
+
+    # overwrite 'rename' or False: add '-i' at the end of the path to make it unique, where 'i' is an integer.
     if overwrite == 'rename' or overwrite is False:
         r_path, r_ext = path.splitext
         # def rename_method1(r_path, sep='-'):#todo
         ls_end = re.findall(r'-(\d+)$', r_path)
-        if ls_end:
+        if ls_end:  # if the path already ends by '-i', change end to 'i+1'
             end = ls_end[0]
             r_path = r_path[:-(len(end) + 1)]
             added_ending = "-{}".format(int(end) + 1)
@@ -193,6 +205,7 @@ def _handle_existing_file_conflict(path: Path, overwrite='ask', backup=False, **
         logger.debug("Path {} changed to {} (renaming)".format(path, n_path))
         return save_file(n_path, overwrite=overwrite, backup=backup, **kwargs)
 
+    # backup True: backup the old file
     if backup and path.isfile:
         suffix = datetime.datetime.now().strftime("-%Y-%m-%d_%H-%M_") + uuid.uuid4().hex[:5]
         try:
@@ -200,11 +213,16 @@ def _handle_existing_file_conflict(path: Path, overwrite='ask', backup=False, **
         except (PermissionError, FileNotFoundError) as err:
             logger.exception(err)
             logger.error("Failed to backup previous configuration file.")
+
+    # overwrite 'overwrite' or True: do not modify the path and make the old file writable to allow overwriting
     if overwrite == 'overwrite' or overwrite is True:
         logger.debug("File {} will be overwritten".format(path))
         _set_writable(path)
+
+    # overwrite 'ignore': do nothing
     elif overwrite == 'ignore':
         pass
+    # other case of overwrite: do nothing (same as 'ignore')
     else:
         logger.warning("Unexpected argument 'overwrite'! File {} will be overwritten".format(path))
     return path
@@ -212,7 +230,7 @@ def _handle_existing_file_conflict(path: Path, overwrite='ask', backup=False, **
 
 def save_file(path: Union[Path, str] = None, config_dict=None, config_key=None,
               return_on_cancellation=Path(None), behavior_on_cancellation='warning',
-              auto_mkdir=True, extension=None, replace_ext=False, filetype=None, check_ext='ignore',  # TODO
+              auto_mkdir=True, extension=None, replace_ext=False, filetype=None,
               overwrite='ask', backup=False, **kwargs) -> Path:
     """Check the path to save a file.
 
@@ -226,7 +244,6 @@ def save_file(path: Union[Path, str] = None, config_dict=None, config_key=None,
     :param filetype: filetype in FILETYPE_TO_FILEDIALOG_FILETYPES keys. If filetype is None, extension is not checked.
     :param extension: final extension to check. If extension is None, extension is not checked.
     :param replace_ext: if True, replaces extension instead of adding one
-    :param check_ext: error flag used to raise anomaly 'raise_bad_extension_anomaly'
     :param overwrite: bool or flag 'ask', 'rename', 'ignore', 'overwrite', used in case file already exists
     :param backup: bool, used in case file already exists
     :param kwargs: for filedialog

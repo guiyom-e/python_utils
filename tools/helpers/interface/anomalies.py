@@ -1,9 +1,13 @@
-# open source
+# -*- coding: utf-8 -*-
+# open source project
+"""
+Functions to display errors in message boxes and dialog with the user.
+"""
 import sys
 
 from tools.logger import logger
 from tools.exceptions import UnknownError
-from tools.helpers.interface.wrappers import _messagebox as messagebox  # no advanced dialog
+from tools.helpers.interface.wrappers import _messagebox as messagebox  # no advanced messagebox here
 
 
 def raise_anomaly(flag="ask", error=None, title=None, message=None, use_messagebox=True):
@@ -113,6 +117,7 @@ def raise_bad_extension_anomaly(flag, use_messagebox=True, msg=None):
 # For testing purposes
 if __name__ == "__main__":
     import logging
+
     logger.handlers[0].setLevel(logging.DEBUG)
     raise_anomaly(flag="ignore")
     raise_anomaly(flag="warning")

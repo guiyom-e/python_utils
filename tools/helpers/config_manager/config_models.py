@@ -1,4 +1,8 @@
-# open source
+# -*- coding: utf-8 -*-
+# open source project
+"""
+Configuration classes.
+"""
 import io
 import configparser
 from collections import defaultdict, OrderedDict
@@ -234,6 +238,7 @@ class _Config(BaseDict):
         17
 
         # search key 3 in section 2, then in default section if not found; return 10 if not found
+
         >>> config(3, section=2, default=10)
         10
 
@@ -267,7 +272,8 @@ class _Config(BaseDict):
         else:
             err_msg = "'{}' is not a valid key for the configuration".format(key)
             logger.error(err_msg)
-            return self._WILDCARD
+            raise KeyError(err_msg)
+            # return self._WILDCARD
 
     @property
     def temp_config(self):

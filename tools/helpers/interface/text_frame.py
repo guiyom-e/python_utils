@@ -1,9 +1,15 @@
+# -*- coding: utf-8 -*-
+# open source project
+"""
+Frame, dialog and Tk window with text in it.
+"""
 from tkinter import ttk, Scrollbar, N, S, E, Text, W, END, BOTH
 from tools.helpers.interface.basics import CustomTk
 from tools.helpers.interface.wrappers import frame_integration, dialog_function, CustomDialog
 
 
 class TextFrame(ttk.Frame):
+    """Frame with text in it."""
     def __init__(self, master=None, text="", height=600, width=500, **options):
         super().__init__(master, height=height, width=width, **options)
         self.grid_propagate(0)
@@ -45,7 +51,7 @@ class TextDialog(CustomDialog):
 
 @dialog_function(TextDialog)
 def showtext(title: str = None, text: str = None, **options):
-    """Show a long text in a Tk window"""
+    """Show a long text in a dialog"""
     pass
 
 

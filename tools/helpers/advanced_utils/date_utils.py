@@ -1,4 +1,5 @@
-# open source
+# -*- coding: utf-8 -*-
+# open source project
 """
 Utils to manipulate dates:
 - reset time of a date
@@ -452,4 +453,5 @@ def get_periods(date_start=None, date_end=None, nb_period=1, period_type=None, r
 
 
 def get_month_periods(date_start=None, date_end=None, nb_period=1):
+    """Returns nb_period month periods between date_start and date_end. See get_periods."""
     return get_periods(date_start=date_start, date_end=date_end, nb_period=nb_period, period_type='month')

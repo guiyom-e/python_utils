@@ -1,7 +1,11 @@
-# open source
+# -*- coding: utf-8 -*-
+# open source project
+"""
+Defines advanced messagebox to select options within multiple choices.
+"""
 from typing import Union
 import tkinter as tk
-from tkinter import ttk, TclError
+from tkinter import ttk
 
 from tools.helpers.utils import isiterable
 from tools.helpers.interface.wrappers import dialog_function, CustomDialog, frame_integration, _format_list_to_dict

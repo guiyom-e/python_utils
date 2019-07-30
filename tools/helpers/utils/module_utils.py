@@ -1,5 +1,9 @@
-# open source
-"""Utils to reload modules while python is launched."""
+# -*- coding: utf-8 -*-
+# open source project
+"""
+Utils to reload modules while python is launched.
+Be cautious when using them, because some weird behaviors can happen with some imports.
+"""
 import importlib
 import os
 import types
@@ -78,15 +82,15 @@ def reload_modules(modules: Union[list, types.ModuleType], reload_func=False, ls
 
     Reload twice to be sure the majority of modules and dependencies are reloaded.
     It is possible that some modules with tricky dependencies are not completely reloaded
-        for example:
+    For example:
         - if 'tools.helpers' depends on 'tools', the first reload is be sufficient to
-        completely reload 'tools.helpers' as 'tools' is reloaded before 'tools.helpers'
+          completely reload 'tools.helpers' as 'tools' is reloaded before 'tools.helpers'
         - if 'tools' depends on 'tools.helpers' (e.g. imports of 'tools.helpers' functions in __all__),
-        the first reload is not sufficient to reload 'tools' as 'tools.helpers' is reloaded after 'tools'.
-        Thus, a new reload is needed.
+          the first reload is not sufficient to reload 'tools' as 'tools.helpers' is reloaded after 'tools'.
+          Thus, a new reload is needed.
         - if 'tools' depends on 'tools.helpers' which depends on 'tools.helpers.utils', 'tools' can not
-        be reloaded properly in one execution, so it is necessary to execute this function twice.
-        Normally, this case is rare with modules with few submodules.
+          be reloaded properly in one execution, so it is necessary to execute this function twice.
+          Normally, this case is rare with modules with few submodules.
 
         To avoid uncompleted reloads, it is advised to pass a list of modules with few interdependence
         in the right order (lasts modules dependent of the first ones, not the contrary).

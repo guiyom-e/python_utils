@@ -1,4 +1,8 @@
-# open source
+# -*- coding: utf-8 -*-
+# open source project
+"""
+Dictionary-like classes used in configuration.
+"""
 import configparser
 from collections import defaultdict, OrderedDict
 from copy import copy, deepcopy

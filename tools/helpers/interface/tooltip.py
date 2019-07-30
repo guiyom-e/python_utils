@@ -1,10 +1,13 @@
+# -*- coding: utf-8 -*-
+# open source project
+"""
+Create a tooltip for a given widget.
+"""
 import tkinter as tk
 
 
 class ToolTip(object):
-    """
-    create a tooltip for a given widget
-    """
+    """Create a tooltip for a given widget"""
 
     def __init__(self, widget, text='widget info'):
         self.waittime = 500  # milliseconds
@@ -17,10 +20,10 @@ class ToolTip(object):
         self.id = None
         self.tw = None
 
-    def enter(self, event=None):
+    def enter(self, _event=None):
         self.schedule()
 
-    def leave(self, event=None):
+    def leave(self, _event=None):
         self.unschedule()
         self.hidetip()
 
@@ -34,7 +37,7 @@ class ToolTip(object):
         if _id:
             self.widget.after_cancel(_id)
 
-    def showtip(self, event=None):
+    def showtip(self, _event=None):
         x = y = 0
         x, y, cx, cy = self.widget.bbox("insert")
         x += self.widget.winfo_rootx() + 25

@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+# open source project
+"""
+Model classes and basic functions.
+"""
 from tkinter import Tk, TclError
 
 

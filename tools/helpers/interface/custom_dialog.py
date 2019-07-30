@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+# open source project
+"""
+Defines advanced dialogs to select options within multiple choices.
+Based on the following tkinter.ttk widgets: Checkbutton, Radiobutton, OptionMenu.
+"""
 from typing import Union
 import tkinter as tk
 from tkinter import ttk

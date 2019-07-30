@@ -1,7 +1,8 @@
-# open source
+# -*- coding: utf-8 -*-
+# open source project
 """
-Modified messagebox and filedialog (tkinter modules)
-to avoid empty windows that cannot be closed before the end of the program.
+Modified messagebox, simpledialog and filedialog (tkinter modules)
+to avoid empty Tk windows that cannot be closed before the end of the program.
 """
 import tkinter as tk
 from collections import OrderedDict
@@ -110,7 +111,7 @@ class _MessageBox(_BaseDialog):
 
 _messagebox = _MessageBox()  # WARN: tkinter messagebox modified
 _filedialog = _FileDialog()  # WARN: tkinter filedialog modified
-_simpledialog = _SimpleDialog()  # WARN: tkinter simpledialog modified a lot
+_simpledialog = _SimpleDialog()  # WARN: tkinter simpledialog modified
 
 
 class CustomDialog(tk.Toplevel):
@@ -282,17 +283,6 @@ def convert_to_dialog(dialog_cls, func=object):
     return dialog_function(dialog_cls)(func)
 
 
-# For testing purposes
-if __name__ == "__main__":
-    print(_simpledialog.askinteger('Title', 'Enter integer'))
-    # print(msg_box.showinfo('Info (original)'))
-    print(_messagebox.showinfo('Info (modified)'))
-    # print(msg_box.askyesno('Question (original)'))
-    print(_messagebox.askyesno('Question (modified)'))
-    # print(f_dialog.askopenfilenames(title='Yes or No ? (Original)'))
-    print(_filedialog.askopenfilenames(title='Yes or No ? (Modified)'))
-
-
 def _format_list_to_dict(obj, default_key='value') -> dict:
     """Format inputs lists/dict for custom dialog frames.
 
@@ -316,3 +306,14 @@ def _format_list_to_dict(obj, default_key='value') -> dict:
         elif default_key not in obj[k]:  # key used as default value
             obj[k][default_key] = k
     return obj
+
+
+# For testing purposes
+if __name__ == "__main__":
+    print(_simpledialog.askinteger('Title', 'Enter integer'))
+    # print(msg_box.showinfo('Info (original)'))
+    print(_messagebox.showinfo('Info (modified)'))
+    # print(msg_box.askyesno('Question (original)'))
+    print(_messagebox.askyesno('Question (modified)'))
+    # print(f_dialog.askopenfilenames(title='Yes or No ? (Original)'))
+    print(_filedialog.askopenfilenames(title='Yes or No ? (Modified)'))

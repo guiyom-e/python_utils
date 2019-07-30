@@ -1,4 +1,15 @@
-# open source
+# -*- coding: utf-8 -*-
+# open source project
+"""
+Metaclasses
+
+The syntax to use a metaclass in Python 3 is as follows:
+
+class MyClass(metaclass=MyMetaClass):
+    pass
+"""
+
+
 class Singleton(type):
     """Metaclass that authorize only one instance of a class."""
     _instances = {}
@@ -33,6 +44,12 @@ class LockChangeAttr(type):
 
 
 def lock_change_attr_metaclass(modification_limit=1, attr_exceptions=tuple()):
+    """Returns a custom metaclass inherited from LockChangeAttr
+
+    :param modification_limit: number of times an attribute can be modified
+    :param attr_exceptions: iterable of attributes that can be modified without any limit
+    """
+
     class CustomLockChangeAttr(LockChangeAttr):
         _modification_count = None
         _modification_limit = modification_limit

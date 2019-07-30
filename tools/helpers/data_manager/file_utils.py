@@ -1,4 +1,8 @@
-# open source
+# -*- coding: utf-8 -*-
+# open source project
+"""
+Utils linked to files.
+"""
 from typing import Union, Dict
 
 from tools.logger import logger
