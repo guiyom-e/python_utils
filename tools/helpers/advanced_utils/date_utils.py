@@ -399,7 +399,7 @@ def get_period(nb_period=1, period_type='week', date_start=None, date_end=None,
     date_start = reset_timing(date_start) if reset_time else date_start
     date_start = reset_period(date_start, period_type=period_type) if first_day_of_period else date_start
     date_end = reset_timing(date_end) if reset_time else date_end
-    date_end = reset_period(date_end, period_type=period_type, offset=+1) if first_day_of_period else date_end
+    date_end = reset_period(date_end, period_type=period_type) if first_day_of_period else date_end
     if date_start is not None and date_end is None:
         date_end = add_period(date_start, nb_period, period_type=period_type)
     elif date_end is not None and date_start is None:

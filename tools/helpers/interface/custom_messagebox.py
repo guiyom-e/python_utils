@@ -52,6 +52,7 @@ class CustomQuestionFrame(ttk.Frame):
         super().__init__(master, **options)
         self.result = None  # Result var
         self.result_keys = ''
+        self.result_str = ''
         self.change_res = tk.IntVar(value=0)
         self._auto_destroy = auto_quit
         message = '' if message is None else message
@@ -82,6 +83,7 @@ class CustomQuestionFrame(ttk.Frame):
     def return_answer(self, key):
         def _return_answer():
             self.result_keys = key
+            self.result_str = str(self._choices[key].get('name', self._choices[key]['value']))
             self.result = self._choices[key]['value']
             self.change_res.set(self.change_res.get() + 1)
             if self._auto_destroy:  # destroy the master window if possible

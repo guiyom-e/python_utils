@@ -313,7 +313,7 @@ def handle_file_error(err, func, path, args=None, kwargs=None,
     msg = msg or "Unknown error with file '{}'. \nOriginal error: {}".format(path, err)
     logger.warning('User action needed!')
     res = messagebox.askcustomquestion(title=title, message=msg,
-                                       answers=["Retry", "Rename automatically", "Change file path",
+                                       choices=["Retry", "Rename automatically", "Change file path",
                                                 "Ignore", "Debug (developer only)", "Cancel"])
     if res == "Retry":
         if key_path is not None:

@@ -56,7 +56,7 @@ except ImportError as err:
     print("Opening Python debugger...")
     pdb.set_trace()
 
-__version__ = '1.2.0'
+__version__ = '1.2.1'
 __description__ = "Main tools"
 
 __icon__ = '\n'

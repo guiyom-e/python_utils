@@ -57,23 +57,25 @@ def _write_excel(path, dataframes, sheet_names, index=False, **kwargs):
         with pd.ExcelWriter(path) as writer:
             logger.debug("File {} opened.".format(path))
             for df, sheet_name in zip(dataframes, sheet_names):
+                if isinstance(df.columns, pd.MultiIndex):
+                    index = True  # index must be True if MultiIndex columns, otherwise NotImplementedError is raised
                 df.to_excel(writer, sheet_name=sheet_name, index=index, **kwargs)
                 logger.debug("Sheet {} written.".format(sheet_name))
         logger.debug("File {} closed.".format(path))
     except PermissionError as err:
         logger.exception(err)
-        handle_permission_error(err, func=_write_excel, path=path, args=[dataframes, sheet_names, index],
-                                kwargs=kwargs, change_path_func=save_file, handle_read_only_error=True)
+        path = handle_permission_error(err, func=_write_excel, path=path, args=[dataframes, sheet_names, index],
+                                       kwargs=kwargs, change_path_func=save_file, handle_read_only_error=True)
     except ValueError as err:
         if str(err).startswith("No engine for filetype"):
-            handle_bad_extension_error(err, func=_write_excel, path=path, args=[dataframes, sheet_names, index],
-                                       kwargs=kwargs, change_path_func=save_file, extension=".xlsx")
+            path = handle_bad_extension_error(err, func=_write_excel, path=path, args=[dataframes, sheet_names, index],
+                                              kwargs=kwargs, change_path_func=save_file, extension=".xlsx")
         else:
             raise err
     except FileNotFoundError as err:
         logger.exception(err)
-        handle_file_not_found_error(err, func=_write_excel, path=path, args=[dataframes, sheet_names, index],
-                                    kwargs=kwargs, change_path_func=save_file)
+        path = handle_file_not_found_error(err, func=_write_excel, path=path, args=[dataframes, sheet_names, index],
+                                           kwargs=kwargs, change_path_func=save_file)
     return path
 
 

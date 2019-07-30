@@ -79,7 +79,7 @@ class _MainPart(ttk.LabelFrame):
     def exec_func(self, _varname, _elementname, _mode):
         # logger.debug("varname, elementname, mode: {}, {}, {}".format(_varname, _elementname, _mode))
         func = self.question_frame.result
-        func_name = self.question_frame.result_keys
+        func_name = self.question_frame.result_str
         if func:
             logger.info("***************\nStarting function '{}'...".format(func_name))
             self.master.progressbar.grid(row=0, column=1)

@@ -213,13 +213,13 @@ class RadioSelectorDialog(CustomDialog):
 class MultiSelectorFrame(ttk.Frame):
     """Frame with multiple checkboxes, radio buttons or option menu."""
 
-    def __init__(self, master=None, message: str = None, multi_choices: Union[list, dict] = None,
+    def __init__(self, master=None, message: str = None, choices: Union[list, dict] = None,
                  initial_status=False, initial_value=None, nb_columns=10, default_box_type='check_box', **options):
         """
 
         :param master: parent Dialog object
         :param message: message to show before the selection
-        :param multi_choices: list of lists of choices or OrderedDict of choices with the following format:
+        :param choices: list of lists of choices or OrderedDict of choices with the following format:
                         OrderedDict([(key, {'name': str, 'tooltip': str, 'choices': Union[OrderedDict, list],
                                             'initial_status': bool, 'box_type': 'radio' OR 'check_box'}), ...}
                         All keys are optional.
@@ -230,7 +230,7 @@ class MultiSelectorFrame(ttk.Frame):
         message = '' if message is None else str(message)
         self.label_msg = ttk.Label(master=self, text=message, wraplengt=290)
         self.label_msg.grid(row=0, column=0, sticky='new', pady=5)
-        self._choices = _format_list_to_dict(multi_choices, default_key='choices')
+        self._choices = _format_list_to_dict(choices, default_key='choices')
 
         self._ans_frame = ttk.Frame(master=self)
         self._ans_frame.grid(row=1, column=0, columnspan=2, sticky='new')
@@ -265,7 +265,7 @@ class MultiSelectorFrame(ttk.Frame):
 
     @property
     def result_keys(self):
-        """Returns the key/index value of the result in multi_choices"""
+        """Returns the key/index value of the result in choices"""
         return OrderedDict([(key, cfg['selector'].result_keys) for key, cfg in self._choices.items()])
 
     def validate(self):
@@ -297,7 +297,7 @@ def ask_radio_button(title: str = None, message: str = None, choices: Union[list
 
 
 @dialog_function(MultiSelectorDialog)
-def ask_multiple_questions(title: str = None, message: str = None, multi_choices: Union[list, dict] = None,
+def ask_multiple_questions(title: str = None, message: str = None, choices: Union[list, dict] = None,
                            initial_status: bool = False, **options):
     pass
 
@@ -330,4 +330,4 @@ if __name__ == '__main__':
     _answers = {'hi': {'choices': _dico, 'tooltip': 'zulu'},
                 'b': {'name': 'name', 'box_type': 'radio', 'choices': deepcopy(_dico), 'initial_value': 8},
                 'c': {'name': 'yo', 'box_type': 'selector', 'choices': deepcopy(_dico)}}
-    print(ask_multiple_questions(multi_choices=_answers))
+    print(ask_multiple_questions(choices=_answers))
