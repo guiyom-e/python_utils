@@ -1,6 +1,7 @@
 /tools/venv
 /tools/venv/
 /tools/logs/
+/docs/python_doc/
 /dist/
 /build/
 ! /build/*.iss
@@ -10,3 +11,4 @@
 ! /**/.keep
 .idea/
 *.exe
+*.pyc
