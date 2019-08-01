@@ -90,7 +90,7 @@ def add_period(date: Union[pd.DataFrame, pd.Series, datetime.datetime, None], nu
 
     :param date: initial date
     :param number_of_period: number of periods to add
-    :param period_type: one of: 'year', 'month', 'week', 'day', 'hour', 'minute', 'second'.
+    :param period_type: one of: 'year', 'quarter', 'month', 'week', 'day', 'hour', 'minute', 'second'.
     :param reset_time: if True, time is reset to 00:00:00.
     :param output_type: type of the output / function to apply to the output. pd.Timestamp by default.
     :param inplace: if date is a dataframe and inplace is True, convert columns inplace
@@ -149,7 +149,7 @@ def reset_period(date: Union[pd.DataFrame, pd.Series, datetime.datetime, None],
     Monday is the first day of week (following ISO 8601).
 
     :param date: selected date in the week.
-    :param period_type: 'week' or 'month'
+    :param period_type:  one of: 'year', 'quarter', 'month', 'week', 'day', 'hour', 'minute', 'second'.
     :param offset: add or remove a certain number of periods. Default: 0.
     :param reset_time: if True, time (hours, minutes, seconds, milliseconds) are set to 00:00:00
     :param inplace: if date is a dataframe and inplace is True, convert columns inplace
@@ -165,7 +165,7 @@ def reset_period(date: Union[pd.DataFrame, pd.Series, datetime.datetime, None],
         n_date = n_date.replace(month=3 * ((n_date.month - 1) // 3) + 1, day=1)
     elif period_type == 'month':
         n_date = n_date.replace(day=1)
-    elif period_type == 'month':
+    elif period_type == 'day':
         n_date = reset_timing(n_date)
     elif period_type == 'hour':
         n_date = n_date.replace(minute=1, second=0, microsecond=0)
@@ -211,7 +211,7 @@ def reset_week(date: datetime.datetime, week_offset: int = 0, reset_time=True) -
 
 
 def reset_month(date: datetime.datetime, month_offset: int = 0, reset_time=True) -> datetime.datetime:
-    """Get the first day of the week of 'date' with an offset of 'month_offset' week(s).
+    """Get the first day of the month of 'date' with an offset of 'month_offset' month(s).
 
     >>> date_1 = datetime.datetime(2017, 12, 20)  # support of datetime.datetime
     >>> reset_month(date_1)
@@ -230,17 +230,17 @@ def reset_month(date: datetime.datetime, month_offset: int = 0, reset_time=True)
     >>> isinstance(first_day, pd.Timestamp)
     True
 
-    :param date: selected date in the week.
+    :param date: selected date in the month.
     :param month_offset: add or remove a certain number of months. Default: 0.
     :param reset_time: if True, time (hours, minutes, seconds, milliseconds) are set to 00:00:00
-    :return: first day in the week of 'date' (pd.TimeStamp object).
+    :return: first day in the month of 'date' (pd.TimeStamp object).
     """
     return reset_period(date, period_type='month', offset=month_offset, reset_time=reset_time)
 
 
 # Datetime deltas
 def datetime_delta(date_1: Union[pd.DataFrame, pd.Series, datetime.datetime, None], date_2,
-                   period_type='week', abs_val=False):
+                   period_type='day', abs_val=False):
     """Get the number of periods separating date_1 from date_2.
     Monday is the first day of week (following ISO 8601).
 
@@ -273,7 +273,7 @@ def datetime_delta(date_1: Union[pd.DataFrame, pd.Series, datetime.datetime, Non
 
     :param date_1: first date
     :param date_2: second date. if date_2 >= date_1 then output >=0
-    :param period_type: one of: 'year', 'month', 'week', 'day', 'hour', 'minute', 'second'.
+    :param period_type: one of: 'year', 'quarter', 'month', 'week', 'day', 'hour', 'minute', 'second'.
     :param abs_val: if True, output is an absolute value
     :return: number of periods between date_1 and date_2 (subtraction)
     """
@@ -408,23 +408,27 @@ def get_period(nb_period=1, period_type='week', date_start=None, date_end=None,
     return date_start, date_end
 
 
-def get_periods(date_start=None, date_end=None, nb_period=1, period_type=None, reset_periods=True):
+def get_periods(date_start=None, date_end=None, nb_period=None, period_type=None, reset_periods=True):
     """Get a list of nb_period periods from date_start and/or to date_end.
     Monday is the first day of week (following ISO 8601).
 
-    >>> get_periods(date_end = datetime.datetime(2019, 2, 5), nb_period=1, period_type='week')
+    >>> from datetime import datetime as dt
+    >>> get_periods(date_end = dt(2019, 2, 5), nb_period=1, period_type='week')
     [(Timestamp('2019-01-28 00:00:00'), Timestamp('2019-02-04 00:00:00'))]
-
-    >>> get_periods(date_end = datetime.datetime(2019, 2, 5), nb_period=1, period_type='week', reset_periods=False)
+    >>> get_periods(date_end = dt(2019, 2, 5), nb_period=1, period_type='week', reset_periods=False)
     [(Timestamp('2019-01-29 00:00:00'), Timestamp('2019-02-05 00:00:00'))]
-
-    >>> get_periods(date_start = datetime.datetime(2019, 2, 3), date_end = datetime.datetime(2019, 2, 5))
+    >>> get_periods(date_start = dt(2019, 2, 3), date_end = dt(2019, 2, 5))
     [(Timestamp('2019-02-03 00:00:00'), Timestamp('2019-02-05 00:00:00'))]
+    >>> get_periods(date_start = dt(2018, 3, 1), date_end = dt(2018, 5, 1), period_type='month')  # None nb_period: auto
+    [(Timestamp('2018-03-01 00:00:00'), Timestamp('2018-04-01 00:00:00')), (Timestamp('2018-04-01 00:00:00'), Timestamp('2018-05-01 00:00:00'))]
+    >>> get_periods(date_start = dt(2018, 3, 1), date_end = dt(2018, 5, 1), period_type='month', nb_period=1)
+    [(Timestamp('2018-03-01 00:00:00'), Timestamp('2018-04-01 00:00:00'))]
 
     :param date_start: minimum date
     :param date_end: maximum date
-    :param nb_period: number of periods
-    :param period_type: one of: 'year', 'month', 'week', 'day', 'hour', 'minute', 'second'.
+    :param nb_period: number of periods. If None, nb_period is set to 1 if date_start or date_end are None
+                      or set to datetime delta between date_start and date_end
+    :param period_type: one of: 'year', 'quarter', 'month', 'week', 'day', 'hour', 'minute', 'second'.
                         If None, date_start and date_end must be different from None (otherwise, an error is raised),
                         nb_period and full_periods arguments are ignored and then [(date_start, date_end)] is returned.
     :param reset_periods: if True, get first date of periods
@@ -435,8 +439,11 @@ def get_periods(date_start=None, date_end=None, nb_period=1, period_type=None, r
             date_start, date_end = date_end, date_start
         if period_type is None:  # particular case
             return [(pd.to_datetime(date_start), pd.to_datetime(date_end))]
+        nb_period = np.inf if nb_period is None else nb_period
         nb_period = min(nb_period, datetime_delta(date_start, date_end, period_type=period_type))
         date_end = None
+    if nb_period is None:
+        nb_period = 1
     if nb_period < 1:
         return []
     if not date_start and not date_end:
