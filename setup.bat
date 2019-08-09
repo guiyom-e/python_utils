@@ -1,11 +1,19 @@
 @echo off
-echo This setup can convert the Python script 'main.exe' into a Windows executable file. Please choose an option
+
+REM Variable definitions
+SET venv_path=venv\
+SET venv_activation_script=Scripts\activate.bat
+SET exe_name=main.exe
+SET venv_activation_path=%venv_path%%venv_activation_script%
+
+REM User choice
+echo This setup can convert the Python script 'main.py' into a Windows executable file. Please choose an option
 echo 1) Default compilation and setup [recommended]
-echo 2) Compilation and setup with default virtual environment (in tools/venv).
-echo 3) Compilation with default virtual environment (in tools/venv).
+echo 2) Compilation and setup with default virtual environment (in %venv_path%).
+echo 3) Compilation with default virtual environment (in %venv_path%).
 echo 4) Compilation and setup with default python environment.
 echo 5) Compilation with default python environment.
-echo 6) Setup only ('main.exe' must already exist).
+echo 6) Setup only ('%exe_name%' must already exist).
 echo 7) Documentation only.
 set /p user_choice="Option:"
 IF "%user_choice%"=="1" goto :activate_virtualenv
@@ -26,12 +34,12 @@ goto :eof
 :virtualenv_activation
 call deactivate
 call :reset_error
-call tools\venv\Scripts\activate.bat
+call %venv_activation_path%
 goto :eof
 
 
 :activate_virtualenv
-echo This setup will convert the Python script 'main.exe' into a Windows executable file. This can take few minutes.
+echo This setup will convert the Python script 'main.py' into a Windows executable file. This can take few minutes.
 REM if already activated, try to deactivate and re-activate
 call :virtualenv_activation
 IF %ERRORLEVEL% EQU 0 (
@@ -77,8 +85,9 @@ goto :failure
 
 :copy_file
 IF NOT EXIST dist\main.exe ( echo File error: dist/main.exe does not exist && goto :end )
-MOVE /Y dist\main.exe main.exe
+MOVE /Y dist\main.exe %exe_name%
 IF %ERRORLEVEL% EQU 0 (
+echo Executable dist\main.exe successfully moved to %exe_name%
 IF "%user_choice%"=="3" goto :success
 IF "%user_choice%"=="5" goto :success
 goto :compile_doc
