@@ -1,5 +1,7 @@
 # -*- mode: python -*-
 
+NAME = 'main'
+
 block_cipher = None
 
 # work-around for https://github.com/pyinstaller/pyinstaller/issues/4064
@@ -7,10 +9,10 @@ import distutils
 if distutils.distutils_path.endswith('__init__.py'):
     distutils.distutils_path = os.path.dirname(distutils.distutils_path)
 
-a = Analysis(['main.py'],
-             pathex=['.'],  # TODO: path to set
+a = Analysis(['../main.py'],
+             pathex=['..'],  # TODO: path to set
              binaries=[],
-             datas=[('tools', 'tools/')], # if needed, also add: ('tools/venv/Lib/site-packages/pptx/templates/default.pptx', 'pptx/templates/')
+             datas=[('../tools', '../tools/')], # if needed, also add: ('../venv/Lib/site-packages/pptx/templates/default.pptx', 'pptx/templates/')
              hiddenimports = [],
              hookspath=[],
              runtime_hooks=[],
@@ -28,10 +30,10 @@ exe = EXE(pyz,
           a.zipfiles,
           a.datas,
           [],
-          name='main',
+          name=NAME,
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
           runtime_tmpdir=None,
-          console=False, icon='tools\\favicon.ico')
+          console=False, icon='..\\tools\\favicon.ico')

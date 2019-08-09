@@ -1,14 +1,17 @@
 /tools/venv
+/venv
 /tools/venv/
 /tools/logs/
-/docs/python_doc/
+/docs/developer_doc/
+/docs/.config/source
 /dist/
 /build/
-! /build/*.iss
+!/build/*.iss
+!/build/main.spec
 **/__pycache__/
 **/.old/
 /data/
-! /**/.keep
+!/**/.keep
 .idea/
 *.exe
 *.pyc

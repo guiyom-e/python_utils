@@ -1,12 +1,21 @@
+:start
 @echo off
-echo This setup can convert the Python script 'main.exe' into a Windows executable file. Please choose an option
+
+REM Variable definitions
+SET venv_path=venv\
+SET venv_activation_script=Scripts\activate.bat
+SET exe_name=main.exe
+SET venv_activation_path=%venv_path%%venv_activation_script%
+
+REM User choice
+echo This setup can convert the Python script 'main.py' into a Windows executable file. Please choose an option
 echo 1) Default compilation and setup [recommended]
-echo 2) Compilation and setup with default virtual environment (in tools/venv).
-echo 3) Compilation with default virtual environment (in tools/venv).
+echo 2) Compilation and setup with default virtual environment (in %venv_path%).
+echo 3) Compilation with default virtual environment (in %venv_path%).
 echo 4) Compilation and setup with default python environment.
 echo 5) Compilation with default python environment.
-echo 6) Setup only ('main.exe' must already exist).
-echo 7) Documentation only.
+echo 6) Setup only ('%exe_name%' must already exist).
+echo 7) Developer documentation only.
 set /p user_choice="Option:"
 IF "%user_choice%"=="1" goto :activate_virtualenv
 IF "%user_choice%"=="2" goto :activate_virtualenv
@@ -14,7 +23,7 @@ IF "%user_choice%"=="3" goto :activate_virtualenv
 IF "%user_choice%"=="4" goto :default_installation
 IF "%user_choice%"=="5" goto :default_installation
 IF "%user_choice%"=="6" goto :compile_setup
-IF "%user_choice%"=="7" goto :compile_doc
+IF "%user_choice%"=="7" goto :compile_dev_doc
 
 echo No correct option was selected.
 goto :end
@@ -26,12 +35,12 @@ goto :eof
 :virtualenv_activation
 call deactivate
 call :reset_error
-call tools\venv\Scripts\activate.bat
+call %venv_activation_path%
 goto :eof
 
 
 :activate_virtualenv
-echo This setup will convert the Python script 'main.exe' into a Windows executable file. This can take few minutes.
+echo This setup will convert the Python script 'main.py' into a Windows executable file. This can take few minutes.
 REM if already activated, try to deactivate and re-activate
 call :virtualenv_activation
 IF %ERRORLEVEL% EQU 0 (
@@ -56,7 +65,7 @@ IF /I "%on_venv_failure%"=="yes" goto :default_installation
 goto :failure
 
 :default_installation
-python -m pyinstaller main.spec --onefile
+python -m pyinstaller build/main.spec --onefile
 IF %ERRORLEVEL% EQU 0 (
 echo main.exe successfully compiled with default python
 goto :copy_file
@@ -66,7 +75,7 @@ goto :failure
 )
 
 :virtualenv_installation
-pyinstaller main.spec --onefile
+pyinstaller build/main.spec --onefile
 IF %ERRORLEVEL% EQU 0 (
 echo main.exe successfully compiled with virtualenv
 goto :copy_file
@@ -77,8 +86,9 @@ goto :failure
 
 :copy_file
 IF NOT EXIST dist\main.exe ( echo File error: dist/main.exe does not exist && goto :end )
-MOVE /Y dist\main.exe main.exe
+MOVE /Y dist\main.exe %exe_name%
 IF %ERRORLEVEL% EQU 0 (
+echo Executable dist\main.exe successfully moved to %exe_name%
 IF "%user_choice%"=="3" goto :success
 IF "%user_choice%"=="5" goto :success
 goto :compile_doc
@@ -88,17 +98,30 @@ goto :failure
 )
 
 :compile_doc
+:compile_dev_doc
 echo Generating python documentation...
 call :virtualenv_activation
 call :reset_error
-sphinx-apidoc -o docs/python_doc/source .
-sphinx-build -b html . docs/python_doc
+cd docs\.config
+sphinx-apidoc -o source ../..
+sphinx-build -b html . ../developer_doc
 IF %ERRORLEVEL% EQU 0 (
-echo Documentation successfully generated in docs/python_docs
+cd ..\..
+echo Documentation successfully generated in docs/developer_doc
 IF "%user_choice%"=="7" goto :success
-goto :compile_setup
 ) else (
+cd ..\..
 echo Documentation was not generated. Check if Sphinx is installed and added to Windows path/environment variables.
+goto :failure
+)
+
+:compile_word_doc
+echo Converting Word documents to PDF...
+powershell  docs/.config/Makefile.ps1
+IF %ERRORLEVEL% EQU 0 (
+echo Documentation successfully converted to PDF in docs/
+) else (
+echo Word documents were not converted. Check that all Word documents are closed.
 goto :failure
 )
 
@@ -120,7 +143,9 @@ goto :end
 
 :failure
 echo Setup ended with errors.
-pause
+echo Do you want to restart the setup?
+set /p restart_choice="(y/n):"
+IF /I "%user_choice%"=="y" goto :start
 goto :end
 
 :end

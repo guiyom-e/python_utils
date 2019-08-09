@@ -7,16 +7,18 @@
    :linenothreshold: 5
 
 Main tools' documentation
-=========================
+#########################
+
+Project overview
+================
 
 .. toctree::
    :maxdepth: 5
-   :caption: Project tree
-   :name: tree
    :titlesonly:
-   
-   docs/python_doc/source/modules.rst
 
+   source/includeme.rst
+
+   source/modules.rst
 
 Indices and tables
 ==================
@@ -24,7 +26,11 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-* :ref:`tree`
+
+Get started
+===========
+
+.. include:: source/includeme.rst
 
 Examples
 ========
