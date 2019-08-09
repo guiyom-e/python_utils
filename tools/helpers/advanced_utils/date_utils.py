@@ -15,7 +15,7 @@ from typing import Union
 import pandas as pd
 import numpy as np
 
-from tools.helpers.interface import get_user_date
+from tools.helpers.interface import simpledialog
 from tools.helpers.utils.decorators import handle_datetime_dataframe, handle_datetime_pandas_objects
 
 STRFTIME_DICT = {'year': "%Y", "month": "%Y-%m", "quarter": "%Y-%m",
@@ -23,6 +23,7 @@ STRFTIME_DICT = {'year': "%Y", "month": "%Y-%m", "quarter": "%Y-%m",
                  "day": "%Y-%m-%d", None: "%Y-%m-%d",
                  "hour": "%H:%M", "minute": "%H:%M", "second": "%H:%M:%S"}
 
+# todo: integrate pandas.date_range
 
 # Reset time
 @handle_datetime_dataframe
@@ -357,7 +358,7 @@ def week_delta(date_1, date_2, abs_val=False):
 
 # Get period(s)
 def get_period(nb_period=1, period_type='week', date_start=None, date_end=None,
-               first_day_of_period=True, reset_time=True, **get_user_date_kwargs):
+               first_day_of_period=True, reset_time=True, **askdate_kwargs):
     """
     >>> get_period(period_type='week', date_start='ask', first_day_of_period=True, \
     default_date=datetime.datetime(2018, 5, 2, 8, 2, 1), bypass_dialog=True)
@@ -385,16 +386,16 @@ def get_period(nb_period=1, period_type='week', date_start=None, date_end=None,
                        If 'latest', 'today' or 'now', use today date as date_end
     :param first_day_of_period: if True, the first days of the periods are used for date_start and date_end
     :param reset_time: if True, all times are reset to 00:00:00
-    :param get_user_date_kwargs: keyword arguments for get_user_date function (in case of use)
+    :param askdate_kwargs: keyword arguments for simpledialog.askdate function (in case of use)
     :return: date_start, date_end
     """
-    title_1 = get_user_date_kwargs.pop('title', None)
+    title_1 = askdate_kwargs.pop('title', None)
     if isinstance(date_start, str) and date_start in ['ask']:
         title = title_1 or "Start date"
-        date_start = get_user_date(title, **get_user_date_kwargs)
+        date_start = simpledialog.askdate(title, **askdate_kwargs)
     if isinstance(date_end, str) and date_end in ['ask']:
         title = title_1 or "End date"
-        date_end = get_user_date(title, **get_user_date_kwargs)
+        date_end = simpledialog.askdate(title, **askdate_kwargs)
     elif isinstance(date_end, str) and date_end in ['latest', 'today', 'now']:
         date_end = datetime.datetime.now()
     date_start = reset_timing(date_start) if reset_time else date_start

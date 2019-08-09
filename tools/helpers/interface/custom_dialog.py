@@ -13,7 +13,9 @@ from tools.logger import logger
 from tools.helpers.utils import isinlist
 from tools.helpers.interface.wrappers import (frame_integration, dialog_function, convert_to_dialog, CustomDialog,
                                               _format_list_to_dict)
+from tools.helpers.interface.date_picker import DatePickerFrame, DateSelectorFrame
 from tools.helpers.interface.tooltip import ToolTip
+from tools.helpers.interface.basics import FrameWithScrollbar
 
 
 class OptionMenuFrame(ttk.Frame):
@@ -23,13 +25,13 @@ class OptionMenuFrame(ttk.Frame):
                  initial_value=None, **options):
         """Initialize a OptionMenuFrame widget.
 
-        :param master: parent Dialog object
+        :param master: parent ttk Frame object
         :param message: message to show before the selection
         :param choices: list of choices or OrderedDict of choices with the following format:
                         OrderedDict([(key, {'name': str}), ...}
                         All keys are optional.
         :param initial_value: initial value to display
-        :param options: for ttk Frame
+        :param options: options for parent
         """
         # Init
         super().__init__(master, **options)
@@ -76,13 +78,13 @@ class CheckBoxFrame(ttk.Frame):
                  initial_status=False, nb_columns=10, **options):
         """Initialize a CheckBoxFrame widget.
 
-        :param master: parent Dialog object
+        :param master: parent ttk Frame object
         :param message: message to show before the selection
         :param choices: list of choices or OrderedDict of choices with the following format:
                         OrderedDict([(key, {'name': str, 'status': bool, 'tooltip': str}), ...}
                         All keys are optional.
         :param nb_columns: max number of columns for check boxes
-        :param options: for ttk Frame
+        :param options: options for parent
         """
         # Init
         super().__init__(master, **options)
@@ -152,13 +154,13 @@ class RadioButtonFrame(ttk.Frame):
                  initial_value=None, nb_columns=10, **options):
         """Initialize a RadioButtonFrame widget.
 
-        :param master: parent Dialog object
+        :param master: parent ttk Frame object
         :param message: message to show before the selection
         :param choices: list of choices or OrderedDict of choices with the following format:
                         OrderedDict([(key, {'name': str, 'status': bool, 'tooltip': str}), ...}
                         All keys are optional.
         :param nb_columns: max number of columns for radio buttons
-        :param options: for ttk Frame
+        :param options: options for parent
         """
         # Init
         super().__init__(master, **options)
@@ -220,26 +222,42 @@ class MultiSelectorFrame(ttk.Frame):
     """Frame with multiple checkboxes, radio buttons or option menu."""
 
     def __init__(self, master=None, message: str = None, choices: Union[list, dict] = None,
-                 initial_status=False, initial_value=None, nb_columns=10, default_box_type='check_box', **options):
-        """
+                 initial_status=False, initial_value=None, nb_columns=10,
+                 date_start=None, date_end=None, dateformat=None,
+                 default_box_type='check_box', max_width=1500, max_height=500, **options):
+        """Initialization method
 
-        :param master: parent Dialog object
+        :param master: parent ttk Frame object
         :param message: message to show before the selection
         :param choices: list of lists of choices or OrderedDict of choices with the following format:
                         OrderedDict([(key, {'name': str, 'tooltip': str, 'choices': Union[OrderedDict, list],
                                             'initial_status': bool, 'box_type': 'radio' OR 'check_box'}), ...}
                         All keys are optional.
-        :param options:
+        :param initial_status: initial_status for check_box choices
+        :param initial_value: initial_value for radio, selector, date_picker choices
+        :param nb_columns: nb_columns for check_box and radio choices
+        :param date_start: date_start for date_selector choices
+        :param date_end: date_end for date_selector choices
+        :param dateformat: dateformat for date_picker and date_selector choices
+        :param default_box_type: default box type if not passed in choices
+        :param options: options for parent
         """
         # Init
         super().__init__(master, **options)
         message = '' if message is None else str(message)
         self.label_msg = ttk.Label(master=self, text=message, wraplengt=290)
         self.label_msg.grid(row=0, column=0, sticky='new', pady=5)
-        self._choices = _format_list_to_dict(choices, default_key='choices')
+        self._choices = _format_list_to_dict(choices, default_key='choices', use_key_as_default_value=False)
 
-        self._ans_frame = ttk.Frame(master=self)
+        self.columnconfigure(0, weight=1)
+        self.rowconfigure(1, weight=1)
+
+        self._frame_wsb = FrameWithScrollbar(self)
+        self._frame_wsb.grid(row=1, sticky='news')
+
+        self._ans_frame = ttk.Frame(master=self._frame_wsb.frame)
         self._ans_frame.grid(row=1, column=0, columnspan=2, sticky='new')
+
         for i, (key, config) in enumerate(self._choices.items()):
             name = str(config.get('name', key))
             tooltip = str(config.get('tooltip', ""))
@@ -257,12 +275,28 @@ class MultiSelectorFrame(ttk.Frame):
                 initial_value = config.get('initial_value', initial_value)
                 answer = OptionMenuFrame(self._ans_frame, message=name, choices=choices,
                                          initial_value=initial_value)
+            elif box_type == 'date_picker':
+                initial_value = config.get('initial_value', initial_value)
+                dateformat = config.get('dateformat', dateformat)
+                answer = DatePickerFrame(self._ans_frame, message=name,
+                                         initial_value=initial_value, dateformat=dateformat)
+            elif box_type == 'date_selector':
+                date_start = config.get('date_start', date_start)
+                date_end = config.get('date_end', date_end)
+                dateformat = config.get('dateformat', dateformat)
+                mode = config.get('mode', 'auto')
+                answer = DateSelectorFrame(self._ans_frame, message=name, choices=choices, mode=mode,
+                                           date_start=date_start, date_end=date_end, dateformat=dateformat)
             else:
                 raise ValueError(box_type)
             if tooltip:
                 ToolTip(answer.label_msg, tooltip)
             answer.grid(row=i, sticky='nw', pady=5)
             config['selector'] = answer
+
+        self.update()
+        self._frame_wsb.canvas.config(width=min(max_width, self._ans_frame.winfo_width()),
+                                      height=min(max_height, self._ans_frame.winfo_height()))
 
     @property
     def result(self):
@@ -312,6 +346,7 @@ if __name__ == '__main__':
     import numpy as np
     from copy import deepcopy
     import pandas as pd
+    from datetime import datetime as dt
 
     # Test OptionMenuDialog
     print(convert_to_dialog(OptionMenuDialog)(title='test', message='Question',
@@ -335,5 +370,10 @@ if __name__ == '__main__':
                   for i in range(30)})
     _answers = {'hi': {'choices': _dico, 'tooltip': 'zulu'},
                 'b': {'name': 'name', 'box_type': 'radio', 'choices': deepcopy(_dico), 'initial_value': 8},
-                'c': {'name': 'yo', 'box_type': 'selector', 'choices': deepcopy(_dico)}}
-    print(ask_multiple_questions(choices=_answers))
+                'c': {'name': 'yo', 'box_type': 'selector', 'choices': deepcopy(_dico)},
+                'd': {'name': 'date picker', 'box_type': 'date_picker'},
+                'e': {'name': 'date selector (tuple)', 'box_type': 'date_selector'},
+                'f': {'name': 'date selector (filter)', 'box_type': 'date_selector',
+                      'choices': [dt(2019, 5, 1), dt(2019, 7, 2)]},
+                }
+    print(ask_multiple_questions(title='hello', message='select', choices=_answers))

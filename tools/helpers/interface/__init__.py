@@ -17,7 +17,7 @@ Files:
 """
 from tools.helpers.interface.basics import CustomTk, center   # Must be the first import
 
-from tools.helpers.interface.date_picker import get_user_date
+from tools.helpers.interface.date_picker import get_user_date, DatePickerFrame, DateSelectorFrame
 from tools.helpers.interface.custom_dialog import OptionMenuFrame, RadioButtonFrame, CheckBoxFrame
 from tools.helpers.interface.custom_messagebox import CustomQuestionFrame
 from tools.helpers.interface.text_frame import TextFrame
@@ -34,7 +34,9 @@ __all__ = [
     'CustomTk',
     'center',
 
-    'get_user_date',
+    'get_user_date',  # deprecated
+    'DatePickerFrame',
+    'DateSelectorFrame',
 
     'OptionMenuFrame',
     'RadioButtonFrame',
@@ -59,4 +61,4 @@ __all__ = [
     'MainTk',
 ]
 
-__version__ = '2.0.0'
+__version__ = '2.1.0'

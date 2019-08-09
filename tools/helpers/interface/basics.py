@@ -3,7 +3,8 @@
 """
 Model classes and basic functions.
 """
-from tkinter import Tk, TclError
+import tkinter as tk
+from tkinter import Tk, TclError, ttk, N, S, E, W
 
 
 class CustomTk(Tk):
@@ -33,3 +34,25 @@ def center(win, width=None, height=None):
     x = win.winfo_screenwidth() // 2 - win_width // 2
     y = win.winfo_screenheight() // 2 - win_height // 2
     win.geometry('+{}+{}'.format(x, y))
+
+
+class FrameWithScrollbar(ttk.Frame):
+    """Frame with a vertical scrollbar.
+    Access to canvas: '.canvas'; access to child frame: '.frame'"""
+
+    def __init__(self, master=None, **options):
+        super().__init__(master, **options)
+
+        self.canvas = tk.Canvas(self, borderwidth=0)
+        self.frame = ttk.Frame(self.canvas)
+        self.vsb = ttk.Scrollbar(self, orient="vertical", command=self.canvas.yview)
+        self.canvas.configure(yscrollcommand=self.vsb.set)
+        self.vsb.pack(side="right", fill="y")
+        self.canvas.pack(side="left", fill="both", expand=True)
+        # self.frame.pack(side="left", fill="both", expand=True)
+        self.frame.bind("<Configure>", self.on_frame_configure)
+        self.canvas.create_window((1, 1), window=self.frame, anchor="nw", tags="self.frame")
+
+    def on_frame_configure(self, _event):
+        """Reset the scroll region to encompass the inner frame"""
+        self.canvas.configure(scrollregion=self.canvas.bbox("all"))

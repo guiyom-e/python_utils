@@ -6,8 +6,9 @@ to avoid empty Tk windows that cannot be closed before the end of the program.
 """
 import tkinter as tk
 from collections import OrderedDict
-from typing import List, Tuple
+from typing import List, Tuple, Union
 import functools
+import pandas as pd
 
 from tkinter import Tk, TclError, ttk
 from tkinter import messagebox as msg_box
@@ -180,8 +181,9 @@ class CustomDialog(tk.Toplevel):
 
     def ok(self, _event=None):
         if not self.validate():
-            res = _messagebox.askyesno(title="Incomplete answers",
-                                       message="Some answers are missing, do you want to continue?")
+            res = _messagebox.askyesno(title="Incorrect answers",
+                                       message="Some answers are missing or incorrect, do you want to continue?",
+                                       default='no')
             if not res:
                 self._frame.focus_set()  # put focus back
                 return
@@ -283,7 +285,8 @@ def convert_to_dialog(dialog_cls, func=object):
     return dialog_function(dialog_cls)(func)
 
 
-def _format_list_to_dict(obj, default_key='value') -> dict:
+def _format_list_to_dict(obj: Union[list, dict], default_key='value',
+                         use_key_as_default_value=True, default_value=None) -> dict:
     """Format inputs lists/dict for custom dialog frames.
 
     >>> _format_list_to_dict(['a', 'b'])
@@ -297,14 +300,19 @@ def _format_list_to_dict(obj, default_key='value') -> dict:
     >>> _format_list_to_dict([{'a': 1}, {'b': {'value': 'c'}}])
     OrderedDict([(0, {'a': 1, 'value': 0}), (1, {'b': {'value': 'c'}, 'value': 1})])
     """
-    obj = obj or OrderedDict()
+    if isinstance(obj, pd.Index):
+        obj = list(obj)
+    obj = obj or OrderedDict()  # None / empty containers cases included
     if isinstance(obj, list):
         obj = OrderedDict([(i, ele) for i, ele in enumerate(obj)])
     for k in obj:
         if not isinstance(obj[k], dict):  # value used as default value
             obj[k] = {default_key: obj[k]}
-        elif default_key not in obj[k]:  # key used as default value
-            obj[k][default_key] = k
+        elif default_key not in obj[k]:
+            if use_key_as_default_value:  # key used as default value
+                obj[k][default_key] = k
+            else:
+                obj[k][default_key] = default_value
     return obj
 
 

@@ -5,56 +5,30 @@ Defines a dialog to select a date with a calendar.
 """
 # Original author: Miguel Martinez Lopez
 # Version: 1.0.7
-#
-# Adapted by Guillaume Égée in 2019-04 (added: MainTk and get_user_date, changed: minor visual changes)
-# Compatibility with Python 2 has not been tested
+# Adapted in 2019-04 (added: integration in a Frame, date interval selection, dialog; changed: minor visual changes)
+# No more compatibility with Python 2
 
-"""
-These are the default bindings:
-    Click button 1 on entry: Show calendar
-    Click button 1 outside calendar and entry: Hide calendar
-    Escape: Hide calendar
-    CTRL + PAGE UP: Move to the previous month.
-    CTRL + PAGE DOWN: Move to the next month.
-    CTRL + SHIFT + PAGE UP: Move to the previous year.
-    CTRL + SHIFT + PAGE DOWN: Move to the next year.
-    CTRL + LEFT: Move to the previous day.
-    CTRL + RIGHT: Move to the next day.
-    CTRL + UP: Move to the previous week.
-    CTRL + DOWN: Move to the next week.
-    CTRL + END: Close the datepicker and erase the date.
-    CTRL + HOME: Move to the current month.
-    CTRL + SPACE: Show date on calendar
-    CTRL + Return: Set current selection to entry
-"""
+
 import sys
 import calendar
 import datetime
+import pandas as pd
+from typing import Union, List, Tuple  # not compatible with Python2
 
-try:
-    import Tkinter
-    import tkFont
-    import ttk
+import tkinter as Tkinter
+import tkinter.font as tkFont
+import tkinter.ttk as ttk
 
-    from Tkconstants import CENTER, LEFT, N, E, W, S
-    from Tkinter import StringVar
-    from Tkinter import Tk, Frame, Label
-    from Tkinter import TclError
-    from Tkinter import messagebox
-except ImportError:  # py3k
-    import tkinter as Tkinter
-    import tkinter.font as tkFont
-    import tkinter.ttk as ttk
-
-    from tkinter.constants import CENTER, LEFT, N, E, W, S
-    from tkinter import StringVar
-    from tkinter import Tk, Frame, Label
-    from tkinter import TclError
-    from tkinter import messagebox
+from tkinter.constants import CENTER, LEFT, N, E, W, S
+from tkinter import StringVar
+from tkinter import Tk, Frame, Label
+from tkinter import TclError
+from tkinter import messagebox
 
 from tools.logger import logger
 from tools.helpers.interface.basics import CustomTk
 from tools.helpers.interface.anomalies import raise_anomaly
+from tools.helpers.interface.wrappers import (frame_integration, dialog_function, CustomDialog, _format_list_to_dict)
 
 
 def _get_calendar(locale, fwday):
@@ -356,7 +330,25 @@ class Datepicker(ttk.Entry):
     def __init__(self, master, entrywidth=None, entrystyle=None, datevar=None, dateformat="%Y-%m-%d", onselect=None,
                  firstweekday=calendar.MONDAY, locale=None, activebackground='#b1dcfb', activeforeground='black',
                  selectbackground='#003eff', selectforeground='white', borderwidth=1, relief="solid"):
+        """tkinter Entry with a calendar.
 
+        These are the default bindings:
+            Click button 1 on entry: Show calendar
+            Click button 1 outside calendar and entry: Hide calendar
+            Escape: Hide calendar
+            CTRL + PAGE UP: Move to the previous month.
+            CTRL + PAGE DOWN: Move to the next month.
+            CTRL + SHIFT + PAGE UP: Move to the previous year.
+            CTRL + SHIFT + PAGE DOWN: Move to the next year.
+            CTRL + LEFT: Move to the previous day.
+            CTRL + RIGHT: Move to the next day.
+            CTRL + UP: Move to the previous week.
+            CTRL + DOWN: Move to the next week.
+            CTRL + END: Close the datepicker and erase the date.
+            CTRL + HOME: Move to the current month.
+            CTRL + SPACE: Show date on calendar
+            CTRL + Return: Set current selection to entry
+        """
         if datevar is not None:
             self.date_var = datevar
         else:
@@ -514,8 +506,169 @@ class Datepicker(ttk.Entry):
                 self.hide_calendar()
 
 
-# TODO: convert to dialog
-class MainDateTk(CustomTk):
+class DatePickerFrame(ttk.Frame):
+    """Integration of DatePicker in a Frame"""
+
+    def __init__(self, master=None, message: str = None, initial_value=None, dateformat=None, **options):
+        """Initialization method
+
+        :param master: parent ttk Frame object
+        :param message: message to show before the selection
+        :param initial_value: default date. If None, the date of the day is used.
+        :param dateformat: date format string (ISO 8601 format "%Y-%m-%d by default)
+        :param allow_empty: if True, empty dates are allowed (considered as None values)
+        :param options: options for parent
+        """
+        # Init
+        super().__init__(master, **options)
+        message = "Date entry" if message is None else str(message)
+        self.label_msg = ttk.Label(master=self, text=message, wraplengt=290, justify="left", )
+        self.label_msg.grid(row=0, column=0, sticky='new', padx=5)
+
+        dateformat = dateformat or "%Y-%m-%d"
+        self.date_picker = Datepicker(self, dateformat=dateformat)
+        if initial_value is None:
+            initial_value = datetime.datetime.now()
+        if isinstance(initial_value, datetime.datetime):
+            self.date_picker.current_date = initial_value
+            self.date_picker.current_text = initial_value.strftime(dateformat)
+        self.date_picker.grid(row=1, column=0, sticky=N + W, pady=5, padx=5)
+        self.grid_columnconfigure(0, pad=110, weight=1)
+        self.grid_rowconfigure(1, pad=180, weight=1)
+
+    @property
+    def result(self):
+        """Returns result: current date"""
+        return self.date_picker.current_date
+
+    @property
+    def result_keys(self):
+        """Returns the text value of the result"""
+        return self.date_picker.current_text
+
+    def validate(self):
+        """Returns whether the entry is correct or not: for check box, the answer is always True."""
+        return self.date_picker.is_valid_date
+
+
+class DateSelectorFrame(ttk.Frame):
+    """Two date pickers selecting dates from a start date (included) to an end date (excluded)
+
+    If a date is empty, the considered value is None and dates are not filtered.
+    """
+
+    def __init__(self, master=None, message=None, mode='auto', choices=None,
+                 date_start=None, date_end=None, dateformat=None, allow_empty=True, **options):
+        """Initialization method
+
+        :param master: parent ttk Frame object
+        :param message: message to show before the selection
+        :param mode: 'tuple': returns the dates chosen by the user,
+        'filter': return the list of dates filtered dates in choices with the dates chosen by the user,
+        'auto' (default value): if choices is None, use 'tuple' mode, otherwise use 'filter' mode.
+        :param choices: list of dates or OrderedDict of choices with the following format:
+                        OrderedDict([(key, {'name': str, 'value': datetime.datetime}), ...}
+                        All keys are optional.
+        :param date_start: default start date. If None, the earliest date of choices is used.
+        :param date_end: default end date. If None, the latest date of choices is used. If no choices, empty date.
+        :param dateformat: date format string (ISO 8601 format "%Y-%m-%d by default)
+        :param allow_empty: if True, empty dates are allowed (considered as None values)
+        :param options: options for parent
+        """
+        # Init
+        super().__init__(master, **options)
+        if mode == 'auto' or mode is None:
+            mode = 'tuple' if choices is None else 'filter'
+        self.mode = mode
+        self.allow_empty = allow_empty
+        dateformat = dateformat or "%Y-%m-%d"
+        self._choices = _format_list_to_dict(choices, default_key='value')
+        self._dates = [v['value'] for v in self._choices.values()
+                       if isinstance(v['value'], datetime.datetime) and v['value'] is not pd.NaT]
+        if self._dates:
+            self._min_date = min(self._dates)  # for comparison
+            self._max_date = max(self._dates) + datetime.timedelta(days=1)
+            min_str = self._min_date.strftime(dateformat)  # for display
+            max_str = self._max_date.strftime(dateformat)
+            date_start = date_start or self._min_date  # for default date
+            date_end = date_end or self._max_date
+        else:
+            self._min_date, self._max_date = datetime.datetime.now(), datetime.datetime.now()
+            min_str, max_str = 'NaT', 'NaT'
+            date_start = date_start or ''
+            date_end = date_end or ''
+
+        if message is None:
+            message = 'Select dates from {} to {}'.format(min_str, max_str) if mode == 'filter' else ''
+        else:
+            message = str(message)
+        self.label_msg = ttk.Label(master=self, text=message, wraplengt=290)
+        self.label_msg.grid(row=0, column=0, columnspan=2, sticky='new', padx=5)
+
+        self._start_date_frame = DatePickerFrame(self, message="Start date (included)",
+                                                 initial_value=date_start, dateformat=dateformat)
+        self._start_date_frame.grid(row=1, column=0, sticky='new', padx=5)
+
+        self._end_date_frame = DatePickerFrame(self, message="End date (excluded)",
+                                               initial_value=date_end, dateformat=dateformat)
+        self._end_date_frame.grid(row=1, column=1, sticky='new', padx=5)
+
+    @property
+    def filtered_result(self) -> List[datetime.datetime]:
+        """Returns the dates in choices filtered"""
+        date_min = self._start_date_frame.result
+        date_max = self._end_date_frame.result
+        return [date for date in self._dates if (date_min or self._min_date) <= date < (date_max or self._max_date)]
+
+    @property
+    def result(self):
+        """Returns result: filtered dates or tuple of selected dates"""
+        return self.filtered_result if self.mode == 'filter' else self.result_keys
+
+    @property
+    def result_keys(self) -> Tuple[Union[datetime.datetime, None], Union[datetime.datetime, None]]:
+        """Returns the two dates defining the interval"""
+        return self._start_date_frame.result, self._end_date_frame.result
+
+    def validate(self):
+        """Returns whether the entry is correct or not: for check box, the answer is always True."""
+        entry_start = self._start_date_frame.date_picker.date_var.get()
+        entry_end = self._end_date_frame.date_picker.date_var.get()
+        if entry_start == entry_end == '':
+            return True if self.allow_empty else False
+        if self._start_date_frame.validate() and entry_end == '':
+            return True if self.allow_empty else False
+        if self._end_date_frame.validate() and entry_start == '':
+            return True if self.allow_empty else False
+        return self._start_date_frame.validate() and self._end_date_frame.validate() \
+               and self._start_date_frame.result <= self._end_date_frame.result
+
+
+@frame_integration(DatePickerFrame, okcancel=True)
+class DatePickerDialog(CustomDialog):
+    """Dialog window with date picker."""
+    pass
+
+
+@frame_integration(DateSelectorFrame, okcancel=True)
+class DateSelectorDialog(CustomDialog):
+    """Dialog window with two date pickers to select dates inside a time period."""
+    pass
+
+
+@dialog_function(DatePickerDialog)
+def askdate(title: str = None, message: str = None, initial_value: datetime.datetime = None, **options):
+    pass
+
+
+@dialog_function(DateSelectorDialog)
+def askperiod(title: str = None, message: str = None, mode: str = 'auto', choices: Union[list, dict] = None,
+              date_start: datetime.datetime = None, date_end: datetime.datetime = None, dateformat: str = None,
+              **options):
+    pass
+
+
+class MainDateTk(CustomTk):  # obsolete
     def __init__(self):
         super().__init__()
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
@@ -535,7 +688,7 @@ class MainDateTk(CustomTk):
         self.destroy()
 
 
-class DatePickerFrame(MainDateTk):
+class DatePickerTk(MainDateTk):  # obsolete
     def __init__(self, title=None, message=None, default_date=None, dateformat="%Y-%m-%d"):
         super().__init__()
         self.geometry("400x250")
@@ -565,13 +718,15 @@ class DatePickerFrame(MainDateTk):
 def get_user_date(title=None, message=None, default_date=None, dateformat="%Y-%m-%d",
                   bypass_dialog=False, behavior_on_error='ignore'):
     """Main function to get a date from  user."""
+    import warnings
+    warnings.warn("get_user_date is deprecated. Use simpledialog.askdate instead", DeprecationWarning)
     if bypass_dialog:
         return default_date or datetime.datetime.now()
     if title is None:
         title = "Select a date"
     if message is None:
         message = "Enter the date (ISO format YYYY-MM-DD):"
-    m_root = DatePickerFrame(title=title, message=message, default_date=default_date, dateformat=dateformat)
+    m_root = DatePickerTk(title=title, message=message, default_date=default_date, dateformat=dateformat)
     m_root.mainloop()
     date_selected = m_root.date_picker.current_date
     logger.info('Date picked: {}'.format(date_selected))
@@ -582,4 +737,6 @@ def get_user_date(title=None, message=None, default_date=None, dateformat="%Y-%m
 
 
 if __name__ == "__main__":
-    print(get_user_date())
+    print(askdate())
+    print(askperiod())
+    print(askperiod(choices=[datetime.datetime.now()]))
