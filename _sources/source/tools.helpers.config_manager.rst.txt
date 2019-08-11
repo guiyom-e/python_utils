@@ -1,0 +1,46 @@
+tools.helpers.config\_manager package
+=====================================
+
+Submodules
+----------
+
+tools.helpers.config\_manager.config\_conversion module
+-------------------------------------------------------
+
+.. automodule:: tools.helpers.config_manager.config_conversion
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tools.helpers.config\_manager.config\_dict module
+-------------------------------------------------
+
+.. automodule:: tools.helpers.config_manager.config_dict
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tools.helpers.config\_manager.config\_models module
+---------------------------------------------------
+
+.. automodule:: tools.helpers.config_manager.config_models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tools.helpers.config\_manager.simple\_config module
+---------------------------------------------------
+
+.. automodule:: tools.helpers.config_manager.simple_config
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: tools.helpers.config_manager
+   :members:
+   :undoc-members:
+   :show-inheritance:

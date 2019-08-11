@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>tools.helpers package &#8212; Main tools 1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tools.helpers.advanced_utils package" href="tools.helpers.advanced_utils.html" />
+    <link rel="prev" title="tools package" href="tools.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.advanced_utils.html" title="tools.helpers.advanced_utils package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tools.html" title="tools package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Main tools 1.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >python_utils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" accesskey="U">tools package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tools-helpers-package">
+<h1>tools.helpers package<a class="headerlink" href="#tools-helpers-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tools.helpers.advanced_utils.html">tools.helpers.advanced_utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.advanced_utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.advanced_utils.html#module-tools.helpers.advanced_utils.dataframe_utils">tools.helpers.advanced_utils.dataframe_utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.advanced_utils.html#module-tools.helpers.advanced_utils.date_utils">tools.helpers.advanced_utils.date_utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.advanced_utils.html#module-tools.helpers.advanced_utils.text_utils">tools.helpers.advanced_utils.text_utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.advanced_utils.html#module-tools.helpers.advanced_utils">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools.helpers.config_manager.html">tools.helpers.config_manager package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.config_manager.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.config_manager.html#module-tools.helpers.config_manager.config_conversion">tools.helpers.config_manager.config_conversion module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.config_manager.html#module-tools.helpers.config_manager.config_dict">tools.helpers.config_manager.config_dict module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.config_manager.html#module-tools.helpers.config_manager.config_models">tools.helpers.config_manager.config_models module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.config_manager.html#module-tools.helpers.config_manager.simple_config">tools.helpers.config_manager.simple_config module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.config_manager.html#module-tools.helpers.config_manager">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools.helpers.data_manager.html">tools.helpers.data_manager package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.data_manager.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.data_manager.html#module-tools.helpers.data_manager.data_loader">tools.helpers.data_manager.data_loader module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.data_manager.html#module-tools.helpers.data_manager.data_writer">tools.helpers.data_manager.data_writer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.data_manager.html#module-tools.helpers.data_manager.file_utils">tools.helpers.data_manager.file_utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.data_manager.html#module-tools.helpers.data_manager.filepath_manager">tools.helpers.data_manager.filepath_manager module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.data_manager.html#module-tools.helpers.data_manager.plots">tools.helpers.data_manager.plots module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.data_manager.html#module-tools.helpers.data_manager">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools.helpers.interface.html">tools.helpers.interface package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.interface.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.interface.html#module-tools.helpers.interface.advanced_wrappers">tools.helpers.interface.advanced_wrappers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.interface.html#module-tools.helpers.interface.anomalies">tools.helpers.interface.anomalies module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.interface.html#module-tools.helpers.interface.basics">tools.helpers.interface.basics module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.interface.html#module-tools.helpers.interface.custom_dialog">tools.helpers.interface.custom_dialog module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.interface.html#module-tools.helpers.interface.custom_messagebox">tools.helpers.interface.custom_messagebox module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.interface.html#module-tools.helpers.interface.date_picker">tools.helpers.interface.date_picker module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.interface.html#module-tools.helpers.interface.logger_widget">tools.helpers.interface.logger_widget module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.interface.html#module-tools.helpers.interface.main_interface">tools.helpers.interface.main_interface module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.interface.html#module-tools.helpers.interface.text_frame">tools.helpers.interface.text_frame module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.interface.html#module-tools.helpers.interface.tooltip">tools.helpers.interface.tooltip module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.interface.html#module-tools.helpers.interface.wrappers">tools.helpers.interface.wrappers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.interface.html#module-tools.helpers.interface">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools.helpers.models.html">tools.helpers.models package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.models.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.models.html#module-tools.helpers.models.dict_models">tools.helpers.models.dict_models module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.models.html#module-tools.helpers.models.metaclasses">tools.helpers.models.metaclasses module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.models.html#module-tools.helpers.models.path_models">tools.helpers.models.path_models module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.models.html#module-tools.helpers.models.str_models">tools.helpers.models.str_models module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.models.html#module-tools.helpers.models.types_models">tools.helpers.models.types_models module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.models.html#module-tools.helpers.models">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tools.helpers.utils.html">tools.helpers.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.utils.html#module-tools.helpers.utils.decorators">tools.helpers.utils.decorators module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.utils.html#module-tools.helpers.utils.module_utils">tools.helpers.utils.module_utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.utils.html#module-tools.helpers.utils.utils">tools.helpers.utils.utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.helpers.utils.html#module-tools.helpers.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="module-tools.helpers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-tools.helpers" title="Permalink to this headline">¶</a></h2>
+<p>Helpers.</p>
+<dl class="function">
+<dt id="tools.helpers.isiterable">
+<code class="sig-prename descclassname">tools.helpers.</code><code class="sig-name descname">isiterable</code><span class="sig-paren">(</span><em class="sig-param">obj</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.isiterable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether an object is “iterable” or not. Are considered iterable tuple, list, set and inherited classes</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.isinstance_filetypes">
+<code class="sig-prename descclassname">tools.helpers.</code><code class="sig-name descname">isinstance_filetypes</code><span class="sig-paren">(</span><em class="sig-param">filetypes</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.isinstance_filetypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if ‘filetypes’ is a valid variable for filetypes argument
+in tkinter.filedialog functions, else False.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.isinlist">
+<code class="sig-prename descclassname">tools.helpers.</code><code class="sig-name descname">isinlist</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">iterable</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.isinlist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether an object is in the iterable or not.</p>
+<p>Support is granted for numpy and pandas objects which have multiple definitions of truth.
+One numpy/pandas object is considered in the iterable if the object itself is in the iterable.
+Therefore, if a copy but not the object is present in the iterable, isinlist returns False.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ls</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span> <span class="n">df</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">isinlist</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">ls</span><span class="p">),</span> <span class="n">isinlist</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">ls</span><span class="p">),</span> <span class="n">isinlist</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="p">),</span> <span class="n">isinlist</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="p">)</span>
+<span class="go">(True, False, True, False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">isinlist</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">ls</span><span class="p">),</span> <span class="n">isinlist</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">ls</span><span class="p">),</span> <span class="n">isinlist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span> <span class="n">ls</span><span class="p">)</span>
+<span class="go">(True, False, False)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">tools.helpers package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#module-tools.helpers">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tools.html"
+                        title="previous chapter">tools package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tools.helpers.advanced_utils.html"
+                        title="next chapter">tools.helpers.advanced_utils package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/source/tools.helpers.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.advanced_utils.html" title="tools.helpers.advanced_utils package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tools.html" title="tools package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Main tools 1.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >python_utils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >tools package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright open source.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

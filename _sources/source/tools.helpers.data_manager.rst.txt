@@ -1,0 +1,54 @@
+tools.helpers.data\_manager package
+===================================
+
+Submodules
+----------
+
+tools.helpers.data\_manager.data\_loader module
+-----------------------------------------------
+
+.. automodule:: tools.helpers.data_manager.data_loader
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tools.helpers.data\_manager.data\_writer module
+-----------------------------------------------
+
+.. automodule:: tools.helpers.data_manager.data_writer
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tools.helpers.data\_manager.file\_utils module
+----------------------------------------------
+
+.. automodule:: tools.helpers.data_manager.file_utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tools.helpers.data\_manager.filepath\_manager module
+----------------------------------------------------
+
+.. automodule:: tools.helpers.data_manager.filepath_manager
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tools.helpers.data\_manager.plots module
+----------------------------------------
+
+.. automodule:: tools.helpers.data_manager.plots
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: tools.helpers.data_manager
+   :members:
+   :undoc-members:
+   :show-inheritance:

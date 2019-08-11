@@ -1,0 +1,598 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>tools.helpers.utils package &#8212; Main tools 1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tools.tests package" href="tools.tests.html" />
+    <link rel="prev" title="tools.helpers.models package" href="tools.helpers.models.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tools.tests.html" title="tools.tests package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.models.html" title="tools.helpers.models package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Main tools 1.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >python_utils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >tools package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="tools.helpers.html" accesskey="U">tools.helpers package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tools-helpers-utils-package">
+<h1>tools.helpers.utils package<a class="headerlink" href="#tools-helpers-utils-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-tools.helpers.utils.decorators">
+<span id="tools-helpers-utils-decorators-module"></span><h2>tools.helpers.utils.decorators module<a class="headerlink" href="#module-tools.helpers.utils.decorators" title="Permalink to this headline">¶</a></h2>
+<p>Wrappers for date functions</p>
+<dl class="function">
+<dt id="tools.helpers.utils.decorators.handle_datetime_dataframe">
+<code class="sig-prename descclassname">tools.helpers.utils.decorators.</code><code class="sig-name descname">handle_datetime_dataframe</code><span class="sig-paren">(</span><em class="sig-param">func</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.utils.decorators.handle_datetime_dataframe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator to make functions converting dates usable for pandas DataFrame.</p>
+<dl class="simple">
+<dt>Function requirements:</dt><dd><ul class="simple">
+<li><p>first argument can be a pandas Serie object</p></li>
+<li><dl class="simple">
+<dt>keyword argument ‘inplace’ may exist (used for DataFrame objects) but:</dt><dd><ul>
+<li><p>must not be passed as a positional argument</p></li>
+<li><p>is False by default</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p>General warning: using complex objects with inheritances or __instancecheck__ method is not recommended</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.utils.decorators.handle_datetime_pandas_objects">
+<code class="sig-prename descclassname">tools.helpers.utils.decorators.</code><code class="sig-name descname">handle_datetime_pandas_objects</code><span class="sig-paren">(</span><em class="sig-param">func</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.utils.decorators.handle_datetime_pandas_objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator to make functions converting dates usable for pandas Series and DataFrame.</p>
+<dl class="simple">
+<dt>Function requirements:</dt><dd><ul class="simple">
+<li><p>first argument must be a datetime-like object</p></li>
+<li><dl class="simple">
+<dt>keyword argument ‘inplace’ may exist (used for DataFrame objects) but:</dt><dd><ul>
+<li><p>must not be passed as a positional argument</p></li>
+<li><p>must not be used by the function itself</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt>Performance warning: in many cases, the pandas Serie method “apply” is slower than direct/vectorial operations</dt><dd><p>Consider using the “.dt” accessor for example</p>
+</dd>
+</dl>
+<p>General warning: using complex objects with inheritances or __instancecheck__ method is not recommended</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.utils.decorators.handle_datetime_serie">
+<code class="sig-prename descclassname">tools.helpers.utils.decorators.</code><code class="sig-name descname">handle_datetime_serie</code><span class="sig-paren">(</span><em class="sig-param">func</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.utils.decorators.handle_datetime_serie" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator to make functions converting dates usable for pandas Series or lists.</p>
+<dl class="simple">
+<dt>Function requirements:</dt><dd><ul class="simple">
+<li><p>first argument must be a datetime-like object</p></li>
+</ul>
+</dd>
+<dt>Performance warning: in many cases, the pandas Serie method “apply” is slower than direct/vectorial operations</dt><dd><p>Consider using the “.dt” accessor for example</p>
+</dd>
+</dl>
+<p>General warning: using complex objects with inheritances or __instancecheck__ method is not recommended</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.utils.module_utils">
+<span id="tools-helpers-utils-module-utils-module"></span><h2>tools.helpers.utils.module_utils module<a class="headerlink" href="#module-tools.helpers.utils.module_utils" title="Permalink to this headline">¶</a></h2>
+<p>Utils to reload modules while python is launched.
+Be cautious when using them, because some weird behaviors can happen with some imports.</p>
+<dl class="function">
+<dt id="tools.helpers.utils.module_utils.reload_functions">
+<code class="sig-prename descclassname">tools.helpers.utils.module_utils.</code><code class="sig-name descname">reload_functions</code><span class="sig-paren">(</span><em class="sig-param">module, functions: Union[list, tuple, Callable]</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.utils.module_utils.reload_functions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reloads a function or a list/tuple of functions.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.utils.module_utils.reload_modules">
+<code class="sig-prename descclassname">tools.helpers.utils.module_utils.</code><code class="sig-name descname">reload_modules</code><span class="sig-paren">(</span><em class="sig-param">modules: Union[list, module], reload_func=False, ls_func_names='__all__'</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.utils.module_utils.reload_modules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reloads the modules in list ‘modules’ and the functions selected if ‘reload_func’ is True.</p>
+<p>Reload twice to be sure the majority of modules and dependencies are reloaded.
+It is possible that some modules with tricky dependencies are not completely reloaded
+For example:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>if ‘tools.helpers’ depends on ‘tools’, the first reload is be sufficient to
+completely reload ‘tools.helpers’ as ‘tools’ is reloaded before ‘tools.helpers’</p></li>
+<li><p>if ‘tools’ depends on ‘tools.helpers’ (e.g. imports of ‘tools.helpers’ functions in __all__),
+the first reload is not sufficient to reload ‘tools’ as ‘tools.helpers’ is reloaded after ‘tools’.
+Thus, a new reload is needed.</p></li>
+<li><p>if ‘tools’ depends on ‘tools.helpers’ which depends on ‘tools.helpers.utils’, ‘tools’ can not
+be reloaded properly in one execution, so it is necessary to execute this function twice.
+Normally, this case is rare with modules with few submodules.</p></li>
+</ul>
+<p>To avoid uncompleted reloads, it is advised to pass a list of modules with few interdependence
+in the right order (lasts modules dependent of the first ones, not the contrary).</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modules</strong> – list of modules</p></li>
+<li><p><strong>reload_func</strong> – if True, reload selected functions (see ls_func_names arg)</p></li>
+<li><p><strong>ls_func_names</strong> – <p>name or list of names of either:
+- an iterable (list or tuple) in __init__ which contains functions to reload (e.g. __all__).</p>
+<blockquote>
+<div><p>The iterable must have one of this format: [func1, func2, …] or [(_, func1, _), (_, func2, _), …]</p>
+</div></blockquote>
+<ul>
+<li><p>a function in __init__</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.utils.module_utils.reload_package">
+<code class="sig-prename descclassname">tools.helpers.utils.module_utils.</code><code class="sig-name descname">reload_package</code><span class="sig-paren">(</span><em class="sig-param">package</em>, <em class="sig-param">reload_func=False</em>, <em class="sig-param">ls_func_names: Union[list</em>, <em class="sig-param">str] = '__all__'</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.utils.module_utils.reload_package" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reloads the module ‘package’ and the functions selected if ‘reload_func’ is True.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>package</strong> – package to reload (includes subpackages)</p></li>
+<li><p><strong>reload_func</strong> – if True, reload selected functions (see ls_func_names arg)</p></li>
+<li><p><strong>ls_func_names</strong> – name or list of names of iterables in __init__ which contains functions to reload.</p></li>
+</ul>
+</dd>
+</dl>
+<p>The iterable must have one of this format: [func1, func2, …] or [(_, func1, _), (_, func2, _), …]
+:return: None</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.utils.utils">
+<span id="tools-helpers-utils-utils-module"></span><h2>tools.helpers.utils.utils module<a class="headerlink" href="#module-tools.helpers.utils.utils" title="Permalink to this headline">¶</a></h2>
+<p>Basic utils that can be used in the whole project
+This module should not need of other modules (except logger).</p>
+<dl class="function">
+<dt id="tools.helpers.utils.utils.coordinates_to_distance">
+<code class="sig-prename descclassname">tools.helpers.utils.utils.</code><code class="sig-name descname">coordinates_to_distance</code><span class="sig-paren">(</span><em class="sig-param">lat1</em>, <em class="sig-param">lon1</em>, <em class="sig-param">lat2</em>, <em class="sig-param">lon2</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.utils.utils.coordinates_to_distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the approximate distance between two points of coordinates (lat1, log1), (lat2, long2).
+Formula adapted from <a class="reference external" href="https://en.wikipedia.org/wiki/Haversine_formula">https://en.wikipedia.org/wiki/Haversine_formula</a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.utils.utils.isinlist">
+<code class="sig-prename descclassname">tools.helpers.utils.utils.</code><code class="sig-name descname">isinlist</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">iterable</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.utils.utils.isinlist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether an object is in the iterable or not.</p>
+<p>Support is granted for numpy and pandas objects which have multiple definitions of truth.
+One numpy/pandas object is considered in the iterable if the object itself is in the iterable.
+Therefore, if a copy but not the object is present in the iterable, isinlist returns False.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ls</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span> <span class="n">df</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">isinlist</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">ls</span><span class="p">),</span> <span class="n">isinlist</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">ls</span><span class="p">),</span> <span class="n">isinlist</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="p">),</span> <span class="n">isinlist</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="p">)</span>
+<span class="go">(True, False, True, False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">isinlist</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">ls</span><span class="p">),</span> <span class="n">isinlist</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">ls</span><span class="p">),</span> <span class="n">isinlist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span> <span class="n">ls</span><span class="p">)</span>
+<span class="go">(True, False, False)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.utils.utils.isinstance_filetypes">
+<code class="sig-prename descclassname">tools.helpers.utils.utils.</code><code class="sig-name descname">isinstance_filetypes</code><span class="sig-paren">(</span><em class="sig-param">filetypes</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.utils.utils.isinstance_filetypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if ‘filetypes’ is a valid variable for filetypes argument
+in tkinter.filedialog functions, else False.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.utils.utils.isiterable">
+<code class="sig-prename descclassname">tools.helpers.utils.utils.</code><code class="sig-name descname">isiterable</code><span class="sig-paren">(</span><em class="sig-param">obj</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.utils.utils.isiterable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether an object is “iterable” or not. Are considered iterable tuple, list, set and inherited classes</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.utils.utils.merge_dict">
+<code class="sig-prename descclassname">tools.helpers.utils.utils.</code><code class="sig-name descname">merge_dict</code><span class="sig-paren">(</span><em class="sig-param">left_dict: dict</em>, <em class="sig-param">right_dict: dict</em>, <em class="sig-param">how: str = 'outer'</em>, <em class="sig-param">inplace=True</em><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#tools.helpers.utils.utils.merge_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merges a right_dict into a left_dict with the method how. left_dict can be copied or modified inplace.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.utils.utils.merge_dict_preprocessing">
+<code class="sig-prename descclassname">tools.helpers.utils.utils.</code><code class="sig-name descname">merge_dict_preprocessing</code><span class="sig-paren">(</span><em class="sig-param">left_dict: dict</em>, <em class="sig-param">right_dict: dict</em>, <em class="sig-param">how: str = 'outer'</em><span class="sig-paren">)</span> &#x2192; Union[Tuple[Union[set, KeysView], bool], Tuple[None, None]]<a class="headerlink" href="#tools.helpers.utils.utils.merge_dict_preprocessing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the tuple (keys, update) which permit to update a ‘left_dict’ with a ‘right_dict’ with the method ‘how’.</p>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;c&quot;</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;e&quot;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge_dict_preprocessing</span><span class="p">(</span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="go">({1}, True)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge_dict_preprocessing</span><span class="p">(</span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+<span class="go">({1}, False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge_dict_preprocessing</span><span class="p">(</span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;right_anti&#39;</span><span class="p">)</span>
+<span class="go">({4}, False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge_dict_preprocessing</span><span class="p">(</span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<span class="go">(dict_keys([1, 4]), False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge_dict_preprocessing</span><span class="p">(</span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+<span class="go">(dict_keys([1, 4]), True)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge_dict_preprocessing</span><span class="p">(</span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;append&#39;</span><span class="p">)</span>
+<span class="go">({4}, True)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge_dict_preprocessing</span><span class="p">(</span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+<span class="go">(set(), True)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge_dict_preprocessing</span><span class="p">(</span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;clear&#39;</span><span class="p">)</span>
+<span class="go">(set(), False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge_dict_preprocessing</span><span class="p">(</span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;bad_string&#39;</span><span class="p">)</span>
+<span class="go">(None, None)</span>
+</pre></div>
+</div>
+<p>Example of use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">keys</span><span class="p">,</span> <span class="n">update</span> <span class="o">=</span> <span class="n">merge_dict_preprocessing</span><span class="p">(</span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="ow">not</span> <span class="n">update</span><span class="p">:</span> <span class="n">left_dict</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left_dict</span><span class="o">.</span><span class="n">update</span><span class="p">([(</span><span class="n">k</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left_dict</span>
+<span class="go">{1: &#39;d&#39;, 2: &#39;b&#39;, 3: &#39;c&#39;, 4: &#39;e&#39;}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>left_dict</strong> – left dictionary-like object</p></li>
+<li><p><strong>right_dict</strong> – right dictionary-like object</p></li>
+</ul>
+</dd>
+</dl>
+<p>Dictionary-like object need the methods ‘keys’ which returns a set-like object
+with methods ‘__sub__’ and ‘__and__’.
+:param how: - ‘left’: only right_dict keys already in left_dict will be updated.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>‘inner’: only keys in self AND right_dict will be kept.</p></li>
+<li><p>‘right_anti’: only keys in right_dict AND NOT in left_dict.</p></li>
+<li><p>‘right’ or ‘replace’: only right_dict keys will be kept.</p></li>
+<li><p>‘outer’or ‘update’: all keys of self AND right_dict will be kept.</p></li>
+<li><p>‘append’: append new keys of right_dict, but don’t modify existing keys in left_dict.</p></li>
+<li><p>‘none’ or None: no modification</p></li>
+<li><p>‘clear’: clear left_dict</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>keys (set), update (bool)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.utils.utils.merge_two_levels_dict">
+<code class="sig-prename descclassname">tools.helpers.utils.utils.</code><code class="sig-name descname">merge_two_levels_dict</code><span class="sig-paren">(</span><em class="sig-param">left_dict: dict</em>, <em class="sig-param">right_dict: dict</em>, <em class="sig-param">how='outer'</em>, <em class="sig-param">how_section=None</em>, <em class="sig-param">inplace=False</em><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#tools.helpers.utils.utils.merge_two_levels_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modify left_dict inplace, updated with right_dict.
+Left and right dict must have at least two levels.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.utils.utils.shorten_dataframe_str">
+<code class="sig-prename descclassname">tools.helpers.utils.utils.</code><code class="sig-name descname">shorten_dataframe_str</code><span class="sig-paren">(</span><em class="sig-param">df: pandas.core.frame.DataFrame</em>, <em class="sig-param">column_name: str</em>, <em class="sig-param">max_length: int</em>, <em class="sig-param">replacement_str: str = '...'</em>, <em class="sig-param">inplace: bool = False</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#tools.helpers.utils.utils.shorten_dataframe_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shorten string values that are longer than ‘max_length’ in column ‘column_name’.
+If some values are not strings, they are converted.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="p">[[</span><span class="s2">&quot;baobab&quot;</span><span class="p">,</span> <span class="s2">&quot;octopus&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;birthday&quot;</span><span class="p">,</span> <span class="s2">&quot;mark&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shorten_dataframe_str</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">           a        b</span>
+<span class="go">0     baobab  octopus</span>
+<span class="go">1  birthd...     mark</span>
+<span class="go">2          1        2</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – pandas dataframe</p></li>
+<li><p><strong>column_name</strong> – column name of dataframe df</p></li>
+<li><p><strong>max_length</strong> – maximum length of strings</p></li>
+<li><p><strong>replacement_str</strong> – string to append to the cut strings. Default: ‘…’</p></li>
+<li><p><strong>inplace</strong> – if True, the input dataframe is modified inplace</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dataframe modified</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-tools.helpers.utils" title="Permalink to this headline">¶</a></h2>
+<p>Basic utils that can be used in the whole project
+This module should not need of other modules (except logger).</p>
+<dl class="function">
+<dt id="tools.helpers.utils.isiterable">
+<code class="sig-prename descclassname">tools.helpers.utils.</code><code class="sig-name descname">isiterable</code><span class="sig-paren">(</span><em class="sig-param">obj</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.utils.isiterable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether an object is “iterable” or not. Are considered iterable tuple, list, set and inherited classes</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.utils.isinstance_filetypes">
+<code class="sig-prename descclassname">tools.helpers.utils.</code><code class="sig-name descname">isinstance_filetypes</code><span class="sig-paren">(</span><em class="sig-param">filetypes</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.utils.isinstance_filetypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True if ‘filetypes’ is a valid variable for filetypes argument
+in tkinter.filedialog functions, else False.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.utils.isinlist">
+<code class="sig-prename descclassname">tools.helpers.utils.</code><code class="sig-name descname">isinlist</code><span class="sig-paren">(</span><em class="sig-param">obj</em>, <em class="sig-param">iterable</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.utils.isinlist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether an object is in the iterable or not.</p>
+<p>Support is granted for numpy and pandas objects which have multiple definitions of truth.
+One numpy/pandas object is considered in the iterable if the object itself is in the iterable.
+Therefore, if a copy but not the object is present in the iterable, isinlist returns False.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ls</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span> <span class="n">df</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">isinlist</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">ls</span><span class="p">),</span> <span class="n">isinlist</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">ls</span><span class="p">),</span> <span class="n">isinlist</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="p">),</span> <span class="n">isinlist</span><span class="p">(</span><span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="p">)</span>
+<span class="go">(True, False, True, False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">isinlist</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">ls</span><span class="p">),</span> <span class="n">isinlist</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">ls</span><span class="p">),</span> <span class="n">isinlist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">]),</span> <span class="n">ls</span><span class="p">)</span>
+<span class="go">(True, False, False)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.utils.merge_dict_preprocessing">
+<code class="sig-prename descclassname">tools.helpers.utils.</code><code class="sig-name descname">merge_dict_preprocessing</code><span class="sig-paren">(</span><em class="sig-param">left_dict: dict</em>, <em class="sig-param">right_dict: dict</em>, <em class="sig-param">how: str = 'outer'</em><span class="sig-paren">)</span> &#x2192; Union[Tuple[Union[set, KeysView], bool], Tuple[None, None]]<a class="headerlink" href="#tools.helpers.utils.merge_dict_preprocessing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the tuple (keys, update) which permit to update a ‘left_dict’ with a ‘right_dict’ with the method ‘how’.</p>
+<p>Examples:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="s2">&quot;c&quot;</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s2">&quot;d&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="s2">&quot;e&quot;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge_dict_preprocessing</span><span class="p">(</span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="go">({1}, True)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge_dict_preprocessing</span><span class="p">(</span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
+<span class="go">({1}, False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge_dict_preprocessing</span><span class="p">(</span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;right_anti&#39;</span><span class="p">)</span>
+<span class="go">({4}, False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge_dict_preprocessing</span><span class="p">(</span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<span class="go">(dict_keys([1, 4]), False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge_dict_preprocessing</span><span class="p">(</span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+<span class="go">(dict_keys([1, 4]), True)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge_dict_preprocessing</span><span class="p">(</span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;append&#39;</span><span class="p">)</span>
+<span class="go">({4}, True)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge_dict_preprocessing</span><span class="p">(</span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+<span class="go">(set(), True)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge_dict_preprocessing</span><span class="p">(</span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;clear&#39;</span><span class="p">)</span>
+<span class="go">(set(), False)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">merge_dict_preprocessing</span><span class="p">(</span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;bad_string&#39;</span><span class="p">)</span>
+<span class="go">(None, None)</span>
+</pre></div>
+</div>
+<p>Example of use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">keys</span><span class="p">,</span> <span class="n">update</span> <span class="o">=</span> <span class="n">merge_dict_preprocessing</span><span class="p">(</span><span class="n">left_dict</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;outer&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="ow">not</span> <span class="n">update</span><span class="p">:</span> <span class="n">left_dict</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left_dict</span><span class="o">.</span><span class="n">update</span><span class="p">([(</span><span class="n">k</span><span class="p">,</span> <span class="n">right_dict</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">left_dict</span>
+<span class="go">{1: &#39;d&#39;, 2: &#39;b&#39;, 3: &#39;c&#39;, 4: &#39;e&#39;}</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>left_dict</strong> – left dictionary-like object</p></li>
+<li><p><strong>right_dict</strong> – right dictionary-like object</p></li>
+</ul>
+</dd>
+</dl>
+<p>Dictionary-like object need the methods ‘keys’ which returns a set-like object
+with methods ‘__sub__’ and ‘__and__’.
+:param how: - ‘left’: only right_dict keys already in left_dict will be updated.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>‘inner’: only keys in self AND right_dict will be kept.</p></li>
+<li><p>‘right_anti’: only keys in right_dict AND NOT in left_dict.</p></li>
+<li><p>‘right’ or ‘replace’: only right_dict keys will be kept.</p></li>
+<li><p>‘outer’or ‘update’: all keys of self AND right_dict will be kept.</p></li>
+<li><p>‘append’: append new keys of right_dict, but don’t modify existing keys in left_dict.</p></li>
+<li><p>‘none’ or None: no modification</p></li>
+<li><p>‘clear’: clear left_dict</p></li>
+</ul>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>keys (set), update (bool)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.utils.merge_dict">
+<code class="sig-prename descclassname">tools.helpers.utils.</code><code class="sig-name descname">merge_dict</code><span class="sig-paren">(</span><em class="sig-param">left_dict: dict</em>, <em class="sig-param">right_dict: dict</em>, <em class="sig-param">how: str = 'outer'</em>, <em class="sig-param">inplace=True</em><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#tools.helpers.utils.merge_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merges a right_dict into a left_dict with the method how. left_dict can be copied or modified inplace.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.utils.merge_two_levels_dict">
+<code class="sig-prename descclassname">tools.helpers.utils.</code><code class="sig-name descname">merge_two_levels_dict</code><span class="sig-paren">(</span><em class="sig-param">left_dict: dict</em>, <em class="sig-param">right_dict: dict</em>, <em class="sig-param">how='outer'</em>, <em class="sig-param">how_section=None</em>, <em class="sig-param">inplace=False</em><span class="sig-paren">)</span> &#x2192; dict<a class="headerlink" href="#tools.helpers.utils.merge_two_levels_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modify left_dict inplace, updated with right_dict.
+Left and right dict must have at least two levels.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.utils.shorten_dataframe_str">
+<code class="sig-prename descclassname">tools.helpers.utils.</code><code class="sig-name descname">shorten_dataframe_str</code><span class="sig-paren">(</span><em class="sig-param">df: pandas.core.frame.DataFrame</em>, <em class="sig-param">column_name: str</em>, <em class="sig-param">max_length: int</em>, <em class="sig-param">replacement_str: str = '...'</em>, <em class="sig-param">inplace: bool = False</em><span class="sig-paren">)</span> &#x2192; pandas.core.frame.DataFrame<a class="headerlink" href="#tools.helpers.utils.shorten_dataframe_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shorten string values that are longer than ‘max_length’ in column ‘column_name’.
+If some values are not strings, they are converted.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="p">[[</span><span class="s2">&quot;baobab&quot;</span><span class="p">,</span> <span class="s2">&quot;octopus&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;birthday&quot;</span><span class="p">,</span> <span class="s2">&quot;mark&quot;</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">shorten_dataframe_str</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="go">           a        b</span>
+<span class="go">0     baobab  octopus</span>
+<span class="go">1  birthd...     mark</span>
+<span class="go">2          1        2</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> – pandas dataframe</p></li>
+<li><p><strong>column_name</strong> – column name of dataframe df</p></li>
+<li><p><strong>max_length</strong> – maximum length of strings</p></li>
+<li><p><strong>replacement_str</strong> – string to append to the cut strings. Default: ‘…’</p></li>
+<li><p><strong>inplace</strong> – if True, the input dataframe is modified inplace</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dataframe modified</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.utils.coordinates_to_distance">
+<code class="sig-prename descclassname">tools.helpers.utils.</code><code class="sig-name descname">coordinates_to_distance</code><span class="sig-paren">(</span><em class="sig-param">lat1</em>, <em class="sig-param">lon1</em>, <em class="sig-param">lat2</em>, <em class="sig-param">lon2</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.utils.coordinates_to_distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the approximate distance between two points of coordinates (lat1, log1), (lat2, long2).
+Formula adapted from <a class="reference external" href="https://en.wikipedia.org/wiki/Haversine_formula">https://en.wikipedia.org/wiki/Haversine_formula</a></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.utils.reload_modules">
+<code class="sig-prename descclassname">tools.helpers.utils.</code><code class="sig-name descname">reload_modules</code><span class="sig-paren">(</span><em class="sig-param">modules: Union[list, module], reload_func=False, ls_func_names='__all__'</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.utils.reload_modules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reloads the modules in list ‘modules’ and the functions selected if ‘reload_func’ is True.</p>
+<p>Reload twice to be sure the majority of modules and dependencies are reloaded.
+It is possible that some modules with tricky dependencies are not completely reloaded
+For example:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>if ‘tools.helpers’ depends on ‘tools’, the first reload is be sufficient to
+completely reload ‘tools.helpers’ as ‘tools’ is reloaded before ‘tools.helpers’</p></li>
+<li><p>if ‘tools’ depends on ‘tools.helpers’ (e.g. imports of ‘tools.helpers’ functions in __all__),
+the first reload is not sufficient to reload ‘tools’ as ‘tools.helpers’ is reloaded after ‘tools’.
+Thus, a new reload is needed.</p></li>
+<li><p>if ‘tools’ depends on ‘tools.helpers’ which depends on ‘tools.helpers.utils’, ‘tools’ can not
+be reloaded properly in one execution, so it is necessary to execute this function twice.
+Normally, this case is rare with modules with few submodules.</p></li>
+</ul>
+<p>To avoid uncompleted reloads, it is advised to pass a list of modules with few interdependence
+in the right order (lasts modules dependent of the first ones, not the contrary).</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modules</strong> – list of modules</p></li>
+<li><p><strong>reload_func</strong> – if True, reload selected functions (see ls_func_names arg)</p></li>
+<li><p><strong>ls_func_names</strong> – <p>name or list of names of either:
+- an iterable (list or tuple) in __init__ which contains functions to reload (e.g. __all__).</p>
+<blockquote>
+<div><p>The iterable must have one of this format: [func1, func2, …] or [(_, func1, _), (_, func2, _), …]</p>
+</div></blockquote>
+<ul>
+<li><p>a function in __init__</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">tools.helpers.utils package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.utils.decorators">tools.helpers.utils.decorators module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.utils.module_utils">tools.helpers.utils.module_utils module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.utils.utils">tools.helpers.utils.utils module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tools.helpers.models.html"
+                        title="previous chapter">tools.helpers.models package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tools.tests.html"
+                        title="next chapter">tools.tests package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/source/tools.helpers.utils.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tools.tests.html" title="tools.tests package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.models.html" title="tools.helpers.models package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Main tools 1.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >python_utils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >tools package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="tools.helpers.html" >tools.helpers package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright open source.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

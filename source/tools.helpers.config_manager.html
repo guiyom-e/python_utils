@@ -1,0 +1,566 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>tools.helpers.config_manager package &#8212; Main tools 1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tools.helpers.data_manager package" href="tools.helpers.data_manager.html" />
+    <link rel="prev" title="tools.helpers.advanced_utils package" href="tools.helpers.advanced_utils.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.data_manager.html" title="tools.helpers.data_manager package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.advanced_utils.html" title="tools.helpers.advanced_utils package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Main tools 1.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >python_utils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >tools package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="tools.helpers.html" accesskey="U">tools.helpers package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tools-helpers-config-manager-package">
+<h1>tools.helpers.config_manager package<a class="headerlink" href="#tools-helpers-config-manager-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-tools.helpers.config_manager.config_conversion">
+<span id="tools-helpers-config-manager-config-conversion-module"></span><h2>tools.helpers.config_manager.config_conversion module<a class="headerlink" href="#module-tools.helpers.config_manager.config_conversion" title="Permalink to this headline">¶</a></h2>
+<p>Functions to load/save configuration with typed values.</p>
+<dl class="function">
+<dt id="tools.helpers.config_manager.config_conversion.convert_dict_from_str">
+<code class="sig-prename descclassname">tools.helpers.config_manager.config_conversion.</code><code class="sig-name descname">convert_dict_from_str</code><span class="sig-paren">(</span><em class="sig-param">dico</em>, <em class="sig-param">allow_multiple=True</em>, <em class="sig-param">error='ignore'</em>, <em class="sig-param">drop_none=False</em>, <em class="sig-param">drop_empty_iterable=False</em>, <em class="sig-param">ascendant=False</em>, <em class="sig-param">no_flag='ignore'</em>, <em class="sig-param">inplace=False</em>, <em class="sig-param">duplicates='first'</em>, <em class="sig-param">**parser_cfg</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.config_conversion.convert_dict_from_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a dict of str (generated from a file for example) to a typed dict.
+Simple types that can be recognised: str, bool, int, float, list, tuple.
+Custom classes: Reference, Path
+Advanced types (with ‘auto’ flag): expressions with dict, set, bytes, None and simple types.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dico</strong> – dictionary-like object to convert with keys and values of type ‘str’.</p></li>
+<li><p><strong>allow_multiple</strong> – if True, multiple flags are allowed (applied from left to right)</p></li>
+<li><p><strong>error</strong> – behavior on casting error. Possible values:
+‘ignore’ (returns the initial string),
+‘drop’ (returns None),
+‘error’ (raise an error if casting fails),
+‘auto-conversion’ (try to convert automatically; if it fails, returns the initial string)</p></li>
+<li><p><strong>drop_none</strong> – if True, None values are dropped</p></li>
+<li><p><strong>drop_empty_iterable</strong> – if True, empty iterable objects (list, tuple) are dropped</p></li>
+<li><p><strong>ascendant</strong> – if True, the flags are applied from the last to the first</p></li>
+<li><p><strong>no_flag</strong> – behavior if no flag found. ‘ignore’, ‘error’, ‘drop’, ‘auto-conversion’</p></li>
+<li><p><strong>inplace</strong> – returns dico inplace</p></li>
+<li><p><strong>duplicates</strong> – behavior if duplicates found. ‘drop’, ‘first’, ‘last’, ‘error’.</p></li>
+<li><p><strong>parser_cfg</strong> – kwargs for _parse_key function</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dictionary-like object (same type as ‘dico’)</p>
+</dd>
+</dl>
+<p># Simple test</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">test_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="s2">&quot;without_flag&quot;</span><span class="p">,</span> <span class="s2">&quot;@i-b&quot;</span><span class="p">:</span> <span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="s2">&quot;@f-c&quot;</span><span class="p">:</span> <span class="s2">&quot;9.2&quot;</span><span class="p">,</span> <span class="s2">&quot;@b-d&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;@b-e&quot;</span><span class="p">:</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span>  <span class="s2">&quot;@b-f&quot;</span><span class="p">:</span> <span class="s2">&quot;False&quot;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">convert_dict_from_str</span><span class="p">(</span><span class="n">test_dict</span><span class="p">)</span>
+<span class="go">{&#39;a&#39;: &#39;without_flag&#39;, &#39;b&#39;: 1, &#39;c&#39;: 9.2, &#39;d&#39;: False, &#39;e&#39;: True, &#39;f&#39;: False}</span>
+</pre></div>
+</div>
+<p># Numbers test</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">num_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;@f-d1&quot;</span><span class="p">:</span> <span class="s2">&quot;1.6&quot;</span><span class="p">,</span> <span class="s2">&quot;@i-d2&quot;</span><span class="p">:</span> <span class="s2">&quot;1.7&quot;</span><span class="p">,</span> <span class="s2">&quot;@f-@i-d3&quot;</span><span class="p">:</span> <span class="s2">&quot;1.8&quot;</span><span class="p">,</span> <span class="s2">&quot;@i-@f-d4&quot;</span><span class="p">:</span> <span class="s2">&quot;1.9&quot;</span><span class="p">,</span> <span class="s2">&quot;d5&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span> <span class="s2">&quot;@ftwsdc-d6&quot;</span><span class="p">:</span> <span class="s2">&quot;2 252,9&quot;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">convert_dict_from_str</span><span class="p">(</span><span class="n">num_dict</span><span class="p">)</span>
+<span class="go">{&#39;d1&#39;: 1.6, &#39;d2&#39;: &#39;1.7&#39;, &#39;d3&#39;: 1, &#39;d4&#39;: 1.9, &#39;d5&#39;: 2.0, &#39;d6&#39;: 2252.9}</span>
+</pre></div>
+</div>
+<p># Duplicates handling test</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dup_dict</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="s2">&quot;@s-overwritten&quot;</span><span class="p">,</span> <span class="s2">&quot;value1&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;overwritten&quot;</span><span class="p">,</span> <span class="s2">&quot;value2&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;@auto-overwritten&quot;</span><span class="p">,</span> <span class="s2">&quot;value3&quot;</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">convert_dict_from_str</span><span class="p">(</span><span class="n">dup_dict</span><span class="p">,</span> <span class="n">duplicates</span><span class="o">=</span><span class="s1">&#39;rename&#39;</span><span class="p">)</span>
+<span class="go">OrderedDict([(&#39;overwritten&#39;, &#39;value1&#39;), (&#39;overwritten_1&#39;, &#39;value2&#39;), (&#39;overwritten_2&#39;, &#39;value3&#39;)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">convert_dict_from_str</span><span class="p">(</span><span class="n">dup_dict</span><span class="p">,</span> <span class="n">duplicates</span><span class="o">=</span><span class="s1">&#39;first&#39;</span><span class="p">)</span>
+<span class="go">OrderedDict([(&#39;overwritten&#39;, &#39;value1&#39;)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">convert_dict_from_str</span><span class="p">(</span><span class="n">dup_dict</span><span class="p">,</span> <span class="n">duplicates</span><span class="o">=</span><span class="s1">&#39;last&#39;</span><span class="p">)</span>
+<span class="go">OrderedDict([(&#39;overwritten&#39;, &#39;value3&#39;)])</span>
+</pre></div>
+</div>
+<p># Date test</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;@date-date&quot;</span><span class="p">:</span> <span class="s2">&quot;2019-04-01&quot;</span><span class="p">,</span> <span class="s2">&quot;@date-date2&quot;</span><span class="p">:</span> <span class="s2">&quot;04-13-2018&quot;</span><span class="p">,</span> <span class="s2">&quot;@date-date3&quot;</span><span class="p">:</span> <span class="s2">&quot;13/04/2018&quot;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">convert_dict_from_str</span><span class="p">(</span><span class="n">date_dict</span><span class="p">)</span>
+<span class="go">{&#39;date&#39;: Timestamp(&#39;2019-04-01 00:00:00&#39;), &#39;date2&#39;: Timestamp(&#39;2018-04-13 00:00:00&#39;), &#39;date3&#39;: Timestamp(&#39;2018-04-13 00:00:00&#39;)}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date_special_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;@date-date_std&quot;</span><span class="p">:</span> <span class="s2">&quot;04/11/2018&quot;</span><span class="p">,</span> <span class="s2">&quot;@datedb-date_day_before&quot;</span><span class="p">:</span> <span class="s2">&quot;04/11/2018&quot;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">convert_dict_from_str</span><span class="p">(</span><span class="n">date_special_dict</span><span class="p">)</span>
+<span class="go">{&#39;date_std&#39;: Timestamp(&#39;2018-04-11 00:00:00&#39;), &#39;date_day_before&#39;: Timestamp(&#39;2018-11-04 00:00:00&#39;)}</span>
+</pre></div>
+</div>
+<p># List test</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">list_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;@auto-list1&quot;</span><span class="p">:</span> <span class="s2">&quot;[18, 13]&quot;</span><span class="p">,</span> <span class="s2">&quot;@l-list2&quot;</span><span class="p">:</span> <span class="s2">&quot;[19, 13]&quot;</span><span class="p">,</span> <span class="s2">&quot;@auto-list3&quot;</span><span class="p">:</span> <span class="s2">&quot;[{(18, 13): &#39;a&#39;}, &#39;end&#39;]&quot;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">convert_dict_from_str</span><span class="p">(</span><span class="n">list_dict</span><span class="p">)</span>
+<span class="go">{&#39;list1&#39;: [18, 13], &#39;list2&#39;: [&#39;19&#39;, &#39;13&#39;], &#39;list3&#39;: [{(18, 13): &#39;a&#39;}, &#39;end&#39;]}</span>
+</pre></div>
+</div>
+<p># Auto conversion test</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">auto_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span> <span class="s2">&quot;True&quot;</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="s2">&quot;False&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="s2">&quot;None&quot;</span><span class="p">,</span> <span class="s2">&quot;d&quot;</span><span class="p">:</span> <span class="s2">&quot;[{(18, 13): &#39;a&#39;}, &#39;end&#39;]&quot;</span><span class="p">,</span> <span class="s2">&quot;e&quot;</span><span class="p">:</span> <span class="s1">&#39;9.9&#39;</span><span class="p">,</span> <span class="s2">&quot;f&quot;</span><span class="p">:</span> <span class="mf">9.9</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">convert_dict_from_str</span><span class="p">(</span><span class="n">auto_dict</span><span class="p">,</span> <span class="n">no_flag</span><span class="o">=</span><span class="s2">&quot;auto-conversion&quot;</span><span class="p">)</span>
+<span class="go">{&#39;a&#39;: True, &#39;b&#39;: False, &#39;c&#39;: None, &#39;d&#39;: [{(18, 13): &#39;a&#39;}, &#39;end&#39;], &#39;e&#39;: 9.9, &#39;f&#39;: 9.9}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.config_manager.config_conversion.convert_dict_to_str">
+<code class="sig-prename descclassname">tools.helpers.config_manager.config_conversion.</code><code class="sig-name descname">convert_dict_to_str</code><span class="sig-paren">(</span><em class="sig-param">dico</em>, <em class="sig-param">auto=True</em>, <em class="sig-param">inplace=False</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.config_conversion.convert_dict_to_str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a dico (dictionary-like object) to make it writable to a file as text
+and easily loadable with the previous types, using convert_dict_from_str function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dico</strong> – dictionary-like object to convert. Flags are added to keys and values are casted to str.</p></li>
+<li><p><strong>auto</strong> – if True, keys corresponding to complex objects get the flag ‘auto’</p></li>
+<li><p><strong>inplace</strong> – modify dico itself</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dictionary-like object (same type as ‘dico’)</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dico</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="p">[{(</span><span class="mi">18</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">):</span> <span class="s1">&#39;a&#39;</span><span class="p">},</span> <span class="s1">&#39;end&#39;</span><span class="p">],</span> <span class="s1">&#39;e&#39;</span><span class="p">:</span> <span class="mf">9.9</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">convert_dict_to_str</span><span class="p">(</span><span class="n">dico</span><span class="p">)</span>
+<span class="go">{&#39;@b-a&#39;: &#39;True&#39;, &#39;@b-b&#39;: &#39;False&#39;, &#39;@auto-c&#39;: &#39;None&#39;, &#39;@auto-d&#39;: &quot;[{(18, 3.1): &#39;a&#39;}, &#39;end&#39;]&quot;, &#39;@f-e&#39;: &#39;9.9&#39;}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.config_manager.config_conversion.to_bool">
+<code class="sig-prename descclassname">tools.helpers.config_manager.config_conversion.</code><code class="sig-name descname">to_bool</code><span class="sig-paren">(</span><em class="sig-param">v</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.config_conversion.to_bool" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.config_manager.config_conversion.to_char">
+<code class="sig-prename descclassname">tools.helpers.config_manager.config_conversion.</code><code class="sig-name descname">to_char</code><span class="sig-paren">(</span><em class="sig-param">v</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.config_conversion.to_char" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.config_manager.config_conversion.to_float">
+<code class="sig-prename descclassname">tools.helpers.config_manager.config_conversion.</code><code class="sig-name descname">to_float</code><span class="sig-paren">(</span><em class="sig-param">v</em>, <em class="sig-param">thousand_sep=None</em>, <em class="sig-param">decimal_sep=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.config_conversion.to_float" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.config_manager.config_conversion.to_list">
+<code class="sig-prename descclassname">tools.helpers.config_manager.config_conversion.</code><code class="sig-name descname">to_list</code><span class="sig-paren">(</span><em class="sig-param">v</em>, <em class="sig-param">sep='</em>, <em class="sig-param">'</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.config_conversion.to_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.config_manager.config_conversion.to_tuple">
+<code class="sig-prename descclassname">tools.helpers.config_manager.config_conversion.</code><code class="sig-name descname">to_tuple</code><span class="sig-paren">(</span><em class="sig-param">v</em>, <em class="sig-param">sep='</em>, <em class="sig-param">'</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.config_conversion.to_tuple" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.config_manager.config_dict">
+<span id="tools-helpers-config-manager-config-dict-module"></span><h2>tools.helpers.config_manager.config_dict module<a class="headerlink" href="#module-tools.helpers.config_manager.config_dict" title="Permalink to this headline">¶</a></h2>
+<p>Dictionary-like classes used in configuration.</p>
+<dl class="class">
+<dt id="tools.helpers.config_manager.config_dict.ConfigDict">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.config_manager.config_dict.</code><code class="sig-name descname">ConfigDict</code><span class="sig-paren">(</span><em class="sig-param">dico=None</em>, <em class="sig-param">auto_cast=False</em>, <em class="sig-param">default_section=&lt;object object&gt;</em>, <em class="sig-param">section=&lt;object object&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.config_dict.ConfigDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tools.helpers.models.html#tools.helpers.models.dict_models.BaseDict" title="tools.helpers.models.dict_models.BaseDict"><code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.models.dict_models.BaseDict</span></code></a></p>
+<p>ConfigDict class</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">def_conf_d</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="mi">7</span><span class="p">},</span> <span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">9</span><span class="p">},</span> <span class="s1">&#39;other&#39;</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="mi">11</span><span class="p">}})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">conf_d</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">6</span><span class="p">:</span> <span class="mi">14</span><span class="p">},</span> <span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">15</span><span class="p">},</span> <span class="s1">&#39;other2&#39;</span><span class="p">:</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="mi">17</span><span class="p">}})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">conf_d</span><span class="o">.</span><span class="n">config</span>
+<span class="go">OrderedDict([(&#39;a&#39;, SectionDict:</span>
+<span class="go">OrderedDict([(&#39;1&#39;, 12), (&#39;2&#39;, 13), (&#39;6&#39;, 14)])), (&#39;2&#39;, SectionDict:</span>
+<span class="go">OrderedDict([(&#39;1&#39;, 15)])), (&#39;other2&#39;, SectionDict:</span>
+<span class="go">OrderedDict([(&#39;1&#39;, 16), (&#39;4&#39;, 17)]))])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">conf_d</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">conf_d</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">conf_d</span><span class="o">.</span><span class="n">config</span>
+<span class="go">OrderedDict([(&#39;a&#39;, SectionDict:</span>
+<span class="go">OrderedDict([(&#39;1&#39;, 12), (&#39;2&#39;, 13), (&#39;6&#39;, 14)])), (&#39;2&#39;, SectionDict:</span>
+<span class="go">OrderedDict([(&#39;1&#39;, 15)])), (&#39;other2&#39;, SectionDict:</span>
+<span class="go">OrderedDict([(&#39;1&#39;, 16), (&#39;4&#39;, 17)]))])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">conf_d</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">def_conf_d</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">conf_d</span><span class="o">.</span><span class="n">config</span>
+<span class="go">OrderedDict([(&#39;a&#39;, SectionDict:</span>
+<span class="go">OrderedDict([(&#39;1&#39;, 5), (&#39;2&#39;, 6), (&#39;5&#39;, 7)])), (&#39;2&#39;, SectionDict:</span>
+<span class="go">OrderedDict([(&#39;1&#39;, 8), (&#39;3&#39;, 9)])), (&#39;other&#39;, SectionDict:</span>
+<span class="go">OrderedDict([(&#39;1&#39;, 10), (&#39;4&#39;, 11)]))])</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.ConfigDict.TO_KEY_FUNC">
+<code class="sig-name descname">TO_KEY_FUNC</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.config_dict.ConfigDict.TO_KEY_FUNC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the last argument into a valid section of ConfigDict.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.ConfigDict.add_section">
+<code class="sig-name descname">add_section</code><span class="sig-paren">(</span><em class="sig-param">section</em>, <em class="sig-param">section_dict=None</em>, <em class="sig-param">auto_cast=False</em>, <em class="sig-param">exist_ok=False</em>, <em class="sig-param">set_section=False</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#tools.helpers.config_manager.config_dict.ConfigDict.add_section" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.ConfigDict.append">
+<code class="sig-name descname">append</code><span class="sig-paren">(</span><em class="sig-param">other: Union[dict, ConfigDict]</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#tools.helpers.config_manager.config_dict.ConfigDict.append" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.ConfigDict.clear">
+<code class="sig-name descname">clear</code><span class="sig-paren">(</span><em class="sig-param">section=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.config_dict.ConfigDict.clear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.ConfigDict.config">
+<em class="property">property </em><code class="sig-name descname">config</code><a class="headerlink" href="#tools.helpers.config_manager.config_dict.ConfigDict.config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.ConfigDict.default_section">
+<em class="property">property </em><code class="sig-name descname">default_section</code><a class="headerlink" href="#tools.helpers.config_manager.config_dict.ConfigDict.default_section" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.ConfigDict.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">item: str</em>, <em class="sig-param">default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.config_dict.ConfigDict.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.ConfigDict.get_section">
+<code class="sig-name descname">get_section</code><span class="sig-paren">(</span><em class="sig-param">section=None</em>, <em class="sig-param">set_section=False</em>, <em class="sig-param">add_section=False</em><span class="sig-paren">)</span> &#x2192; Optional[tools.helpers.config_manager.config_dict.SectionDict]<a class="headerlink" href="#tools.helpers.config_manager.config_dict.ConfigDict.get_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the ConfigDict section (SectionDict). If section is None, the default section is used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>section</strong> – section string</p></li>
+<li><p><strong>set_section</strong> – if True, set section</p></li>
+<li><p><strong>add_section</strong> – if True and section doesn’t exist, create it</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>SectionDict associated to section</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.ConfigDict.isempty">
+<em class="property">property </em><code class="sig-name descname">isempty</code><a class="headerlink" href="#tools.helpers.config_manager.config_dict.ConfigDict.isempty" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.ConfigDict.isnone">
+<em class="property">property </em><code class="sig-name descname">isnone</code><a class="headerlink" href="#tools.helpers.config_manager.config_dict.ConfigDict.isnone" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.ConfigDict.merge">
+<code class="sig-name descname">merge</code><span class="sig-paren">(</span><em class="sig-param">config_dict: Union[dict, ConfigDict], how='outer', how_section=None, inplace=False, deepcopy_right=True</em><span class="sig-paren">)</span> &#x2192; Optional[tools.helpers.config_manager.config_dict.ConfigDict]<a class="headerlink" href="#tools.helpers.config_manager.config_dict.ConfigDict.merge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.ConfigDict.merge_config_dict">
+<em class="property">static </em><code class="sig-name descname">merge_config_dict</code><span class="sig-paren">(</span><em class="sig-param">left_dict: tools.helpers.config_manager.config_dict.ConfigDict</em>, <em class="sig-param">right_dict: tools.helpers.config_manager.config_dict.ConfigDict</em>, <em class="sig-param">how='outer'</em>, <em class="sig-param">how_section=None</em><span class="sig-paren">)</span> &#x2192; tools.helpers.config_manager.config_dict.ConfigDict<a class="headerlink" href="#tools.helpers.config_manager.config_dict.ConfigDict.merge_config_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modify left_dict inplace, updated with right_dict</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.ConfigDict.section">
+<em class="property">property </em><code class="sig-name descname">section</code><a class="headerlink" href="#tools.helpers.config_manager.config_dict.ConfigDict.section" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.ConfigDict.sections">
+<code class="sig-name descname">sections</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; list<a class="headerlink" href="#tools.helpers.config_manager.config_dict.ConfigDict.sections" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.ConfigDict.set_section">
+<code class="sig-name descname">set_section</code><span class="sig-paren">(</span><em class="sig-param">section=None</em>, <em class="sig-param">add_section=True</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#tools.helpers.config_manager.config_dict.ConfigDict.set_section" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.ConfigDict.to_str">
+<code class="sig-name descname">to_str</code><span class="sig-paren">(</span><em class="sig-param">write_flags=False</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#tools.helpers.config_manager.config_dict.ConfigDict.to_str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.ConfigDict.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">other: Union[dict, ConfigDict]</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#tools.helpers.config_manager.config_dict.ConfigDict.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.config_manager.config_dict.SectionDict">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.config_manager.config_dict.</code><code class="sig-name descname">SectionDict</code><span class="sig-paren">(</span><em class="sig-param">dico=None</em>, <em class="sig-param">auto_cast=False</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.config_dict.SectionDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="tools.helpers.models.html#tools.helpers.models.dict_models.BaseDict" title="tools.helpers.models.dict_models.BaseDict"><code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.models.dict_models.BaseDict</span></code></a></p>
+<p>Dictionary-like class.</p>
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.SectionDict.TO_KEY_FUNC">
+<code class="sig-name descname">TO_KEY_FUNC</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.config_dict.SectionDict.TO_KEY_FUNC" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the last argument into a valid key of SectionDict.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.SectionDict.clear">
+<code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.config_dict.SectionDict.clear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.SectionDict.merge">
+<code class="sig-name descname">merge</code><span class="sig-paren">(</span><em class="sig-param">section_dict</em>, <em class="sig-param">how='outer'</em>, <em class="sig-param">inplace=False</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.config_dict.SectionDict.merge" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.SectionDict.setdefault">
+<code class="sig-name descname">setdefault</code><span class="sig-paren">(</span><em class="sig-param">k</em>, <em class="sig-param">default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.config_dict.SectionDict.setdefault" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.SectionDict.to_str">
+<code class="sig-name descname">to_str</code><span class="sig-paren">(</span><em class="sig-param">write_flags=False</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.config_dict.SectionDict.to_str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.config_manager.config_dict.SectionDict.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.config_dict.SectionDict.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.config_manager.config_dict.to_key">
+<code class="sig-prename descclassname">tools.helpers.config_manager.config_dict.</code><code class="sig-name descname">to_key</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.config_dict.to_key" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the last argument into a valid key of SectionDict.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.config_manager.config_dict.to_section">
+<code class="sig-prename descclassname">tools.helpers.config_manager.config_dict.</code><code class="sig-name descname">to_section</code><span class="sig-paren">(</span><em class="sig-param">*args</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.config_dict.to_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the last argument into a valid section of ConfigDict.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.config_manager.config_models">
+<span id="tools-helpers-config-manager-config-models-module"></span><h2>tools.helpers.config_manager.config_models module<a class="headerlink" href="#module-tools.helpers.config_manager.config_models" title="Permalink to this headline">¶</a></h2>
+<p>Configuration classes.</p>
+<dl class="class">
+<dt id="tools.helpers.config_manager.config_models.Config">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.config_manager.config_models.</code><code class="sig-name descname">Config</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.config_models.Config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.config_manager.config_models._Config</span></code></p>
+<p>Unique configuration (singleton)</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.config_manager.simple_config">
+<span id="tools-helpers-config-manager-simple-config-module"></span><h2>tools.helpers.config_manager.simple_config module<a class="headerlink" href="#module-tools.helpers.config_manager.simple_config" title="Permalink to this headline">¶</a></h2>
+<p>Hard coded configuration (no configuration file)</p>
+<dl class="class">
+<dt id="tools.helpers.config_manager.simple_config.SimpleConfig">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.config_manager.simple_config.</code><code class="sig-name descname">SimpleConfig</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.simple_config.SimpleConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.config_manager.simple_config._SimpleConfig</span></code></p>
+<p>Unique configuration (singleton)</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.config_manager">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-tools.helpers.config_manager" title="Permalink to this headline">¶</a></h2>
+<p>Configuration loaded from/saved to disk with INI syntax.</p>
+<p>As the configuration is a singleton (the configuration class can only have a unique instance),
+it can be accessed by calling Config class directly. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">CONFIG</span> <span class="o">=</span> <span class="n">Config</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CONFIG2</span> <span class="o">=</span> <span class="n">Config</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">CONFIG</span> <span class="ow">is</span> <span class="n">CONFIG2</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl>
+<dt>Configuration is 2-levels dictionary-like object, but its values can be accessed like a 1-level dictionary.</dt><dd><blockquote>
+<div><blockquote>
+<div><p>Config</p>
+</div></blockquote>
+<p>_____________|  <a href="#id1"><span class="problematic" id="id2">|</span></a>______________________________________________________________________________________________
+|                     |                              |                      |                    |            |</p>
+</div></blockquote>
+<dl>
+<dt>config (ConfigDict)  default_config (ConfigDict)  temp_config (OrderedDict)  path (Path)  default_path (Path)  other</dt><dd><blockquote>
+<div><dl>
+<dt><a href="#id3"><span class="problematic" id="id4">|</span></a>__________________________________________________________________</dt><dd><div class="line-block">
+<div class="line">|                                     |</div>
+</div>
+</dd>
+<dt>config (OrderedDict)  default_section (default key of config)   section (current key of config)</dt><dd><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+<dl>
+<dt>SectionDict</dt><dd><blockquote>
+<div><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</div></blockquote>
+<p>config (OrderedDict)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd>
+</dl>
+<p># Methods to get elements</p>
+<dl class="simple">
+<dt>## Get item: CONFIG[item]</dt><dd><ol class="arabic simple">
+<li><p>Search in the current section ‘section’ of the current config ‘config’ (loaded from disk)
+Equivalent 2-levels dictionary: CONFIG[section][item]
+On KeyError, continue to search:</p></li>
+<li><p>Search in the default section ‘default_section’ of the current config ‘config’
+Equivalent 2-levels dictionary: CONFIG[default_section][item]
+On KeyError, continue to search:</p></li>
+<li><p>Search in the current section ‘section’ of the default config ‘default_config’ (hard coded)
+Equivalent 2-levels dictionary: CONFIG.default_config[section][item]
+On KeyError, continue to search:</p></li>
+<li><p>Search in the default section ‘default_section’ of the default config ‘default_config’
+Equivalent 2-levels dictionary: CONFIG.default_config[default_section][item]
+On KeyError, raise KeyError</p></li>
+</ol>
+</dd>
+</dl>
+<p>## Call: CONFIG(item) or CONFIG(section, item) or CONFIG(section, item, default)
+Possible cases:</p>
+<blockquote>
+<div><ol class="loweralpha">
+<li><p>item is the only argument: CONFIG(item)</p></li>
+<li><dl>
+<dt>item and default are the only arguments: CONFIG(item, default=default)</dt><dd><ol class="arabic simple">
+<li><p>search in default section of current configuration,</p></li>
+<li><p>search in default section of default configuration,</p></li>
+</ol>
+<p>3) a) raise KeyError
+3) b) return default</p>
+</dd>
+</dl>
+</li>
+<li><p>section is referenced: CONFIG(section, item) or CONFIG(item, section=section)</p></li>
+<li><p>section and default are referenced: CONFIG(section, item, default)
+or CONFIG(section, item, default=default)  or CONFIG(item, section=section, default=default)</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>search in current section of current configuration,</p></li>
+<li><p>search in default section of current configuration,</p></li>
+<li><p>search in current section of default configuration,</p></li>
+<li><p>search in default section of default configuration,</p></li>
+</ol>
+<p>5) c) raise KeyError
+5) d) return default</p>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+<p># Initialization
+TODO</p>
+<p># Load/Save configuration
+TODO</p>
+<dl class="class">
+<dt id="tools.helpers.config_manager.Config">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.config_manager.</code><code class="sig-name descname">Config</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.config_manager.Config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.config_manager.config_models._Config</span></code></p>
+<p>Unique configuration (singleton)</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">tools.helpers.config_manager package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.config_manager.config_conversion">tools.helpers.config_manager.config_conversion module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.config_manager.config_dict">tools.helpers.config_manager.config_dict module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.config_manager.config_models">tools.helpers.config_manager.config_models module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.config_manager.simple_config">tools.helpers.config_manager.simple_config module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.config_manager">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tools.helpers.advanced_utils.html"
+                        title="previous chapter">tools.helpers.advanced_utils package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tools.helpers.data_manager.html"
+                        title="next chapter">tools.helpers.data_manager package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/source/tools.helpers.config_manager.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.data_manager.html" title="tools.helpers.data_manager package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.advanced_utils.html" title="tools.helpers.advanced_utils package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Main tools 1.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >python_utils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >tools package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="tools.helpers.html" >tools.helpers package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright open source.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

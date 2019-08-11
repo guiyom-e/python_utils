@@ -1,0 +1,10 @@
+tools.tests package
+===================
+
+Module contents
+---------------
+
+.. automodule:: tools.tests
+   :members:
+   :undoc-members:
+   :show-inheritance:

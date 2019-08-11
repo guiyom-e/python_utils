@@ -1,0 +1,22 @@
+scripts package
+===============
+
+Submodules
+----------
+
+scripts.sample module
+---------------------
+
+.. automodule:: scripts.sample
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: scripts
+   :members:
+   :undoc-members:
+   :show-inheritance:

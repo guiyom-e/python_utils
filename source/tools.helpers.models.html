@@ -1,0 +1,635 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>tools.helpers.models package &#8212; Main tools 1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tools.helpers.utils package" href="tools.helpers.utils.html" />
+    <link rel="prev" title="tools.helpers.interface package" href="tools.helpers.interface.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.utils.html" title="tools.helpers.utils package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.interface.html" title="tools.helpers.interface package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Main tools 1.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >python_utils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >tools package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="tools.helpers.html" accesskey="U">tools.helpers package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tools-helpers-models-package">
+<h1>tools.helpers.models package<a class="headerlink" href="#tools-helpers-models-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-tools.helpers.models.dict_models">
+<span id="tools-helpers-models-dict-models-module"></span><h2>tools.helpers.models.dict_models module<a class="headerlink" href="#module-tools.helpers.models.dict_models" title="Permalink to this headline">¶</a></h2>
+<p>Dictionary-like classes</p>
+<dl class="class">
+<dt id="tools.helpers.models.dict_models.BaseDict">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.dict_models.</code><code class="sig-name descname">BaseDict</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.dict_models.BaseDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class of ordered-dictionary-like objects where keys have a specified format.</p>
+<dl class="method">
+<dt id="tools.helpers.models.dict_models.BaseDict.TO_KEY_FUNC">
+<code class="sig-name descname">TO_KEY_FUNC</code><span class="sig-paren">(</span><em class="sig-param">x</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.dict_models.BaseDict.TO_KEY_FUNC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.dict_models.BaseDict.clear">
+<code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.dict_models.BaseDict.clear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.dict_models.BaseDict.copy">
+<code class="sig-name descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.dict_models.BaseDict.copy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.dict_models.BaseDict.deepcopy">
+<code class="sig-name descname">deepcopy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.dict_models.BaseDict.deepcopy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.dict_models.BaseDict.from_dict">
+<em class="property">classmethod </em><code class="sig-name descname">from_dict</code><span class="sig-paren">(</span><em class="sig-param">dico</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.dict_models.BaseDict.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.dict_models.BaseDict.fromkeys">
+<em class="property">classmethod </em><code class="sig-name descname">fromkeys</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.dict_models.BaseDict.fromkeys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.dict_models.BaseDict.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">item</em>, <em class="sig-param">default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.dict_models.BaseDict.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.dict_models.BaseDict.items">
+<code class="sig-name descname">items</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.dict_models.BaseDict.items" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.dict_models.BaseDict.keys">
+<code class="sig-name descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.dict_models.BaseDict.keys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.dict_models.BaseDict.move_to_end">
+<code class="sig-name descname">move_to_end</code><span class="sig-paren">(</span><em class="sig-param">key</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.dict_models.BaseDict.move_to_end" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.dict_models.BaseDict.pop">
+<code class="sig-name descname">pop</code><span class="sig-paren">(</span><em class="sig-param">item</em>, <em class="sig-param">default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.dict_models.BaseDict.pop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.dict_models.BaseDict.popitem">
+<code class="sig-name descname">popitem</code><span class="sig-paren">(</span><em class="sig-param">item</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.dict_models.BaseDict.popitem" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.dict_models.BaseDict.setdefault">
+<code class="sig-name descname">setdefault</code><span class="sig-paren">(</span><em class="sig-param">k</em>, <em class="sig-param">default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.dict_models.BaseDict.setdefault" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.dict_models.BaseDict.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.dict_models.BaseDict.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.dict_models.BaseDict.values">
+<code class="sig-name descname">values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.dict_models.BaseDict.values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.models.dict_models.IdentityDict">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.dict_models.</code><code class="sig-name descname">IdentityDict</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.dict_models.IdentityDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">collections.UserDict</span></code></p>
+<p>Dict which returns the key if key not in dict when getting item.
+If ‘func’ arg is set, the function ‘func’ is applied to key before return</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.models.metaclasses">
+<span id="tools-helpers-models-metaclasses-module"></span><h2>tools.helpers.models.metaclasses module<a class="headerlink" href="#module-tools.helpers.models.metaclasses" title="Permalink to this headline">¶</a></h2>
+<p>Metaclasses</p>
+<p>The syntax to use a metaclass in Python 3 is as follows:</p>
+<dl class="simple">
+<dt>class MyClass(metaclass=MyMetaClass):</dt><dd><p>pass</p>
+</dd>
+</dl>
+<dl class="class">
+<dt id="tools.helpers.models.metaclasses.LockChangeAttr">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.metaclasses.</code><code class="sig-name descname">LockChangeAttr</code><a class="headerlink" href="#tools.helpers.models.metaclasses.LockChangeAttr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></p>
+<p>Metaclass that locks attribute modification after a certain limit</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.models.metaclasses.Singleton">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.metaclasses.</code><code class="sig-name descname">Singleton</code><a class="headerlink" href="#tools.helpers.models.metaclasses.Singleton" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></p>
+<p>Metaclass that authorize only one instance of a class.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.models.metaclasses.lock_change_attr_metaclass">
+<code class="sig-prename descclassname">tools.helpers.models.metaclasses.</code><code class="sig-name descname">lock_change_attr_metaclass</code><span class="sig-paren">(</span><em class="sig-param">modification_limit=1</em>, <em class="sig-param">attr_exceptions=()</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.metaclasses.lock_change_attr_metaclass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a custom metaclass inherited from LockChangeAttr</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>modification_limit</strong> – number of times an attribute can be modified</p></li>
+<li><p><strong>attr_exceptions</strong> – iterable of attributes that can be modified without any limit</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.models.path_models">
+<span id="tools-helpers-models-path-models-module"></span><h2>tools.helpers.models.path_models module<a class="headerlink" href="#module-tools.helpers.models.path_models" title="Permalink to this headline">¶</a></h2>
+<p>Classes to manipulate paths.
+Path and PathCollection define custom strings/collections with pathname manipulations methods.
+FileExt describes a file extension.
+DefaultFiletypesDict defines a dictionary-like class with file types understandable by tkinter file dialogs.</p>
+<dl class="class">
+<dt id="tools.helpers.models.path_models.DefaultFiletypesDict">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.path_models.</code><code class="sig-name descname">DefaultFiletypesDict</code><span class="sig-paren">(</span><em class="sig-param">dico=None</em>, <em class="sig-param">all_files=True</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.path_models.DefaultFiletypesDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="tools.helpers.models.path_models.DefaultFiletypesDict.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">key</em>, <em class="sig-param">default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.path_models.DefaultFiletypesDict.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.models.path_models.FileExt">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.path_models.</code><code class="sig-name descname">FileExt</code><a class="headerlink" href="#tools.helpers.models.path_models.FileExt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.models.str_models._CustomStr</span></code></p>
+<p>File extension class model</p>
+<dl class="attribute">
+<dt id="tools.helpers.models.path_models.FileExt.EXT_SEP">
+<code class="sig-name descname">EXT_SEP</code><em class="property"> = '.'</em><a class="headerlink" href="#tools.helpers.models.path_models.FileExt.EXT_SEP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.path_models.FileExt.isempty">
+<em class="property">property </em><code class="sig-name descname">isempty</code><a class="headerlink" href="#tools.helpers.models.path_models.FileExt.isempty" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.models.path_models.Path">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.path_models.</code><code class="sig-name descname">Path</code><a class="headerlink" href="#tools.helpers.models.path_models.Path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.models.path_models._BasePath</span></code></p>
+<p>Class defining a path, inherited from str built-in type.
+If an iterable is passed, return a PathCollection of multiple Path objects.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;a/b/c.d&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span>
+<span class="go">Path: a/b/c.d</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Path</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="go">Path: None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">filename</span>
+<span class="go">Path: c.d</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">isdir</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">split_path</span>
+<span class="go">[Path: a/b, Path: c.d]</span>
+</pre></div>
+</div>
+<p># Collections</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p_c</span> <span class="o">=</span> <span class="n">Path</span><span class="p">([</span><span class="s1">&#39;a/b/c.d&#39;</span><span class="p">,</span> <span class="s1">&#39;e/f/g.h&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p_c</span>
+<span class="go">[Path: a/b/c.d, Path: e/f/g.h]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p_c</span><span class="o">.</span><span class="n">filename</span>
+<span class="go">[Path: c.d, Path: g.h]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p_c</span><span class="o">.</span><span class="n">isdir</span>
+<span class="go">[False, False]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p_c</span><span class="o">.</span><span class="n">split_path</span>
+<span class="go">[[Path: a/b, Path: c.d], [Path: e/f, Path: g.h]]</span>
+</pre></div>
+</div>
+<p># As _MODIFY_COLLECTION_INPLACE is True, PathCollection object has the same behavior as Path:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PathCollection</span><span class="p">([</span><span class="s1">&#39;a/b/c.d&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="n">Path</span><span class="p">([</span><span class="s1">&#39;a/b/c.d&#39;</span><span class="p">])</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PathCollection</span><span class="p">([</span><span class="s1">&#39;a/b/c.d&#39;</span><span class="p">])</span>
+<span class="go">[Path: a/b/c.d]</span>
+</pre></div>
+</div>
+<p># Types of supported iterables: list, tuple, set and inherited objects.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Path</span><span class="p">([</span><span class="s1">&#39;a/b/c.d&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;e/f/g.h&#39;</span><span class="p">],</span> <span class="p">(</span><span class="s1">&#39;i/j/k.l&#39;</span><span class="p">,),</span> <span class="p">{</span><span class="s1">&#39;m/n/o.p&#39;</span><span class="p">}])</span>
+<span class="go">[Path: a/b/c.d, [Path: e/f/g.h], [Path: i/j/k.l], [Path: m/n/o.p]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.models.path_models.PathCollection">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.path_models.</code><code class="sig-name descname">PathCollection</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.path_models.PathCollection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.models.str_models._CollectionCustomStr</span></code></p>
+<p>Collection of Path objects, inherited from list built-in type</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.models.str_models">
+<span id="tools-helpers-models-str-models-module"></span><h2>tools.helpers.models.str_models module<a class="headerlink" href="#module-tools.helpers.models.str_models" title="Permalink to this headline">¶</a></h2>
+<p>Classes inherited from string (“Custom strings”) and from list (“Collections”).</p>
+</div>
+<div class="section" id="module-tools.helpers.models.types_models">
+<span id="tools-helpers-models-types-models-module"></span><h2>tools.helpers.models.types_models module<a class="headerlink" href="#module-tools.helpers.models.types_models" title="Permalink to this headline">¶</a></h2>
+<p>Various model classes and functions linked to them.</p>
+<dl class="class">
+<dt id="tools.helpers.models.types_models.EmptyClass">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.types_models.</code><code class="sig-name descname">EmptyClass</code><a class="headerlink" href="#tools.helpers.models.types_models.EmptyClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to create empty objects</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.models.types_models.Property">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.types_models.</code><code class="sig-name descname">Property</code><span class="sig-paren">(</span><em class="sig-param">fget=None</em>, <em class="sig-param">fset=None</em>, <em class="sig-param">fdel=None</em>, <em class="sig-param">doc=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.types_models.Property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Emulate PyProperty_Type() in Objects/descrobject.c</p>
+<dl class="method">
+<dt id="tools.helpers.models.types_models.Property.deleter">
+<code class="sig-name descname">deleter</code><span class="sig-paren">(</span><em class="sig-param">fdel</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.types_models.Property.deleter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.types_models.Property.getter">
+<code class="sig-name descname">getter</code><span class="sig-paren">(</span><em class="sig-param">fget</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.types_models.Property.getter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.types_models.Property.setter">
+<code class="sig-name descname">setter</code><span class="sig-paren">(</span><em class="sig-param">fset</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.types_models.Property.setter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.models.types_models.Reference">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.types_models.</code><code class="sig-name descname">Reference</code><a class="headerlink" href="#tools.helpers.models.types_models.Reference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Reference class</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.models.types_models.Wildcard">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.types_models.</code><code class="sig-name descname">Wildcard</code><a class="headerlink" href="#tools.helpers.models.types_models.Wildcard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to define wildcard objects</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.models.types_models.add_tag">
+<code class="sig-prename descclassname">tools.helpers.models.types_models.</code><code class="sig-name descname">add_tag</code><span class="sig-paren">(</span><em class="sig-param">tag='tag'</em>, <em class="sig-param">tag_value=True</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.types_models.add_tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set an attribute to a function or a property.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.models.types_models.keep_type">
+<code class="sig-prename descclassname">tools.helpers.models.types_models.</code><code class="sig-name descname">keep_type</code><span class="sig-paren">(</span><em class="sig-param">func_type='function'</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.types_models.keep_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the attribute ‘keep_type’ to a method or property and convert its result to original class.</p>
+<p>Handle functions, methods, properties, class methods.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.models">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-tools.helpers.models" title="Permalink to this headline">¶</a></h2>
+<p>Model classes</p>
+<dl class="class">
+<dt id="tools.helpers.models.Singleton">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.</code><code class="sig-name descname">Singleton</code><a class="headerlink" href="#tools.helpers.models.Singleton" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">type</span></code></p>
+<p>Metaclass that authorize only one instance of a class.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.models.Path">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.</code><code class="sig-name descname">Path</code><a class="headerlink" href="#tools.helpers.models.Path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.models.path_models._BasePath</span></code></p>
+<p>Class defining a path, inherited from str built-in type.
+If an iterable is passed, return a PathCollection of multiple Path objects.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;a/b/c.d&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span>
+<span class="go">Path: a/b/c.d</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Path</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="go">Path: None</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">filename</span>
+<span class="go">Path: c.d</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">isdir</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">split_path</span>
+<span class="go">[Path: a/b, Path: c.d]</span>
+</pre></div>
+</div>
+<p># Collections</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">p_c</span> <span class="o">=</span> <span class="n">Path</span><span class="p">([</span><span class="s1">&#39;a/b/c.d&#39;</span><span class="p">,</span> <span class="s1">&#39;e/f/g.h&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p_c</span>
+<span class="go">[Path: a/b/c.d, Path: e/f/g.h]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p_c</span><span class="o">.</span><span class="n">filename</span>
+<span class="go">[Path: c.d, Path: g.h]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p_c</span><span class="o">.</span><span class="n">isdir</span>
+<span class="go">[False, False]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p_c</span><span class="o">.</span><span class="n">split_path</span>
+<span class="go">[[Path: a/b, Path: c.d], [Path: e/f, Path: g.h]]</span>
+</pre></div>
+</div>
+<p># As _MODIFY_COLLECTION_INPLACE is True, PathCollection object has the same behavior as Path:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">PathCollection</span><span class="p">([</span><span class="s1">&#39;a/b/c.d&#39;</span><span class="p">])</span> <span class="o">==</span> <span class="n">Path</span><span class="p">([</span><span class="s1">&#39;a/b/c.d&#39;</span><span class="p">])</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">PathCollection</span><span class="p">([</span><span class="s1">&#39;a/b/c.d&#39;</span><span class="p">])</span>
+<span class="go">[Path: a/b/c.d]</span>
+</pre></div>
+</div>
+<p># Types of supported iterables: list, tuple, set and inherited objects.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">Path</span><span class="p">([</span><span class="s1">&#39;a/b/c.d&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;e/f/g.h&#39;</span><span class="p">],</span> <span class="p">(</span><span class="s1">&#39;i/j/k.l&#39;</span><span class="p">,),</span> <span class="p">{</span><span class="s1">&#39;m/n/o.p&#39;</span><span class="p">}])</span>
+<span class="go">[Path: a/b/c.d, [Path: e/f/g.h], [Path: i/j/k.l], [Path: m/n/o.p]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.models.PathCollection">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.</code><code class="sig-name descname">PathCollection</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.PathCollection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.models.str_models._CollectionCustomStr</span></code></p>
+<p>Collection of Path objects, inherited from list built-in type</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.models.DefaultFiletypesDict">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.</code><code class="sig-name descname">DefaultFiletypesDict</code><span class="sig-paren">(</span><em class="sig-param">dico=None</em>, <em class="sig-param">all_files=True</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.DefaultFiletypesDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="tools.helpers.models.DefaultFiletypesDict.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">key</em>, <em class="sig-param">default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.DefaultFiletypesDict.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.models.FileExt">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.</code><code class="sig-name descname">FileExt</code><a class="headerlink" href="#tools.helpers.models.FileExt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.models.str_models._CustomStr</span></code></p>
+<p>File extension class model</p>
+<dl class="attribute">
+<dt id="tools.helpers.models.FileExt.EXT_SEP">
+<code class="sig-name descname">EXT_SEP</code><em class="property"> = '.'</em><a class="headerlink" href="#tools.helpers.models.FileExt.EXT_SEP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.FileExt.isempty">
+<em class="property">property </em><code class="sig-name descname">isempty</code><a class="headerlink" href="#tools.helpers.models.FileExt.isempty" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.models.Reference">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.</code><code class="sig-name descname">Reference</code><a class="headerlink" href="#tools.helpers.models.Reference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Reference class</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.models.Wildcard">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.</code><code class="sig-name descname">Wildcard</code><a class="headerlink" href="#tools.helpers.models.Wildcard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to define wildcard objects</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.models.Property">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.</code><code class="sig-name descname">Property</code><span class="sig-paren">(</span><em class="sig-param">fget=None</em>, <em class="sig-param">fset=None</em>, <em class="sig-param">fdel=None</em>, <em class="sig-param">doc=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.Property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Emulate PyProperty_Type() in Objects/descrobject.c</p>
+<dl class="method">
+<dt id="tools.helpers.models.Property.deleter">
+<code class="sig-name descname">deleter</code><span class="sig-paren">(</span><em class="sig-param">fdel</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.Property.deleter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.Property.getter">
+<code class="sig-name descname">getter</code><span class="sig-paren">(</span><em class="sig-param">fget</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.Property.getter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.Property.setter">
+<code class="sig-name descname">setter</code><span class="sig-paren">(</span><em class="sig-param">fset</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.Property.setter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.models.EmptyClass">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.</code><code class="sig-name descname">EmptyClass</code><a class="headerlink" href="#tools.helpers.models.EmptyClass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Class to create empty objects</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.models.IdentityDict">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.</code><code class="sig-name descname">IdentityDict</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.IdentityDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">collections.UserDict</span></code></p>
+<p>Dict which returns the key if key not in dict when getting item.
+If ‘func’ arg is set, the function ‘func’ is applied to key before return</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.models.BaseDict">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.models.</code><code class="sig-name descname">BaseDict</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.BaseDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class of ordered-dictionary-like objects where keys have a specified format.</p>
+<dl class="method">
+<dt id="tools.helpers.models.BaseDict.TO_KEY_FUNC">
+<code class="sig-name descname">TO_KEY_FUNC</code><span class="sig-paren">(</span><em class="sig-param">x</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.BaseDict.TO_KEY_FUNC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.BaseDict.clear">
+<code class="sig-name descname">clear</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.BaseDict.clear" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.BaseDict.copy">
+<code class="sig-name descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.BaseDict.copy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.BaseDict.deepcopy">
+<code class="sig-name descname">deepcopy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.BaseDict.deepcopy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.BaseDict.from_dict">
+<em class="property">classmethod </em><code class="sig-name descname">from_dict</code><span class="sig-paren">(</span><em class="sig-param">dico</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.BaseDict.from_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.BaseDict.fromkeys">
+<em class="property">classmethod </em><code class="sig-name descname">fromkeys</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.BaseDict.fromkeys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.BaseDict.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">item</em>, <em class="sig-param">default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.BaseDict.get" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.BaseDict.items">
+<code class="sig-name descname">items</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.BaseDict.items" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.BaseDict.keys">
+<code class="sig-name descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.BaseDict.keys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.BaseDict.move_to_end">
+<code class="sig-name descname">move_to_end</code><span class="sig-paren">(</span><em class="sig-param">key</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.BaseDict.move_to_end" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.BaseDict.pop">
+<code class="sig-name descname">pop</code><span class="sig-paren">(</span><em class="sig-param">item</em>, <em class="sig-param">default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.BaseDict.pop" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.BaseDict.popitem">
+<code class="sig-name descname">popitem</code><span class="sig-paren">(</span><em class="sig-param">item</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.BaseDict.popitem" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.BaseDict.setdefault">
+<code class="sig-name descname">setdefault</code><span class="sig-paren">(</span><em class="sig-param">k</em>, <em class="sig-param">default=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.BaseDict.setdefault" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.BaseDict.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">other</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.BaseDict.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.models.BaseDict.values">
+<code class="sig-name descname">values</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.models.BaseDict.values" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">tools.helpers.models package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.models.dict_models">tools.helpers.models.dict_models module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.models.metaclasses">tools.helpers.models.metaclasses module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.models.path_models">tools.helpers.models.path_models module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.models.str_models">tools.helpers.models.str_models module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.models.types_models">tools.helpers.models.types_models module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.models">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tools.helpers.interface.html"
+                        title="previous chapter">tools.helpers.interface package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tools.helpers.utils.html"
+                        title="next chapter">tools.helpers.utils package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/source/tools.helpers.models.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.utils.html" title="tools.helpers.utils package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.interface.html" title="tools.helpers.interface package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Main tools 1.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >python_utils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >tools package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="tools.helpers.html" >tools.helpers package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright open source.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

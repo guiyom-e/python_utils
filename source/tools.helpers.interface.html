@@ -1,0 +1,1563 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>tools.helpers.interface package &#8212; Main tools 1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tools.helpers.models package" href="tools.helpers.models.html" />
+    <link rel="prev" title="tools.helpers.data_manager package" href="tools.helpers.data_manager.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.models.html" title="tools.helpers.models package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.data_manager.html" title="tools.helpers.data_manager package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Main tools 1.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >python_utils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >tools package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="tools.helpers.html" accesskey="U">tools.helpers package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tools-helpers-interface-package">
+<h1>tools.helpers.interface package<a class="headerlink" href="#tools-helpers-interface-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-tools.helpers.interface.advanced_wrappers">
+<span id="tools-helpers-interface-advanced-wrappers-module"></span><h2>tools.helpers.interface.advanced_wrappers module<a class="headerlink" href="#module-tools.helpers.interface.advanced_wrappers" title="Permalink to this headline">¶</a></h2>
+<p>Add advanced dialogs in the wrapped messagebox, simpledialog and filedialog module-like objects.
+Import messagebox, simpledialog and filedialog from this file instead from tkinter to benefit from enhanced modules.</p>
+</div>
+<div class="section" id="module-tools.helpers.interface.anomalies">
+<span id="tools-helpers-interface-anomalies-module"></span><h2>tools.helpers.interface.anomalies module<a class="headerlink" href="#module-tools.helpers.interface.anomalies" title="Permalink to this headline">¶</a></h2>
+<p>Functions to display errors in message boxes and dialog with the user.</p>
+<dl class="function">
+<dt id="tools.helpers.interface.anomalies.raise_anomaly">
+<code class="sig-prename descclassname">tools.helpers.interface.anomalies.</code><code class="sig-name descname">raise_anomaly</code><span class="sig-paren">(</span><em class="sig-param">flag='ask'</em>, <em class="sig-param">error=None</em>, <em class="sig-param">title=None</em>, <em class="sig-param">message=None</em>, <em class="sig-param">use_messagebox=True</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.anomalies.raise_anomaly" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Raise an ‘anomaly’ depending on the flag argument:</dt><dd><ul class="simple">
+<li><p>‘ignore’: do nothing and return,</p></li>
+<li><p>‘warning’: show a warning (warning logger and tkinter messagebox),</p></li>
+<li><p>‘error’: raises an exception,</p></li>
+<li><p>‘ask’: ask the user either to ignore the anomaly or to raise an error.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>flag</strong> – must be ‘ask’, ‘ignore’, ‘warning’, ‘error’</p></li>
+<li><p><strong>error</strong> – Exception</p></li>
+<li><p><strong>title</strong> – Title for message box and logger.</p></li>
+<li><p><strong>message</strong> – Message for message box and error logger.</p></li>
+<li><p><strong>use_messagebox</strong> – if True the tkinter messagebox will be used to show errors.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.interface.anomalies.raise_bad_extension_anomaly">
+<code class="sig-prename descclassname">tools.helpers.interface.anomalies.</code><code class="sig-name descname">raise_bad_extension_anomaly</code><span class="sig-paren">(</span><em class="sig-param">flag</em>, <em class="sig-param">use_messagebox=True</em>, <em class="sig-param">msg=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.anomalies.raise_bad_extension_anomaly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Anomaly if bad extension set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>flag</strong> – must be ‘ask’, ‘ignore’, ‘warning’, or ‘error’</p></li>
+<li><p><strong>use_messagebox</strong> – boolean. if True a messagebox will appear</p></li>
+<li><p><strong>msg</strong> – custom message</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.interface.anomalies.raise_no_file_selected_anomaly">
+<code class="sig-prename descclassname">tools.helpers.interface.anomalies.</code><code class="sig-name descname">raise_no_file_selected_anomaly</code><span class="sig-paren">(</span><em class="sig-param">flag</em>, <em class="sig-param">use_messagebox=True</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.anomalies.raise_no_file_selected_anomaly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Anomaly if no file selected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>flag</strong> – must be ‘ask’, ‘ignore’, ‘warning’, or ‘error’</p></li>
+<li><p><strong>use_messagebox</strong> – boolean. if True a messagebox will appear</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.interface.basics">
+<span id="tools-helpers-interface-basics-module"></span><h2>tools.helpers.interface.basics module<a class="headerlink" href="#module-tools.helpers.interface.basics" title="Permalink to this headline">¶</a></h2>
+<p>Model classes and basic functions.</p>
+<dl class="class">
+<dt id="tools.helpers.interface.basics.CustomTk">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.basics.</code><code class="sig-name descname">CustomTk</code><span class="sig-paren">(</span><em class="sig-param">title=None</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.basics.CustomTk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.Tk</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.basics.FrameWithScrollbar">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.basics.</code><code class="sig-name descname">FrameWithScrollbar</code><span class="sig-paren">(</span><em class="sig-param">master=None</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.basics.FrameWithScrollbar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.ttk.Frame</span></code></p>
+<p>Frame with a vertical scrollbar.
+Access to canvas: ‘.canvas’; access to child frame: ‘.frame’</p>
+<dl class="method">
+<dt id="tools.helpers.interface.basics.FrameWithScrollbar.on_frame_configure">
+<code class="sig-name descname">on_frame_configure</code><span class="sig-paren">(</span><em class="sig-param">_event</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.basics.FrameWithScrollbar.on_frame_configure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the scroll region to encompass the inner frame</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.interface.basics.center">
+<code class="sig-prename descclassname">tools.helpers.interface.basics.</code><code class="sig-name descname">center</code><span class="sig-paren">(</span><em class="sig-param">win</em>, <em class="sig-param">width=None</em>, <em class="sig-param">height=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.basics.center" title="Permalink to this definition">¶</a></dt>
+<dd><p>Centers a tkinter window.
+:param win: the root or Toplevel window to center
+:param width: custom width for center computation
+:param height: custom height for center computation</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.interface.custom_dialog">
+<span id="tools-helpers-interface-custom-dialog-module"></span><h2>tools.helpers.interface.custom_dialog module<a class="headerlink" href="#module-tools.helpers.interface.custom_dialog" title="Permalink to this headline">¶</a></h2>
+<p>Defines advanced dialogs to select options within multiple choices.
+Based on the following tkinter.ttk widgets: Checkbutton, Radiobutton, OptionMenu.</p>
+<dl class="class">
+<dt id="tools.helpers.interface.custom_dialog.CheckBoxFrame">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.custom_dialog.</code><code class="sig-name descname">CheckBoxFrame</code><span class="sig-paren">(</span><em class="sig-param">master=None</em>, <em class="sig-param">message: str = None</em>, <em class="sig-param">choices: Union[list</em>, <em class="sig-param">dict] = None</em>, <em class="sig-param">initial_status=False</em>, <em class="sig-param">nb_columns=10</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.CheckBoxFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.ttk.Frame</span></code></p>
+<p>Frame with checkboxes.</p>
+<dl class="method">
+<dt id="tools.helpers.interface.custom_dialog.CheckBoxFrame.all_command">
+<code class="sig-name descname">all_command</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.CheckBoxFrame.all_command" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.custom_dialog.CheckBoxFrame.check">
+<code class="sig-name descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.CheckBoxFrame.check" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.custom_dialog.CheckBoxFrame.none_command">
+<code class="sig-name descname">none_command</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.CheckBoxFrame.none_command" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.custom_dialog.CheckBoxFrame.result">
+<em class="property">property </em><code class="sig-name descname">result</code><a class="headerlink" href="#tools.helpers.interface.custom_dialog.CheckBoxFrame.result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns results</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.custom_dialog.CheckBoxFrame.result_keys">
+<em class="property">property </em><code class="sig-name descname">result_keys</code><a class="headerlink" href="#tools.helpers.interface.custom_dialog.CheckBoxFrame.result_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the key/index value of the result in choices</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.custom_dialog.CheckBoxFrame.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.CheckBoxFrame.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the entry is correct or not: for check box, the answer is always True.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.custom_dialog.CheckBoxSelectorDialog">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.custom_dialog.</code><code class="sig-name descname">CheckBoxSelectorDialog</code><span class="sig-paren">(</span><em class="sig-param">parent=None</em>, <em class="sig-param">title=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.CheckBoxSelectorDialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tools.helpers.interface.custom_dialog.CheckBoxSelectorDialog" title="tools.helpers.interface.custom_dialog.CheckBoxSelectorDialog"><code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.interface.custom_dialog.CheckBoxSelectorDialog</span></code></a></p>
+<p>Dialog window with checkboxes.</p>
+<dl class="method">
+<dt id="tools.helpers.interface.custom_dialog.CheckBoxSelectorDialog.body">
+<code class="sig-name descname">body</code><span class="sig-paren">(</span><em class="sig-param">master</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.CheckBoxSelectorDialog.body" title="Permalink to this definition">¶</a></dt>
+<dd><p>Widget body</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.custom_dialog.MultiSelectorDialog">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.custom_dialog.</code><code class="sig-name descname">MultiSelectorDialog</code><span class="sig-paren">(</span><em class="sig-param">parent=None</em>, <em class="sig-param">title=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.MultiSelectorDialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tools.helpers.interface.custom_dialog.MultiSelectorDialog" title="tools.helpers.interface.custom_dialog.MultiSelectorDialog"><code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.interface.custom_dialog.MultiSelectorDialog</span></code></a></p>
+<p>Window which looks like a messagebox window, but with custom choices (list of tuples).</p>
+<dl class="method">
+<dt id="tools.helpers.interface.custom_dialog.MultiSelectorDialog.body">
+<code class="sig-name descname">body</code><span class="sig-paren">(</span><em class="sig-param">master</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.MultiSelectorDialog.body" title="Permalink to this definition">¶</a></dt>
+<dd><p>Widget body</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.custom_dialog.MultiSelectorFrame">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.custom_dialog.</code><code class="sig-name descname">MultiSelectorFrame</code><span class="sig-paren">(</span><em class="sig-param">master=None</em>, <em class="sig-param">message: str = None</em>, <em class="sig-param">choices: Union[list</em>, <em class="sig-param">dict] = None</em>, <em class="sig-param">initial_status=False</em>, <em class="sig-param">initial_value=None</em>, <em class="sig-param">nb_columns=10</em>, <em class="sig-param">date_start=None</em>, <em class="sig-param">date_end=None</em>, <em class="sig-param">dateformat=None</em>, <em class="sig-param">default_box_type='check_box'</em>, <em class="sig-param">max_width=1500</em>, <em class="sig-param">max_height=500</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.MultiSelectorFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.ttk.Frame</span></code></p>
+<p>Frame with multiple checkboxes, radio buttons or option menu.</p>
+<dl class="method">
+<dt id="tools.helpers.interface.custom_dialog.MultiSelectorFrame.result">
+<em class="property">property </em><code class="sig-name descname">result</code><a class="headerlink" href="#tools.helpers.interface.custom_dialog.MultiSelectorFrame.result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the results</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.custom_dialog.MultiSelectorFrame.result_keys">
+<em class="property">property </em><code class="sig-name descname">result_keys</code><a class="headerlink" href="#tools.helpers.interface.custom_dialog.MultiSelectorFrame.result_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the key/index value of the result in choices</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.custom_dialog.MultiSelectorFrame.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.MultiSelectorFrame.validate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.custom_dialog.OptionMenuDialog">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.custom_dialog.</code><code class="sig-name descname">OptionMenuDialog</code><span class="sig-paren">(</span><em class="sig-param">parent=None</em>, <em class="sig-param">title=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.OptionMenuDialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tools.helpers.interface.custom_dialog.OptionMenuDialog" title="tools.helpers.interface.custom_dialog.OptionMenuDialog"><code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.interface.custom_dialog.OptionMenuDialog</span></code></a></p>
+<p>Dialog window with an OptionMenu widget.</p>
+<dl class="method">
+<dt id="tools.helpers.interface.custom_dialog.OptionMenuDialog.body">
+<code class="sig-name descname">body</code><span class="sig-paren">(</span><em class="sig-param">master</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.OptionMenuDialog.body" title="Permalink to this definition">¶</a></dt>
+<dd><p>Widget body</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.custom_dialog.OptionMenuFrame">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.custom_dialog.</code><code class="sig-name descname">OptionMenuFrame</code><span class="sig-paren">(</span><em class="sig-param">master=None</em>, <em class="sig-param">message: str = None</em>, <em class="sig-param">choices: Union[list</em>, <em class="sig-param">dict] = None</em>, <em class="sig-param">initial_value=None</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.OptionMenuFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.ttk.Frame</span></code></p>
+<p>Frame with an OptionMenu widget.</p>
+<dl class="method">
+<dt id="tools.helpers.interface.custom_dialog.OptionMenuFrame.result">
+<em class="property">property </em><code class="sig-name descname">result</code><a class="headerlink" href="#tools.helpers.interface.custom_dialog.OptionMenuFrame.result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the result</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.custom_dialog.OptionMenuFrame.result_keys">
+<em class="property">property </em><code class="sig-name descname">result_keys</code><a class="headerlink" href="#tools.helpers.interface.custom_dialog.OptionMenuFrame.result_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the result</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.custom_dialog.OptionMenuFrame.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.OptionMenuFrame.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the entry is correct or not, i.e. if it is in choices</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.custom_dialog.RadioButtonFrame">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.custom_dialog.</code><code class="sig-name descname">RadioButtonFrame</code><span class="sig-paren">(</span><em class="sig-param">master=None</em>, <em class="sig-param">message: str = None</em>, <em class="sig-param">choices: Union[list</em>, <em class="sig-param">dict] = None</em>, <em class="sig-param">initial_value=None</em>, <em class="sig-param">nb_columns=10</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.RadioButtonFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.ttk.Frame</span></code></p>
+<p>Frame with radio buttons.</p>
+<dl class="method">
+<dt id="tools.helpers.interface.custom_dialog.RadioButtonFrame.result">
+<em class="property">property </em><code class="sig-name descname">result</code><a class="headerlink" href="#tools.helpers.interface.custom_dialog.RadioButtonFrame.result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns result</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.custom_dialog.RadioButtonFrame.result_keys">
+<em class="property">property </em><code class="sig-name descname">result_keys</code><a class="headerlink" href="#tools.helpers.interface.custom_dialog.RadioButtonFrame.result_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the key/index value of the result in choices</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.custom_dialog.RadioButtonFrame.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.RadioButtonFrame.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the entry is correct or not, i.e. if the answer value is in choices values</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.custom_dialog.RadioSelectorDialog">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.custom_dialog.</code><code class="sig-name descname">RadioSelectorDialog</code><span class="sig-paren">(</span><em class="sig-param">parent=None</em>, <em class="sig-param">title=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.RadioSelectorDialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tools.helpers.interface.custom_dialog.RadioSelectorDialog" title="tools.helpers.interface.custom_dialog.RadioSelectorDialog"><code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.interface.custom_dialog.RadioSelectorDialog</span></code></a></p>
+<p>Dialog window with radio buttons.</p>
+<dl class="method">
+<dt id="tools.helpers.interface.custom_dialog.RadioSelectorDialog.body">
+<code class="sig-name descname">body</code><span class="sig-paren">(</span><em class="sig-param">master</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.RadioSelectorDialog.body" title="Permalink to this definition">¶</a></dt>
+<dd><p>Widget body</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.interface.custom_dialog.ask_checkbox">
+<code class="sig-prename descclassname">tools.helpers.interface.custom_dialog.</code><code class="sig-name descname">ask_checkbox</code><span class="sig-paren">(</span><em class="sig-param">title: str = None</em>, <em class="sig-param">message: str = None</em>, <em class="sig-param">choices: Union[list</em>, <em class="sig-param">dict] = None</em>, <em class="sig-param">initial_status: bool = None</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.ask_checkbox" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.interface.custom_dialog.ask_multiple_questions">
+<code class="sig-prename descclassname">tools.helpers.interface.custom_dialog.</code><code class="sig-name descname">ask_multiple_questions</code><span class="sig-paren">(</span><em class="sig-param">title: str = None</em>, <em class="sig-param">message: str = None</em>, <em class="sig-param">choices: Union[list</em>, <em class="sig-param">dict] = None</em>, <em class="sig-param">initial_status: bool = False</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.ask_multiple_questions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.interface.custom_dialog.ask_option">
+<code class="sig-prename descclassname">tools.helpers.interface.custom_dialog.</code><code class="sig-name descname">ask_option</code><span class="sig-paren">(</span><em class="sig-param">title: str = None</em>, <em class="sig-param">message: str = None</em>, <em class="sig-param">choices: Union[list</em>, <em class="sig-param">dict] = None</em>, <em class="sig-param">initial_value: bool = None</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.ask_option" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.interface.custom_dialog.ask_radio_button">
+<code class="sig-prename descclassname">tools.helpers.interface.custom_dialog.</code><code class="sig-name descname">ask_radio_button</code><span class="sig-paren">(</span><em class="sig-param">title: str = None</em>, <em class="sig-param">message: str = None</em>, <em class="sig-param">choices: Union[list</em>, <em class="sig-param">dict] = None</em>, <em class="sig-param">initial_value: bool = None</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_dialog.ask_radio_button" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.interface.custom_messagebox">
+<span id="tools-helpers-interface-custom-messagebox-module"></span><h2>tools.helpers.interface.custom_messagebox module<a class="headerlink" href="#module-tools.helpers.interface.custom_messagebox" title="Permalink to this headline">¶</a></h2>
+<p>Defines advanced messagebox to select options within multiple choices.</p>
+<dl class="class">
+<dt id="tools.helpers.interface.custom_messagebox.CustomQuestionDialog">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.custom_messagebox.</code><code class="sig-name descname">CustomQuestionDialog</code><span class="sig-paren">(</span><em class="sig-param">parent=None</em>, <em class="sig-param">title=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_messagebox.CustomQuestionDialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tools.helpers.interface.custom_messagebox.CustomQuestionDialog" title="tools.helpers.interface.custom_messagebox.CustomQuestionDialog"><code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.interface.custom_messagebox.CustomQuestionDialog</span></code></a></p>
+<p>Window which looks like a messagebox window, but with custom answers (list of tuples).</p>
+<dl class="method">
+<dt id="tools.helpers.interface.custom_messagebox.CustomQuestionDialog.body">
+<code class="sig-name descname">body</code><span class="sig-paren">(</span><em class="sig-param">master</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_messagebox.CustomQuestionDialog.body" title="Permalink to this definition">¶</a></dt>
+<dd><p>Widget body</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.custom_messagebox.CustomQuestionFrame">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.custom_messagebox.</code><code class="sig-name descname">CustomQuestionFrame</code><span class="sig-paren">(</span><em class="sig-param">master=None</em>, <em class="sig-param">message: str = None</em>, <em class="sig-param">choices: Union[list</em>, <em class="sig-param">dict] = None</em>, <em class="sig-param">auto_quit=True</em>, <em class="sig-param">geometry_manager='pack'</em>, <em class="sig-param">geometry_options=None</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_messagebox.CustomQuestionFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.ttk.Frame</span></code></p>
+<p>Frame with custom answers displayed as tkinter buttons.</p>
+<dl class="method">
+<dt id="tools.helpers.interface.custom_messagebox.CustomQuestionFrame.return_answer">
+<code class="sig-name descname">return_answer</code><span class="sig-paren">(</span><em class="sig-param">key</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_messagebox.CustomQuestionFrame.return_answer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.custom_messagebox.CustomQuestionFrame.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_messagebox.CustomQuestionFrame.validate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.interface.custom_messagebox.ask_custom_question">
+<code class="sig-prename descclassname">tools.helpers.interface.custom_messagebox.</code><code class="sig-name descname">ask_custom_question</code><span class="sig-paren">(</span><em class="sig-param">title: str = None</em>, <em class="sig-param">message: str = None</em>, <em class="sig-param">choices: Union[list</em>, <em class="sig-param">dict] = None</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.custom_messagebox.ask_custom_question" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.interface.date_picker">
+<span id="tools-helpers-interface-date-picker-module"></span><h2>tools.helpers.interface.date_picker module<a class="headerlink" href="#module-tools.helpers.interface.date_picker" title="Permalink to this headline">¶</a></h2>
+<p>Defines a dialog to select a date with a calendar.</p>
+<dl class="class">
+<dt id="tools.helpers.interface.date_picker.Calendar">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.date_picker.</code><code class="sig-name descname">Calendar</code><span class="sig-paren">(</span><em class="sig-param">master=None</em>, <em class="sig-param">year=None</em>, <em class="sig-param">month=None</em>, <em class="sig-param">firstweekday=0</em>, <em class="sig-param">locale=None</em>, <em class="sig-param">activebackground='#b1dcfb'</em>, <em class="sig-param">activeforeground='black'</em>, <em class="sig-param">selectbackground='#003eff'</em>, <em class="sig-param">selectforeground='white'</em>, <em class="sig-param">command=None</em>, <em class="sig-param">borderwidth=1</em>, <em class="sig-param">relief='solid'</em>, <em class="sig-param">on_click_month_button=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.ttk.Frame</span></code></p>
+<dl class="class">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime">
+<em class="property">class </em><code class="sig-name descname">datetime</code><span class="sig-paren">(</span><em class="sig-param">year</em>, <em class="sig-param">month</em>, <em class="sig-param">day</em><span class="optional">[</span>, <em class="sig-param">hour</em><span class="optional">[</span>, <em class="sig-param">minute</em><span class="optional">[</span>, <em class="sig-param">second</em><span class="optional">[</span>, <em class="sig-param">microsecond</em><span class="optional">[</span>, <em class="sig-param">tzinfo</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">datetime.date</span></code></p>
+<p>The year, month and day arguments are required. tzinfo may be None, or an
+instance of a tzinfo subclass. The remaining arguments may be ints.</p>
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.astimezone">
+<code class="sig-name descname">astimezone</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.astimezone" title="Permalink to this definition">¶</a></dt>
+<dd><p>tz -&gt; convert to local time in new timezone tz</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.combine">
+<code class="sig-name descname">combine</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.combine" title="Permalink to this definition">¶</a></dt>
+<dd><p>date, time -&gt; datetime with same date and time fields</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.ctime">
+<code class="sig-name descname">ctime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.ctime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return ctime() style string.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.date">
+<code class="sig-name descname">date</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return date object with same year, month and day.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.dst">
+<code class="sig-name descname">dst</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.dst" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self.tzinfo.dst(self).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.fromtimestamp">
+<code class="sig-name descname">fromtimestamp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.fromtimestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>timestamp[, tz] -&gt; tz’s local time from POSIX timestamp.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.hour">
+<code class="sig-name descname">hour</code><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.hour" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.isoformat">
+<code class="sig-name descname">isoformat</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.isoformat" title="Permalink to this definition">¶</a></dt>
+<dd><p>[sep] -&gt; string in ISO 8601 format, YYYY-MM-DDTHH:MM:SS[.mmmmmm][+HH:MM].</p>
+<p>sep is used to separate the year from the time, and defaults to ‘T’.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.max">
+<code class="sig-name descname">max</code><em class="property"> = datetime.datetime(9999, 12, 31, 23, 59, 59, 999999)</em><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.max" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.microsecond">
+<code class="sig-name descname">microsecond</code><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.microsecond" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.min">
+<code class="sig-name descname">min</code><em class="property"> = datetime.datetime(1, 1, 1, 0, 0)</em><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.min" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.minute">
+<code class="sig-name descname">minute</code><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.minute" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.now">
+<code class="sig-name descname">now</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.now" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns new datetime object representing current time local to tz.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>tz</dt><dd><p>Timezone object.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>If no tz is specified, uses local timezone.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.replace">
+<code class="sig-name descname">replace</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.replace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return datetime with new specified fields.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.resolution">
+<code class="sig-name descname">resolution</code><em class="property"> = datetime.timedelta(0, 0, 1)</em><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.resolution" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.second">
+<code class="sig-name descname">second</code><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.second" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.strptime">
+<code class="sig-name descname">strptime</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.strptime" title="Permalink to this definition">¶</a></dt>
+<dd><p>string, format -&gt; new datetime parsed from a string (like time.strptime()).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.time">
+<code class="sig-name descname">time</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return time object with same time but with tzinfo=None.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.timestamp">
+<code class="sig-name descname">timestamp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.timestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return POSIX timestamp as float.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.timetuple">
+<code class="sig-name descname">timetuple</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.timetuple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return time tuple, compatible with time.localtime().</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.timetz">
+<code class="sig-name descname">timetz</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.timetz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return time object with same time and tzinfo.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.tzinfo">
+<code class="sig-name descname">tzinfo</code><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.tzinfo" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.tzname">
+<code class="sig-name descname">tzname</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.tzname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self.tzinfo.tzname(self).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.utcfromtimestamp">
+<code class="sig-name descname">utcfromtimestamp</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.utcfromtimestamp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct a naive UTC datetime from a POSIX timestamp.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.utcnow">
+<code class="sig-name descname">utcnow</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.utcnow" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a new datetime representing UTC day and time.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.utcoffset">
+<code class="sig-name descname">utcoffset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.utcoffset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return self.tzinfo.utcoffset(self).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.datetime.utctimetuple">
+<code class="sig-name descname">utctimetuple</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.datetime.utctimetuple" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return UTC time tuple, compatible with time.localtime().</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.get_selection">
+<code class="sig-name descname">get_selection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.get_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a datetime representing the current selected date.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.next_month">
+<code class="sig-name descname">next_month</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.next_month" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update calendar to show the next month.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.next_year">
+<code class="sig-name descname">next_year</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.next_year" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update calendar to show the next year.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.prev_month">
+<code class="sig-name descname">prev_month</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.prev_month" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updated calendar to show the previous week.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.prev_year">
+<code class="sig-name descname">prev_year</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.prev_year" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updated calendar to show the previous year.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.select_current_date">
+<code class="sig-name descname">select_current_date</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.select_current_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update calendar to current date.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.select_next_day">
+<code class="sig-name descname">select_next_day</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.select_next_day" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update calendar to show the next day.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.select_next_week_day">
+<code class="sig-name descname">select_next_week_day</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.select_next_week_day" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update calendar to show the next week.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.select_prev_day">
+<code class="sig-name descname">select_prev_day</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.select_prev_day" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updated calendar to show the previous day.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.select_prev_week_day">
+<code class="sig-name descname">select_prev_week_day</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.select_prev_week_day" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updated calendar to show the previous week.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.selection">
+<code class="sig-name descname">selection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a datetime representing the current selected date.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.set_selection">
+<code class="sig-name descname">set_selection</code><span class="sig-paren">(</span><em class="sig-param">date</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.set_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set the selected date.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.date_picker.Calendar.timedelta">
+<em class="property">class </em><code class="sig-name descname">timedelta</code><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.timedelta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Difference between two datetime values.</p>
+<dl class="attribute">
+<dt id="tools.helpers.interface.date_picker.Calendar.timedelta.days">
+<code class="sig-name descname">days</code><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.timedelta.days" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of days.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tools.helpers.interface.date_picker.Calendar.timedelta.max">
+<code class="sig-name descname">max</code><em class="property"> = datetime.timedelta(999999999, 86399, 999999)</em><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.timedelta.max" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tools.helpers.interface.date_picker.Calendar.timedelta.microseconds">
+<code class="sig-name descname">microseconds</code><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.timedelta.microseconds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of microseconds (&gt;= 0 and less than 1 second).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="tools.helpers.interface.date_picker.Calendar.timedelta.min">
+<code class="sig-name descname">min</code><em class="property"> = datetime.timedelta(-999999999)</em><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.timedelta.min" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tools.helpers.interface.date_picker.Calendar.timedelta.resolution">
+<code class="sig-name descname">resolution</code><em class="property"> = datetime.timedelta(0, 0, 1)</em><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.timedelta.resolution" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tools.helpers.interface.date_picker.Calendar.timedelta.seconds">
+<code class="sig-name descname">seconds</code><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.timedelta.seconds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of seconds (&gt;= 0 and less than 1 day).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Calendar.timedelta.total_seconds">
+<code class="sig-name descname">total_seconds</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Calendar.timedelta.total_seconds" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total seconds in the duration.</p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.date_picker.DatePickerDialog">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.date_picker.</code><code class="sig-name descname">DatePickerDialog</code><span class="sig-paren">(</span><em class="sig-param">parent=None</em>, <em class="sig-param">title=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.DatePickerDialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tools.helpers.interface.date_picker.DatePickerDialog" title="tools.helpers.interface.date_picker.DatePickerDialog"><code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.interface.date_picker.DatePickerDialog</span></code></a></p>
+<p>Dialog window with date picker.</p>
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.DatePickerDialog.body">
+<code class="sig-name descname">body</code><span class="sig-paren">(</span><em class="sig-param">master</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.DatePickerDialog.body" title="Permalink to this definition">¶</a></dt>
+<dd><p>Widget body</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.date_picker.DatePickerFrame">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.date_picker.</code><code class="sig-name descname">DatePickerFrame</code><span class="sig-paren">(</span><em class="sig-param">master=None</em>, <em class="sig-param">message: str = None</em>, <em class="sig-param">initial_value=None</em>, <em class="sig-param">dateformat=None</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.DatePickerFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.ttk.Frame</span></code></p>
+<p>Integration of DatePicker in a Frame</p>
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.DatePickerFrame.result">
+<em class="property">property </em><code class="sig-name descname">result</code><a class="headerlink" href="#tools.helpers.interface.date_picker.DatePickerFrame.result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns result: current date</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.DatePickerFrame.result_keys">
+<em class="property">property </em><code class="sig-name descname">result_keys</code><a class="headerlink" href="#tools.helpers.interface.date_picker.DatePickerFrame.result_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the text value of the result</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.DatePickerFrame.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.DatePickerFrame.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the entry is correct or not: for check box, the answer is always True.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.date_picker.DatePickerTk">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.date_picker.</code><code class="sig-name descname">DatePickerTk</code><span class="sig-paren">(</span><em class="sig-param">title=None</em>, <em class="sig-param">message=None</em>, <em class="sig-param">default_date=None</em>, <em class="sig-param">dateformat='%Y-%m-%d'</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.DatePickerTk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tools.helpers.interface.date_picker.MainDateTk" title="tools.helpers.interface.date_picker.MainDateTk"><code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.interface.date_picker.MainDateTk</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.date_picker.DateSelectorDialog">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.date_picker.</code><code class="sig-name descname">DateSelectorDialog</code><span class="sig-paren">(</span><em class="sig-param">parent=None</em>, <em class="sig-param">title=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.DateSelectorDialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tools.helpers.interface.date_picker.DateSelectorDialog" title="tools.helpers.interface.date_picker.DateSelectorDialog"><code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.interface.date_picker.DateSelectorDialog</span></code></a></p>
+<p>Dialog window with two date pickers to select dates inside a time period.</p>
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.DateSelectorDialog.body">
+<code class="sig-name descname">body</code><span class="sig-paren">(</span><em class="sig-param">master</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.DateSelectorDialog.body" title="Permalink to this definition">¶</a></dt>
+<dd><p>Widget body</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.date_picker.DateSelectorFrame">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.date_picker.</code><code class="sig-name descname">DateSelectorFrame</code><span class="sig-paren">(</span><em class="sig-param">master=None</em>, <em class="sig-param">message=None</em>, <em class="sig-param">mode='auto'</em>, <em class="sig-param">choices=None</em>, <em class="sig-param">date_start=None</em>, <em class="sig-param">date_end=None</em>, <em class="sig-param">dateformat=None</em>, <em class="sig-param">allow_empty=True</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.DateSelectorFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.ttk.Frame</span></code></p>
+<p>Two date pickers selecting dates from a start date (included) to an end date (excluded)</p>
+<p>If a date is empty, the considered value is None and dates are not filtered.</p>
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.DateSelectorFrame.filtered_result">
+<em class="property">property </em><code class="sig-name descname">filtered_result</code><a class="headerlink" href="#tools.helpers.interface.date_picker.DateSelectorFrame.filtered_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the dates in choices filtered</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.DateSelectorFrame.result">
+<em class="property">property </em><code class="sig-name descname">result</code><a class="headerlink" href="#tools.helpers.interface.date_picker.DateSelectorFrame.result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns result: filtered dates or tuple of selected dates</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.DateSelectorFrame.result_keys">
+<em class="property">property </em><code class="sig-name descname">result_keys</code><a class="headerlink" href="#tools.helpers.interface.date_picker.DateSelectorFrame.result_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the two dates defining the interval</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.DateSelectorFrame.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.DateSelectorFrame.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the entry is correct or not: for check box, the answer is always True.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.date_picker.Datepicker">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.date_picker.</code><code class="sig-name descname">Datepicker</code><span class="sig-paren">(</span><em class="sig-param">master</em>, <em class="sig-param">entrywidth=None</em>, <em class="sig-param">entrystyle=None</em>, <em class="sig-param">datevar=None</em>, <em class="sig-param">dateformat='%Y-%m-%d'</em>, <em class="sig-param">onselect=None</em>, <em class="sig-param">firstweekday=0</em>, <em class="sig-param">locale=None</em>, <em class="sig-param">activebackground='#b1dcfb'</em>, <em class="sig-param">activeforeground='black'</em>, <em class="sig-param">selectbackground='#003eff'</em>, <em class="sig-param">selectforeground='white'</em>, <em class="sig-param">borderwidth=1</em>, <em class="sig-param">relief='solid'</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Datepicker" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.ttk.Entry</span></code></p>
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Datepicker.current_date">
+<em class="property">property </em><code class="sig-name descname">current_date</code><a class="headerlink" href="#tools.helpers.interface.date_picker.Datepicker.current_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Datepicker.current_text">
+<em class="property">property </em><code class="sig-name descname">current_text</code><a class="headerlink" href="#tools.helpers.interface.date_picker.Datepicker.current_text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Datepicker.erase">
+<code class="sig-name descname">erase</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Datepicker.erase" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Datepicker.hide_calendar">
+<code class="sig-name descname">hide_calendar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Datepicker.hide_calendar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Datepicker.is_calendar_visible">
+<em class="property">property </em><code class="sig-name descname">is_calendar_visible</code><a class="headerlink" href="#tools.helpers.interface.date_picker.Datepicker.is_calendar_visible" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Datepicker.is_valid_date">
+<em class="property">property </em><code class="sig-name descname">is_valid_date</code><a class="headerlink" href="#tools.helpers.interface.date_picker.Datepicker.is_valid_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Datepicker.set_date_from_calendar">
+<code class="sig-name descname">set_date_from_calendar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Datepicker.set_date_from_calendar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Datepicker.show_calendar">
+<code class="sig-name descname">show_calendar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Datepicker.show_calendar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.Datepicker.show_date_on_calendar">
+<code class="sig-name descname">show_date_on_calendar</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.Datepicker.show_date_on_calendar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.date_picker.MainDateTk">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.date_picker.</code><code class="sig-name descname">MainDateTk</code><a class="headerlink" href="#tools.helpers.interface.date_picker.MainDateTk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tools.helpers.interface.basics.CustomTk" title="tools.helpers.interface.basics.CustomTk"><code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.interface.basics.CustomTk</span></code></a></p>
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.MainDateTk.close">
+<code class="sig-name descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.MainDateTk.close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.date_picker.MainDateTk.on_closing">
+<code class="sig-name descname">on_closing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.MainDateTk.on_closing" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.interface.date_picker.askdate">
+<code class="sig-prename descclassname">tools.helpers.interface.date_picker.</code><code class="sig-name descname">askdate</code><span class="sig-paren">(</span><em class="sig-param">title: str = None</em>, <em class="sig-param">message: str = None</em>, <em class="sig-param">initial_value: datetime.datetime = None</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.askdate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ask a date to the user.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>title</strong> – window title</p></li>
+<li><p><strong>message</strong> – message to show before the entry of dialog</p></li>
+<li><p><strong>initial_value</strong> – first date to show in the entry of dialog. If None the current date is used.</p></li>
+<li><p><strong>bypass_dialog</strong> – if True, no dialog is opened and the function is executed, returning either:
+* initial_value if initial_value is as date (datetime.datetime type)
+* the current date if initial_value is None
+* None in the other cases</p></li>
+<li><p><strong>options</strong> – options for the dialog class</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>datetime.datetime object or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.interface.date_picker.askperiod">
+<code class="sig-prename descclassname">tools.helpers.interface.date_picker.</code><code class="sig-name descname">askperiod</code><span class="sig-paren">(</span><em class="sig-param">title: str = None</em>, <em class="sig-param">message: str = None</em>, <em class="sig-param">mode: str = 'auto'</em>, <em class="sig-param">choices: Union[list</em>, <em class="sig-param">dict] = None</em>, <em class="sig-param">date_start: datetime.datetime = None</em>, <em class="sig-param">date_end: datetime.datetime = None</em>, <em class="sig-param">dateformat: str = None</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.askperiod" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.interface.date_picker.get_user_date">
+<code class="sig-prename descclassname">tools.helpers.interface.date_picker.</code><code class="sig-name descname">get_user_date</code><span class="sig-paren">(</span><em class="sig-param">title=None</em>, <em class="sig-param">message=None</em>, <em class="sig-param">default_date=None</em>, <em class="sig-param">dateformat='%Y-%m-%d'</em>, <em class="sig-param">bypass_dialog=False</em>, <em class="sig-param">behavior_on_error='ignore'</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.date_picker.get_user_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main function to get a date from  user.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.interface.logger_widget">
+<span id="tools-helpers-interface-logger-widget-module"></span><h2>tools.helpers.interface.logger_widget module<a class="headerlink" href="#module-tools.helpers.interface.logger_widget" title="Permalink to this headline">¶</a></h2>
+<p>Defines a text frame updated by a logger handler. Support multi-threading.</p>
+<dl class="class">
+<dt id="tools.helpers.interface.logger_widget.LoggingHandlerFrame">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.logger_widget.</code><code class="sig-name descname">LoggingHandlerFrame</code><span class="sig-paren">(</span><em class="sig-param">master=None</em>, <em class="sig-param">level=20</em>, <em class="sig-param">height=200</em>, <em class="sig-param">width=500</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.logger_widget.LoggingHandlerFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tools.helpers.interface.text_frame.TextFrame" title="tools.helpers.interface.text_frame.TextFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.interface.text_frame.TextFrame</span></code></a></p>
+<p>Text frame updated by a logger handler.</p>
+<dl class="class">
+<dt id="tools.helpers.interface.logger_widget.LoggingHandlerFrame.Handler">
+<em class="property">class </em><code class="sig-name descname">Handler</code><span class="sig-paren">(</span><em class="sig-param">widget</em>, <em class="sig-param">level=20</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.logger_widget.LoggingHandlerFrame.Handler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">logging.Handler</span></code></p>
+<dl class="method">
+<dt id="tools.helpers.interface.logger_widget.LoggingHandlerFrame.Handler.emit">
+<code class="sig-name descname">emit</code><span class="sig-paren">(</span><em class="sig-param">record</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.logger_widget.LoggingHandlerFrame.Handler.emit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do whatever it takes to actually log the specified logging record.</p>
+<p>This version is intended to be implemented by subclasses and so
+raises a NotImplementedError.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.logger_widget.LoggingHandlerFrame.quit">
+<code class="sig-name descname">quit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.logger_widget.LoggingHandlerFrame.quit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detach logger before closing</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.interface.main_interface">
+<span id="tools-helpers-interface-main-interface-module"></span><h2>tools.helpers.interface.main_interface module<a class="headerlink" href="#module-tools.helpers.interface.main_interface" title="Permalink to this headline">¶</a></h2>
+<p>Interface with multiple parts containing buttons corresponding to one function each.
+Includes a logger frame and a help window.</p>
+<dl class="class">
+<dt id="tools.helpers.interface.main_interface.MainTk">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.main_interface.</code><code class="sig-name descname">MainTk</code><span class="sig-paren">(</span><em class="sig-param">parts: collections.OrderedDict</em>, <em class="sig-param">logger_level=20</em>, <em class="sig-param">nb_columns=3</em>, <em class="sig-param">help_msg='No help_msg available.'</em>, <em class="sig-param">title='main'</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.main_interface.MainTk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tools.helpers.interface.basics.CustomTk" title="tools.helpers.interface.basics.CustomTk"><code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.interface.basics.CustomTk</span></code></a></p>
+<p>Main Tk window</p>
+<dl class="method">
+<dt id="tools.helpers.interface.main_interface.MainTk.activate_all">
+<code class="sig-name descname">activate_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.main_interface.MainTk.activate_all" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.main_interface.MainTk.ask_exit">
+<em class="property">static </em><code class="sig-name descname">ask_exit</code><span class="sig-paren">(</span><em class="sig-param">name='unknown'</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.main_interface.MainTk.ask_exit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.main_interface.MainTk.disable_all">
+<code class="sig-name descname">disable_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.main_interface.MainTk.disable_all" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.main_interface.MainTk.load_help">
+<code class="sig-name descname">load_help</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.main_interface.MainTk.load_help" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.main_interface.MainTk.on_closing">
+<code class="sig-name descname">on_closing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.main_interface.MainTk.on_closing" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.main_interface.MainTk.open_help">
+<code class="sig-name descname">open_help</code><span class="sig-paren">(</span><em class="sig-param">_event=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.main_interface.MainTk.open_help" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.interface.text_frame">
+<span id="tools-helpers-interface-text-frame-module"></span><h2>tools.helpers.interface.text_frame module<a class="headerlink" href="#module-tools.helpers.interface.text_frame" title="Permalink to this headline">¶</a></h2>
+<p>Frame, dialog and Tk window with text in it.</p>
+<dl class="class">
+<dt id="tools.helpers.interface.text_frame.TextDialog">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.text_frame.</code><code class="sig-name descname">TextDialog</code><span class="sig-paren">(</span><em class="sig-param">parent=None</em>, <em class="sig-param">title=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.text_frame.TextDialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tools.helpers.interface.text_frame.TextDialog" title="tools.helpers.interface.text_frame.TextDialog"><code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.interface.text_frame.TextDialog</span></code></a></p>
+<p>Text frame integrated in a dialog</p>
+<dl class="method">
+<dt id="tools.helpers.interface.text_frame.TextDialog.body">
+<code class="sig-name descname">body</code><span class="sig-paren">(</span><em class="sig-param">master</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.text_frame.TextDialog.body" title="Permalink to this definition">¶</a></dt>
+<dd><p>Widget body</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.text_frame.TextFrame">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.text_frame.</code><code class="sig-name descname">TextFrame</code><span class="sig-paren">(</span><em class="sig-param">master=None</em>, <em class="sig-param">text=''</em>, <em class="sig-param">height=600</em>, <em class="sig-param">width=500</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.text_frame.TextFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.ttk.Frame</span></code></p>
+<p>Frame with text in it.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.text_frame.TextTk">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.text_frame.</code><code class="sig-name descname">TextTk</code><span class="sig-paren">(</span><em class="sig-param">title=None</em>, <em class="sig-param">text=''</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.text_frame.TextTk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tools.helpers.interface.basics.CustomTk" title="tools.helpers.interface.basics.CustomTk"><code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.interface.basics.CustomTk</span></code></a></p>
+<p>Text window</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.interface.text_frame.showtext">
+<code class="sig-prename descclassname">tools.helpers.interface.text_frame.</code><code class="sig-name descname">showtext</code><span class="sig-paren">(</span><em class="sig-param">title: str = None</em>, <em class="sig-param">text: str = None</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.text_frame.showtext" title="Permalink to this definition">¶</a></dt>
+<dd><p>Show a long text in a dialog</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.interface.tooltip">
+<span id="tools-helpers-interface-tooltip-module"></span><h2>tools.helpers.interface.tooltip module<a class="headerlink" href="#module-tools.helpers.interface.tooltip" title="Permalink to this headline">¶</a></h2>
+<p>Create a tooltip for a given widget.</p>
+<dl class="class">
+<dt id="tools.helpers.interface.tooltip.ToolTip">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.tooltip.</code><code class="sig-name descname">ToolTip</code><span class="sig-paren">(</span><em class="sig-param">widget</em>, <em class="sig-param">text='widget info'</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.tooltip.ToolTip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Create a tooltip for a given widget</p>
+<dl class="method">
+<dt id="tools.helpers.interface.tooltip.ToolTip.enter">
+<code class="sig-name descname">enter</code><span class="sig-paren">(</span><em class="sig-param">_event=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.tooltip.ToolTip.enter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.tooltip.ToolTip.hidetip">
+<code class="sig-name descname">hidetip</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.tooltip.ToolTip.hidetip" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.tooltip.ToolTip.leave">
+<code class="sig-name descname">leave</code><span class="sig-paren">(</span><em class="sig-param">_event=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.tooltip.ToolTip.leave" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.tooltip.ToolTip.schedule">
+<code class="sig-name descname">schedule</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.tooltip.ToolTip.schedule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.tooltip.ToolTip.showtip">
+<code class="sig-name descname">showtip</code><span class="sig-paren">(</span><em class="sig-param">_event=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.tooltip.ToolTip.showtip" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.tooltip.ToolTip.unschedule">
+<code class="sig-name descname">unschedule</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.tooltip.ToolTip.unschedule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.interface.wrappers">
+<span id="tools-helpers-interface-wrappers-module"></span><h2>tools.helpers.interface.wrappers module<a class="headerlink" href="#module-tools.helpers.interface.wrappers" title="Permalink to this headline">¶</a></h2>
+<p>Modified messagebox, simpledialog and filedialog (tkinter modules)
+to avoid empty Tk windows that cannot be closed before the end of the program.</p>
+<dl class="class">
+<dt id="tools.helpers.interface.wrappers.CustomDialog">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.wrappers.</code><code class="sig-name descname">CustomDialog</code><span class="sig-paren">(</span><em class="sig-param">parent=None</em>, <em class="sig-param">title=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.wrappers.CustomDialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.Toplevel</span></code></p>
+<p>Class to open custom dialogs. Adapted from tkinter.simpledialog.Dialog. See its doc for more info.</p>
+<dl class="method">
+<dt id="tools.helpers.interface.wrappers.CustomDialog.apply">
+<code class="sig-name descname">apply</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.wrappers.CustomDialog.apply" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.wrappers.CustomDialog.body">
+<code class="sig-name descname">body</code><span class="sig-paren">(</span><em class="sig-param">master</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.wrappers.CustomDialog.body" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.wrappers.CustomDialog.cancel">
+<code class="sig-name descname">cancel</code><span class="sig-paren">(</span><em class="sig-param">_event=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.wrappers.CustomDialog.cancel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.wrappers.CustomDialog.destroy">
+<code class="sig-name descname">destroy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.wrappers.CustomDialog.destroy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Destroy this and all descendants widgets.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.wrappers.CustomDialog.ok">
+<code class="sig-name descname">ok</code><span class="sig-paren">(</span><em class="sig-param">_event=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.wrappers.CustomDialog.ok" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.wrappers.CustomDialog.on_closing">
+<code class="sig-name descname">on_closing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.wrappers.CustomDialog.on_closing" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.wrappers.CustomDialog.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.wrappers.CustomDialog.validate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.interface.wrappers.convert_to_dialog">
+<code class="sig-prename descclassname">tools.helpers.interface.wrappers.</code><code class="sig-name descname">convert_to_dialog</code><span class="sig-paren">(</span><em class="sig-param">dialog_cls</em>, <em class="sig-param">func=&lt;class 'object'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.wrappers.convert_to_dialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a function that open a dialog window and returns its result.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.interface.wrappers.dialog_function">
+<code class="sig-prename descclassname">tools.helpers.interface.wrappers.</code><code class="sig-name descname">dialog_function</code><span class="sig-paren">(</span><em class="sig-param">dialog_cls</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.wrappers.dialog_function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator wrapper to create a function that open a dialog window and returns its result.</p>
+<p>The function is completely overwritten, except its signature and docstring (see functools.wraps),
+except if the keyword argument ‘bypass_dialog’ is set to True. In this case, the original function is executed.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.interface.wrappers.frame_integration">
+<code class="sig-prename descclassname">tools.helpers.interface.wrappers.</code><code class="sig-name descname">frame_integration</code><span class="sig-paren">(</span><em class="sig-param">frame: tkinter.ttk.Frame</em>, <em class="sig-param">okcancel=False</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.wrappers.frame_integration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator wrapper to create a Tk window class from a Frame class.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyFrame</span><span class="p">(</span><span class="n">ttk</span><span class="o">.</span><span class="n">Frame</span><span class="p">):</span> <span class="k">pass</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">class</span> <span class="nc">MyDialog</span><span class="p">(</span><span class="n">CustomDialog</span><span class="p">):</span> <span class="k">pass</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">FrameIntegratedInDialog</span> <span class="o">=</span> <span class="n">frame_integration</span><span class="p">(</span><span class="n">MyFrame</span><span class="p">)(</span><span class="n">MyDialog</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.interface.wrappers.integrate_frame_in_dialog">
+<code class="sig-prename descclassname">tools.helpers.interface.wrappers.</code><code class="sig-name descname">integrate_frame_in_dialog</code><span class="sig-paren">(</span><em class="sig-param">frame</em>, <em class="sig-param">okcancel=False</em>, <em class="sig-param">base_dialog=&lt;class 'tools.helpers.interface.wrappers.CustomDialog'&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.wrappers.integrate_frame_in_dialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a Dialog class which contains an integrated frame.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.interface">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-tools.helpers.interface" title="Permalink to this headline">¶</a></h2>
+<p>This module provides classes and functions based on tkinter module.</p>
+<dl class="simple">
+<dt>Files:</dt><dd><ul class="simple">
+<li><p>basics: basic classes and functions</p></li>
+<li><p>wrappers and advanced_wrappers: replace and enhance tkinter filedialog, simpledialog and messagebox modules</p></li>
+<li><p>custom_messagebox: add a new method to messagebox to allow customized answers in a dialog window</p></li>
+<li><p>custom_dialog: add new methods to simpledialog with check boxes, radio buttons, option menus or a mix.</p></li>
+<li><p>date_picker: interface with a calendar to select a date</p></li>
+<li><p>text_frame: display text in a frame</p></li>
+<li><p>logger_widget: handler and frame to show logging outputs in tkinter windows</p></li>
+<li><p>tooltip: easily add a tooltip on a widget</p></li>
+<li><p>anomalies: show error messages on errors</p></li>
+<li><p>main_interface: simple interface with multiple parts. Each button correspond to a function</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="class">
+<dt id="tools.helpers.interface.CustomTk">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.</code><code class="sig-name descname">CustomTk</code><span class="sig-paren">(</span><em class="sig-param">title=None</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.CustomTk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.Tk</span></code></p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.interface.center">
+<code class="sig-prename descclassname">tools.helpers.interface.</code><code class="sig-name descname">center</code><span class="sig-paren">(</span><em class="sig-param">win</em>, <em class="sig-param">width=None</em>, <em class="sig-param">height=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.center" title="Permalink to this definition">¶</a></dt>
+<dd><p>Centers a tkinter window.
+:param win: the root or Toplevel window to center
+:param width: custom width for center computation
+:param height: custom height for center computation</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.interface.get_user_date">
+<code class="sig-prename descclassname">tools.helpers.interface.</code><code class="sig-name descname">get_user_date</code><span class="sig-paren">(</span><em class="sig-param">title=None</em>, <em class="sig-param">message=None</em>, <em class="sig-param">default_date=None</em>, <em class="sig-param">dateformat='%Y-%m-%d'</em>, <em class="sig-param">bypass_dialog=False</em>, <em class="sig-param">behavior_on_error='ignore'</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.get_user_date" title="Permalink to this definition">¶</a></dt>
+<dd><p>Main function to get a date from  user.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.DatePickerFrame">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.</code><code class="sig-name descname">DatePickerFrame</code><span class="sig-paren">(</span><em class="sig-param">master=None</em>, <em class="sig-param">message: str = None</em>, <em class="sig-param">initial_value=None</em>, <em class="sig-param">dateformat=None</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.DatePickerFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.ttk.Frame</span></code></p>
+<p>Integration of DatePicker in a Frame</p>
+<dl class="method">
+<dt id="tools.helpers.interface.DatePickerFrame.result">
+<em class="property">property </em><code class="sig-name descname">result</code><a class="headerlink" href="#tools.helpers.interface.DatePickerFrame.result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns result: current date</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.DatePickerFrame.result_keys">
+<em class="property">property </em><code class="sig-name descname">result_keys</code><a class="headerlink" href="#tools.helpers.interface.DatePickerFrame.result_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the text value of the result</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.DatePickerFrame.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.DatePickerFrame.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the entry is correct or not: for check box, the answer is always True.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.DateSelectorFrame">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.</code><code class="sig-name descname">DateSelectorFrame</code><span class="sig-paren">(</span><em class="sig-param">master=None</em>, <em class="sig-param">message=None</em>, <em class="sig-param">mode='auto'</em>, <em class="sig-param">choices=None</em>, <em class="sig-param">date_start=None</em>, <em class="sig-param">date_end=None</em>, <em class="sig-param">dateformat=None</em>, <em class="sig-param">allow_empty=True</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.DateSelectorFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.ttk.Frame</span></code></p>
+<p>Two date pickers selecting dates from a start date (included) to an end date (excluded)</p>
+<p>If a date is empty, the considered value is None and dates are not filtered.</p>
+<dl class="method">
+<dt id="tools.helpers.interface.DateSelectorFrame.filtered_result">
+<em class="property">property </em><code class="sig-name descname">filtered_result</code><a class="headerlink" href="#tools.helpers.interface.DateSelectorFrame.filtered_result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the dates in choices filtered</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.DateSelectorFrame.result">
+<em class="property">property </em><code class="sig-name descname">result</code><a class="headerlink" href="#tools.helpers.interface.DateSelectorFrame.result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns result: filtered dates or tuple of selected dates</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.DateSelectorFrame.result_keys">
+<em class="property">property </em><code class="sig-name descname">result_keys</code><a class="headerlink" href="#tools.helpers.interface.DateSelectorFrame.result_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the two dates defining the interval</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.DateSelectorFrame.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.DateSelectorFrame.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the entry is correct or not: for check box, the answer is always True.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.OptionMenuFrame">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.</code><code class="sig-name descname">OptionMenuFrame</code><span class="sig-paren">(</span><em class="sig-param">master=None</em>, <em class="sig-param">message: str = None</em>, <em class="sig-param">choices: Union[list</em>, <em class="sig-param">dict] = None</em>, <em class="sig-param">initial_value=None</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.OptionMenuFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.ttk.Frame</span></code></p>
+<p>Frame with an OptionMenu widget.</p>
+<dl class="method">
+<dt id="tools.helpers.interface.OptionMenuFrame.result">
+<em class="property">property </em><code class="sig-name descname">result</code><a class="headerlink" href="#tools.helpers.interface.OptionMenuFrame.result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the result</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.OptionMenuFrame.result_keys">
+<em class="property">property </em><code class="sig-name descname">result_keys</code><a class="headerlink" href="#tools.helpers.interface.OptionMenuFrame.result_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the result</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.OptionMenuFrame.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.OptionMenuFrame.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the entry is correct or not, i.e. if it is in choices</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.RadioButtonFrame">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.</code><code class="sig-name descname">RadioButtonFrame</code><span class="sig-paren">(</span><em class="sig-param">master=None</em>, <em class="sig-param">message: str = None</em>, <em class="sig-param">choices: Union[list</em>, <em class="sig-param">dict] = None</em>, <em class="sig-param">initial_value=None</em>, <em class="sig-param">nb_columns=10</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.RadioButtonFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.ttk.Frame</span></code></p>
+<p>Frame with radio buttons.</p>
+<dl class="method">
+<dt id="tools.helpers.interface.RadioButtonFrame.result">
+<em class="property">property </em><code class="sig-name descname">result</code><a class="headerlink" href="#tools.helpers.interface.RadioButtonFrame.result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns result</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.RadioButtonFrame.result_keys">
+<em class="property">property </em><code class="sig-name descname">result_keys</code><a class="headerlink" href="#tools.helpers.interface.RadioButtonFrame.result_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the key/index value of the result in choices</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.RadioButtonFrame.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.RadioButtonFrame.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the entry is correct or not, i.e. if the answer value is in choices values</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.CheckBoxFrame">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.</code><code class="sig-name descname">CheckBoxFrame</code><span class="sig-paren">(</span><em class="sig-param">master=None</em>, <em class="sig-param">message: str = None</em>, <em class="sig-param">choices: Union[list</em>, <em class="sig-param">dict] = None</em>, <em class="sig-param">initial_status=False</em>, <em class="sig-param">nb_columns=10</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.CheckBoxFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.ttk.Frame</span></code></p>
+<p>Frame with checkboxes.</p>
+<dl class="method">
+<dt id="tools.helpers.interface.CheckBoxFrame.all_command">
+<code class="sig-name descname">all_command</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.CheckBoxFrame.all_command" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.CheckBoxFrame.check">
+<code class="sig-name descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.CheckBoxFrame.check" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.CheckBoxFrame.none_command">
+<code class="sig-name descname">none_command</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.CheckBoxFrame.none_command" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.CheckBoxFrame.result">
+<em class="property">property </em><code class="sig-name descname">result</code><a class="headerlink" href="#tools.helpers.interface.CheckBoxFrame.result" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns results</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.CheckBoxFrame.result_keys">
+<em class="property">property </em><code class="sig-name descname">result_keys</code><a class="headerlink" href="#tools.helpers.interface.CheckBoxFrame.result_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the key/index value of the result in choices</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.CheckBoxFrame.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.CheckBoxFrame.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns whether the entry is correct or not: for check box, the answer is always True.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.CustomQuestionFrame">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.</code><code class="sig-name descname">CustomQuestionFrame</code><span class="sig-paren">(</span><em class="sig-param">master=None</em>, <em class="sig-param">message: str = None</em>, <em class="sig-param">choices: Union[list</em>, <em class="sig-param">dict] = None</em>, <em class="sig-param">auto_quit=True</em>, <em class="sig-param">geometry_manager='pack'</em>, <em class="sig-param">geometry_options=None</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.CustomQuestionFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.ttk.Frame</span></code></p>
+<p>Frame with custom answers displayed as tkinter buttons.</p>
+<dl class="method">
+<dt id="tools.helpers.interface.CustomQuestionFrame.return_answer">
+<code class="sig-name descname">return_answer</code><span class="sig-paren">(</span><em class="sig-param">key</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.CustomQuestionFrame.return_answer" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.CustomQuestionFrame.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.CustomQuestionFrame.validate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.TextFrame">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.</code><code class="sig-name descname">TextFrame</code><span class="sig-paren">(</span><em class="sig-param">master=None</em>, <em class="sig-param">text=''</em>, <em class="sig-param">height=600</em>, <em class="sig-param">width=500</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.TextFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">tkinter.ttk.Frame</span></code></p>
+<p>Frame with text in it.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.interface.raise_anomaly">
+<code class="sig-prename descclassname">tools.helpers.interface.</code><code class="sig-name descname">raise_anomaly</code><span class="sig-paren">(</span><em class="sig-param">flag='ask'</em>, <em class="sig-param">error=None</em>, <em class="sig-param">title=None</em>, <em class="sig-param">message=None</em>, <em class="sig-param">use_messagebox=True</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.raise_anomaly" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Raise an ‘anomaly’ depending on the flag argument:</dt><dd><ul class="simple">
+<li><p>‘ignore’: do nothing and return,</p></li>
+<li><p>‘warning’: show a warning (warning logger and tkinter messagebox),</p></li>
+<li><p>‘error’: raises an exception,</p></li>
+<li><p>‘ask’: ask the user either to ignore the anomaly or to raise an error.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>flag</strong> – must be ‘ask’, ‘ignore’, ‘warning’, ‘error’</p></li>
+<li><p><strong>error</strong> – Exception</p></li>
+<li><p><strong>title</strong> – Title for message box and logger.</p></li>
+<li><p><strong>message</strong> – Message for message box and error logger.</p></li>
+<li><p><strong>use_messagebox</strong> – if True the tkinter messagebox will be used to show errors.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.interface.raise_bad_extension_anomaly">
+<code class="sig-prename descclassname">tools.helpers.interface.</code><code class="sig-name descname">raise_bad_extension_anomaly</code><span class="sig-paren">(</span><em class="sig-param">flag</em>, <em class="sig-param">use_messagebox=True</em>, <em class="sig-param">msg=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.raise_bad_extension_anomaly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Anomaly if bad extension set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>flag</strong> – must be ‘ask’, ‘ignore’, ‘warning’, or ‘error’</p></li>
+<li><p><strong>use_messagebox</strong> – boolean. if True a messagebox will appear</p></li>
+<li><p><strong>msg</strong> – custom message</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.interface.raise_no_file_selected_anomaly">
+<code class="sig-prename descclassname">tools.helpers.interface.</code><code class="sig-name descname">raise_no_file_selected_anomaly</code><span class="sig-paren">(</span><em class="sig-param">flag</em>, <em class="sig-param">use_messagebox=True</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.raise_no_file_selected_anomaly" title="Permalink to this definition">¶</a></dt>
+<dd><p>Anomaly if no file selected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>flag</strong> – must be ‘ask’, ‘ignore’, ‘warning’, or ‘error’</p></li>
+<li><p><strong>use_messagebox</strong> – boolean. if True a messagebox will appear</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.ToolTip">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.</code><code class="sig-name descname">ToolTip</code><span class="sig-paren">(</span><em class="sig-param">widget</em>, <em class="sig-param">text='widget info'</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.ToolTip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Create a tooltip for a given widget</p>
+<dl class="method">
+<dt id="tools.helpers.interface.ToolTip.enter">
+<code class="sig-name descname">enter</code><span class="sig-paren">(</span><em class="sig-param">_event=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.ToolTip.enter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.ToolTip.hidetip">
+<code class="sig-name descname">hidetip</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.ToolTip.hidetip" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.ToolTip.leave">
+<code class="sig-name descname">leave</code><span class="sig-paren">(</span><em class="sig-param">_event=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.ToolTip.leave" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.ToolTip.schedule">
+<code class="sig-name descname">schedule</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.ToolTip.schedule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.ToolTip.showtip">
+<code class="sig-name descname">showtip</code><span class="sig-paren">(</span><em class="sig-param">_event=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.ToolTip.showtip" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.ToolTip.unschedule">
+<code class="sig-name descname">unschedule</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.ToolTip.unschedule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.LoggingHandlerFrame">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.</code><code class="sig-name descname">LoggingHandlerFrame</code><span class="sig-paren">(</span><em class="sig-param">master=None</em>, <em class="sig-param">level=20</em>, <em class="sig-param">height=200</em>, <em class="sig-param">width=500</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.LoggingHandlerFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tools.helpers.interface.text_frame.TextFrame" title="tools.helpers.interface.text_frame.TextFrame"><code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.interface.text_frame.TextFrame</span></code></a></p>
+<p>Text frame updated by a logger handler.</p>
+<dl class="class">
+<dt id="tools.helpers.interface.LoggingHandlerFrame.Handler">
+<em class="property">class </em><code class="sig-name descname">Handler</code><span class="sig-paren">(</span><em class="sig-param">widget</em>, <em class="sig-param">level=20</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.LoggingHandlerFrame.Handler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">logging.Handler</span></code></p>
+<dl class="method">
+<dt id="tools.helpers.interface.LoggingHandlerFrame.Handler.emit">
+<code class="sig-name descname">emit</code><span class="sig-paren">(</span><em class="sig-param">record</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.LoggingHandlerFrame.Handler.emit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Do whatever it takes to actually log the specified logging record.</p>
+<p>This version is intended to be implemented by subclasses and so
+raises a NotImplementedError.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.LoggingHandlerFrame.quit">
+<code class="sig-name descname">quit</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.LoggingHandlerFrame.quit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Detach logger before closing</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tools.helpers.interface.MainTk">
+<em class="property">class </em><code class="sig-prename descclassname">tools.helpers.interface.</code><code class="sig-name descname">MainTk</code><span class="sig-paren">(</span><em class="sig-param">parts: collections.OrderedDict</em>, <em class="sig-param">logger_level=20</em>, <em class="sig-param">nb_columns=3</em>, <em class="sig-param">help_msg='No help_msg available.'</em>, <em class="sig-param">title='main'</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.MainTk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#tools.helpers.interface.basics.CustomTk" title="tools.helpers.interface.basics.CustomTk"><code class="xref py py-class docutils literal notranslate"><span class="pre">tools.helpers.interface.basics.CustomTk</span></code></a></p>
+<p>Main Tk window</p>
+<dl class="method">
+<dt id="tools.helpers.interface.MainTk.activate_all">
+<code class="sig-name descname">activate_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.MainTk.activate_all" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.MainTk.ask_exit">
+<em class="property">static </em><code class="sig-name descname">ask_exit</code><span class="sig-paren">(</span><em class="sig-param">name='unknown'</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.MainTk.ask_exit" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.MainTk.disable_all">
+<code class="sig-name descname">disable_all</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.MainTk.disable_all" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.MainTk.load_help">
+<code class="sig-name descname">load_help</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.MainTk.load_help" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.MainTk.on_closing">
+<code class="sig-name descname">on_closing</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.MainTk.on_closing" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="tools.helpers.interface.MainTk.open_help">
+<code class="sig-name descname">open_help</code><span class="sig-paren">(</span><em class="sig-param">_event=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.interface.MainTk.open_help" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">tools.helpers.interface package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.interface.advanced_wrappers">tools.helpers.interface.advanced_wrappers module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.interface.anomalies">tools.helpers.interface.anomalies module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.interface.basics">tools.helpers.interface.basics module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.interface.custom_dialog">tools.helpers.interface.custom_dialog module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.interface.custom_messagebox">tools.helpers.interface.custom_messagebox module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.interface.date_picker">tools.helpers.interface.date_picker module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.interface.logger_widget">tools.helpers.interface.logger_widget module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.interface.main_interface">tools.helpers.interface.main_interface module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.interface.text_frame">tools.helpers.interface.text_frame module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.interface.tooltip">tools.helpers.interface.tooltip module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.interface.wrappers">tools.helpers.interface.wrappers module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.interface">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tools.helpers.data_manager.html"
+                        title="previous chapter">tools.helpers.data_manager package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tools.helpers.models.html"
+                        title="next chapter">tools.helpers.models package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/source/tools.helpers.interface.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.models.html" title="tools.helpers.models package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.data_manager.html" title="tools.helpers.data_manager package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Main tools 1.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >python_utils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >tools package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="tools.helpers.html" >tools.helpers package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright open source.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

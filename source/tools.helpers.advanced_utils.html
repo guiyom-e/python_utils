@@ -1,0 +1,757 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>tools.helpers.advanced_utils package &#8212; Main tools 1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tools.helpers.config_manager package" href="tools.helpers.config_manager.html" />
+    <link rel="prev" title="tools.helpers package" href="tools.helpers.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.config_manager.html" title="tools.helpers.config_manager package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.html" title="tools.helpers package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Main tools 1.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >python_utils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >tools package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="tools.helpers.html" accesskey="U">tools.helpers package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tools-helpers-advanced-utils-package">
+<h1>tools.helpers.advanced_utils package<a class="headerlink" href="#tools-helpers-advanced-utils-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-tools.helpers.advanced_utils.dataframe_utils">
+<span id="tools-helpers-advanced-utils-dataframe-utils-module"></span><h2>tools.helpers.advanced_utils.dataframe_utils module<a class="headerlink" href="#module-tools.helpers.advanced_utils.dataframe_utils" title="Permalink to this headline">¶</a></h2>
+<p>Simple functions to manipulate dataframes with a user interface.</p>
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.dataframe_utils.dataframe_column_selection">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.dataframe_utils.</code><code class="sig-name descname">dataframe_column_selection</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">multiple_selection=True</em><span class="sig-paren">)</span> &#x2192; Union[pandas.core.frame.DataFrame, pandas.core.series.Series]<a class="headerlink" href="#tools.helpers.advanced_utils.dataframe_utils.dataframe_column_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select certain certain columns of a dataframe</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.dataframe_utils.dataframe_describe">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.dataframe_utils.</code><code class="sig-name descname">dataframe_describe</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">columns=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.advanced_utils.dataframe_utils.dataframe_describe" title="Permalink to this definition">¶</a></dt>
+<dd><p>Apply describe method to certain columns of a dataframe</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.dataframe_utils.dataframe_groupby">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.dataframe_utils.</code><code class="sig-name descname">dataframe_groupby</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">synthesis_col=None</em>, <em class="sig-param">agg_dict=None</em>, <em class="sig-param">agg_methods=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.advanced_utils.dataframe_utils.dataframe_groupby" title="Permalink to this definition">¶</a></dt>
+<dd><p>Group by the columns selected by the user.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.dataframe_utils.dataframe_merge">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.dataframe_utils.</code><code class="sig-name descname">dataframe_merge</code><span class="sig-paren">(</span><em class="sig-param">df1</em>, <em class="sig-param">df2</em>, <em class="sig-param">how_methods='outer'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.advanced_utils.dataframe_utils.dataframe_merge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Merge two dataframes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df1</strong> – left dataframe</p></li>
+<li><p><strong>df2</strong> – right dataframe</p></li>
+<li><p><strong>how_methods</strong> – string or list of strings in ‘outer’, ‘inner’, ‘left’ or ‘right’</p></li>
+<li><p><strong>kwargs</strong> – keyword arguments for pandas.merge method</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of merged dataframes</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.dataframe_utils.dataframe_quick_analysis">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.dataframe_utils.</code><code class="sig-name descname">dataframe_quick_analysis</code><span class="sig-paren">(</span><em class="sig-param">df</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.advanced_utils.dataframe_utils.dataframe_quick_analysis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter certain columns and aggregate results.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.dataframe_utils.dataframe_values_selection">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.dataframe_utils.</code><code class="sig-name descname">dataframe_values_selection</code><span class="sig-paren">(</span><em class="sig-param">df</em>, <em class="sig-param">columns=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.advanced_utils.dataframe_utils.dataframe_values_selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select certain lines of a dataframe considering specific values of certain columns</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.advanced_utils.date_utils">
+<span id="tools-helpers-advanced-utils-date-utils-module"></span><h2>tools.helpers.advanced_utils.date_utils module<a class="headerlink" href="#module-tools.helpers.advanced_utils.date_utils" title="Permalink to this headline">¶</a></h2>
+<p>Utils to manipulate dates:
+- reset time of a date
+- add a period of time to a date
+- get the first date of a period
+- get the number of periods separating two dates
+- get dates of a specified period
+- get a list of multiple periods
+- support of datetime objects, pandas timestamps, series and dataframes (most cases)</p>
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.date_utils.add_month">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.date_utils.</code><code class="sig-name descname">add_month</code><span class="sig-paren">(</span><em class="sig-param">date</em>, <em class="sig-param">number_of_months=0</em>, <em class="sig-param">reset_time=False</em>, <em class="sig-param">output_type=&lt;class 'pandas._libs.tslibs.timestamps.Timestamp'&gt;</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.advanced_utils.date_utils.add_month" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add number_of_months months to date. number_of_months can be negative or positive.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.date_utils.add_period">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.date_utils.</code><code class="sig-name descname">add_period</code><span class="sig-paren">(</span><em class="sig-param">date: Union[pandas.core.frame.DataFrame, pandas.core.series.Series, datetime.datetime, None], number_of_period=0, period_type=None, reset_time=False, output_type=&lt;class 'pandas._libs.tslibs.timestamps.Timestamp'&gt;, inplace=False, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.advanced_utils.date_utils.add_period" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a certain number of periods (year, month, week, day, hour, minute, second) to the input date.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">add_period</span> <span class="o">=</span> <span class="n">handle_datetime_pandas_objects</span><span class="p">(</span><span class="n">add_period</span><span class="p">)</span>  <span class="c1"># apply decorator for doctest</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add_period</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;week&#39;</span><span class="p">,</span> <span class="n">reset_time</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">Timestamp(&#39;2019-01-19 00:00:00&#39;)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add_period</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;week&#39;</span><span class="p">,</span> <span class="n">reset_time</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">0   2019-01-26</span>
+<span class="go">dtype: datetime64[ns]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add_period</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;week&#39;</span><span class="p">,</span> <span class="n">reset_time</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">           0</span>
+<span class="go">0 2019-02-02</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add_period</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;week&#39;</span><span class="p">,</span> <span class="n">reset_time</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">NaT</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>date</strong> – initial date</p></li>
+<li><p><strong>number_of_period</strong> – number of periods to add</p></li>
+<li><p><strong>period_type</strong> – one of: ‘year’, ‘quarter’, ‘month’, ‘week’, ‘day’, ‘hour’, ‘minute’, ‘second’.</p></li>
+<li><p><strong>reset_time</strong> – if True, time is reset to 00:00:00.</p></li>
+<li><p><strong>output_type</strong> – type of the output / function to apply to the output. pd.Timestamp by default.</p></li>
+<li><p><strong>inplace</strong> – if date is a dataframe and inplace is True, convert columns inplace</p></li>
+<li><p><strong>kwargs</strong> – keyword arguments (unused)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>date of type output_type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.date_utils.add_week">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.date_utils.</code><code class="sig-name descname">add_week</code><span class="sig-paren">(</span><em class="sig-param">date</em>, <em class="sig-param">number_of_weeks=0</em>, <em class="sig-param">reset_time=False</em>, <em class="sig-param">output_type=&lt;class 'pandas._libs.tslibs.timestamps.Timestamp'&gt;</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.advanced_utils.date_utils.add_week" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add number_of_weeks weeks to date. number_of_months can be negative or positive.
+Monday is the first day of week (following ISO 8601).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.date_utils.datetime_delta">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.date_utils.</code><code class="sig-name descname">datetime_delta</code><span class="sig-paren">(</span><em class="sig-param">date_1: Union[pandas.core.frame.DataFrame, pandas.core.series.Series, datetime.datetime, None], date_2, period_type='day', abs_val=False</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.advanced_utils.date_utils.datetime_delta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of periods separating date_1 from date_2.
+Monday is the first day of week (following ISO 8601).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">d1</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d2</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d3</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d4</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datetime_delta</span><span class="p">(</span><span class="n">d1</span><span class="p">,</span> <span class="n">d2</span><span class="p">,</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;week&#39;</span><span class="p">)</span>  <span class="c1"># difference of less than 7 days but different week</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datetime_delta</span><span class="p">(</span><span class="n">d2</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;week&#39;</span><span class="p">)</span>  <span class="c1"># the contrary</span>
+<span class="go">-1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datetime_delta</span><span class="p">(</span><span class="n">d2</span><span class="p">,</span> <span class="n">d3</span><span class="p">,</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;week&#39;</span><span class="p">)</span>  <span class="c1"># different year but same week (ISO 8601)</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datetime_delta</span><span class="p">(</span><span class="n">d3</span><span class="p">,</span> <span class="n">d4</span><span class="p">,</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;week&#39;</span><span class="p">)</span>  <span class="c1"># difference of 13 days, but 2 weeks of difference</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datetime_delta</span><span class="p">(</span><span class="n">d4</span><span class="p">,</span> <span class="n">d3</span><span class="p">,</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;week&#39;</span><span class="p">)</span>  <span class="c1"># the contrary</span>
+<span class="go">-2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="p">[[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">)]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">data</span><span class="o">=</span><span class="p">[[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datetime_delta</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">d1</span><span class="p">,</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;month&#39;</span><span class="p">)</span>
+<span class="go">   2018-12-30 00:00:00 - a</span>
+<span class="go">0                       -1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datetime_delta</span><span class="p">(</span><span class="n">df1</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">],</span> <span class="n">df2</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">],</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;year&#39;</span><span class="p">)</span>
+<span class="go">0   -1</span>
+<span class="go">dtype: int64</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datetime_delta</span><span class="p">(</span><span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;month&#39;</span><span class="p">)</span>
+<span class="go">   b - a</span>
+<span class="go">0    -10</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>date_1</strong> – first date</p></li>
+<li><p><strong>date_2</strong> – second date. if date_2 &gt;= date_1 then output &gt;=0</p></li>
+<li><p><strong>period_type</strong> – one of: ‘year’, ‘quarter’, ‘month’, ‘week’, ‘day’, ‘hour’, ‘minute’, ‘second’.</p></li>
+<li><p><strong>abs_val</strong> – if True, output is an absolute value</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>number of periods between date_1 and date_2 (subtraction)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.date_utils.get_month_periods">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.date_utils.</code><code class="sig-name descname">get_month_periods</code><span class="sig-paren">(</span><em class="sig-param">date_start=None</em>, <em class="sig-param">date_end=None</em>, <em class="sig-param">nb_period=1</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.advanced_utils.date_utils.get_month_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns nb_period month periods between date_start and date_end. See get_periods.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.date_utils.get_period">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.date_utils.</code><code class="sig-name descname">get_period</code><span class="sig-paren">(</span><em class="sig-param">nb_period=1</em>, <em class="sig-param">period_type='week'</em>, <em class="sig-param">date_start=None</em>, <em class="sig-param">date_end=None</em>, <em class="sig-param">first_day_of_period=True</em>, <em class="sig-param">reset_time=True</em>, <em class="sig-param">**askdate_kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.advanced_utils.date_utils.get_period" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_period</span><span class="p">(</span><span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;week&#39;</span><span class="p">,</span> <span class="n">date_start</span><span class="o">=</span><span class="s1">&#39;ask&#39;</span><span class="p">,</span> <span class="n">first_day_of_period</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>     <span class="n">default_date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">bypass_dialog</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">(Timestamp(&#39;2018-04-30 00:00:00&#39;), Timestamp(&#39;2018-05-07 00:00:00&#39;))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_period</span><span class="p">(</span><span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="n">date_start</span><span class="o">=</span><span class="s1">&#39;ask&#39;</span><span class="p">,</span> <span class="n">first_day_of_period</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>     <span class="n">default_date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">bypass_dialog</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">(Timestamp(&#39;2018-05-01 00:00:00&#39;), Timestamp(&#39;2018-06-01 00:00:00&#39;))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_period</span><span class="p">(</span><span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="n">date_start</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)]),</span> <span class="n">first_day_of_period</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_period</span><span class="p">(</span><span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="n">date_start</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)]),</span> <span class="n">first_day_of_period</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nb_period</strong> – number of periods</p></li>
+<li><p><strong>period_type</strong> – week or month</p></li>
+<li><p><strong>date_start</strong> – first day of the period.
+If None, use date_end to compute date_start.
+If date_start and date_end are None, return None, None
+If ‘ask’, ask the user</p></li>
+<li><p><strong>date_end</strong> – last day of the period.
+If None, use date_start to compute date_end.
+If date_start and date_end are None, return None, None
+If ‘ask’, ask the user
+If ‘latest’, ‘today’ or ‘now’, use today date as date_end</p></li>
+<li><p><strong>first_day_of_period</strong> – if True, the first days of the periods are used for date_start and date_end</p></li>
+<li><p><strong>reset_time</strong> – if True, all times are reset to 00:00:00</p></li>
+<li><p><strong>askdate_kwargs</strong> – keyword arguments for simpledialog.askdate function (in case of use)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>date_start, date_end</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.date_utils.get_periods">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.date_utils.</code><code class="sig-name descname">get_periods</code><span class="sig-paren">(</span><em class="sig-param">date_start=None</em>, <em class="sig-param">date_end=None</em>, <em class="sig-param">nb_period=None</em>, <em class="sig-param">period_type=None</em>, <em class="sig-param">reset_periods=True</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.advanced_utils.date_utils.get_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of nb_period periods from date_start and/or to date_end.
+Monday is the first day of week (following ISO 8601).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span> <span class="k">as</span> <span class="n">dt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_periods</span><span class="p">(</span><span class="n">date_end</span> <span class="o">=</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">nb_period</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;week&#39;</span><span class="p">)</span>
+<span class="go">[(Timestamp(&#39;2019-01-28 00:00:00&#39;), Timestamp(&#39;2019-02-04 00:00:00&#39;))]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_periods</span><span class="p">(</span><span class="n">date_end</span> <span class="o">=</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">nb_period</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;week&#39;</span><span class="p">,</span> <span class="n">reset_periods</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">[(Timestamp(&#39;2019-01-29 00:00:00&#39;), Timestamp(&#39;2019-02-05 00:00:00&#39;))]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_periods</span><span class="p">(</span><span class="n">date_start</span> <span class="o">=</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">date_end</span> <span class="o">=</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="go">[(Timestamp(&#39;2019-02-03 00:00:00&#39;), Timestamp(&#39;2019-02-05 00:00:00&#39;))]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_periods</span><span class="p">(</span><span class="n">date_start</span> <span class="o">=</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">date_end</span> <span class="o">=</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;month&#39;</span><span class="p">)</span>  <span class="c1"># None nb_period: auto</span>
+<span class="go">[(Timestamp(&#39;2018-03-01 00:00:00&#39;), Timestamp(&#39;2018-04-01 00:00:00&#39;)), (Timestamp(&#39;2018-04-01 00:00:00&#39;), Timestamp(&#39;2018-05-01 00:00:00&#39;))]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_periods</span><span class="p">(</span><span class="n">date_start</span> <span class="o">=</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">date_end</span> <span class="o">=</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="n">nb_period</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">[(Timestamp(&#39;2018-03-01 00:00:00&#39;), Timestamp(&#39;2018-04-01 00:00:00&#39;))]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>date_start</strong> – minimum date</p></li>
+<li><p><strong>date_end</strong> – maximum date</p></li>
+<li><p><strong>nb_period</strong> – number of periods. If None, nb_period is set to 1 if date_start or date_end are None
+or set to datetime delta between date_start and date_end</p></li>
+<li><p><strong>period_type</strong> – one of: ‘year’, ‘quarter’, ‘month’, ‘week’, ‘day’, ‘hour’, ‘minute’, ‘second’.
+If None, date_start and date_end must be different from None (otherwise, an error is raised),
+nb_period and full_periods arguments are ignored and then [(date_start, date_end)] is returned.</p></li>
+<li><p><strong>reset_periods</strong> – if True, get first date of periods</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of tuples of date_start (to include), date_end (to exclude)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.date_utils.get_quarter">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.date_utils.</code><code class="sig-name descname">get_quarter</code><span class="sig-paren">(</span><em class="sig-param">date: datetime.datetime</em>, <em class="sig-param">inplace=False</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.advanced_utils.date_utils.get_quarter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the quarter of a date</p>
+<p># &gt;&gt;&gt; get_quarter = handle_datetime_dataframe(get_quarter)  # apply decorator for doctest
+&gt;&gt;&gt; date = datetime.datetime(2019, 4, 5, 8, 2, 3)
+&gt;&gt;&gt; get_quarter(date)
+2</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_quarter</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+<span class="go">0    1</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_quarter</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+<span class="go">   0</span>
+<span class="go">0  4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_quarter</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span>
+<span class="go">   0</span>
+<span class="go">0  4</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.date_utils.month_delta">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.date_utils.</code><code class="sig-name descname">month_delta</code><span class="sig-paren">(</span><em class="sig-param">date_1</em>, <em class="sig-param">date_2</em>, <em class="sig-param">abs_val=False</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.advanced_utils.date_utils.month_delta" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.date_utils.reset_month">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.date_utils.</code><code class="sig-name descname">reset_month</code><span class="sig-paren">(</span><em class="sig-param">date: datetime.datetime</em>, <em class="sig-param">month_offset: int = 0</em>, <em class="sig-param">reset_time=True</em><span class="sig-paren">)</span> &#x2192; datetime.datetime<a class="headerlink" href="#tools.helpers.advanced_utils.date_utils.reset_month" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the first day of the month of ‘date’ with an offset of ‘month_offset’ month(s).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date_1</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># support of datetime.datetime</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reset_month</span><span class="p">(</span><span class="n">date_1</span><span class="p">)</span>
+<span class="go">Timestamp(&#39;2017-12-01 00:00:00&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date_2</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">92584</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reset_month</span><span class="p">(</span><span class="n">date_2</span><span class="p">,</span> <span class="n">month_offset</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">Timestamp(&#39;2018-01-01 00:00:00&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reset_month</span><span class="p">(</span><span class="n">date_2</span><span class="p">,</span> <span class="n">month_offset</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">reset_time</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">Timestamp(&#39;2018-01-01 23:54:59.092584&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date_3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># support of pandas TimeStamp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_day</span> <span class="o">=</span> <span class="n">reset_month</span><span class="p">(</span><span class="n">date_3</span><span class="p">,</span> <span class="n">month_offset</span><span class="o">=-</span><span class="mi">12</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_day</span>
+<span class="go">Timestamp(&#39;2016-12-01 00:00:00&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">first_day</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">first_day</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>date</strong> – selected date in the month.</p></li>
+<li><p><strong>month_offset</strong> – add or remove a certain number of months. Default: 0.</p></li>
+<li><p><strong>reset_time</strong> – if True, time (hours, minutes, seconds, milliseconds) are set to 00:00:00</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>first day in the month of ‘date’ (pd.TimeStamp object).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.date_utils.reset_period">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.date_utils.</code><code class="sig-name descname">reset_period</code><span class="sig-paren">(</span><em class="sig-param">date: Union[pandas.core.frame.DataFrame, pandas.core.series.Series, datetime.datetime, None], period_type: str, offset: int = 0, reset_time=True, inplace=False</em><span class="sig-paren">)</span> &#x2192; Union[pandas.core.frame.DataFrame, pandas.core.series.Series, datetime.datetime, None]<a class="headerlink" href="#tools.helpers.advanced_utils.date_utils.reset_period" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the first day of the period of ‘date’ with an offset of ‘offset’ period(s).
+Monday is the first day of week (following ISO 8601).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>date</strong> – selected date in the week.</p></li>
+<li><p><strong>period_type</strong> – one of: ‘year’, ‘quarter’, ‘month’, ‘week’, ‘day’, ‘hour’, ‘minute’, ‘second’.</p></li>
+<li><p><strong>offset</strong> – add or remove a certain number of periods. Default: 0.</p></li>
+<li><p><strong>reset_time</strong> – if True, time (hours, minutes, seconds, milliseconds) are set to 00:00:00</p></li>
+<li><p><strong>inplace</strong> – if date is a dataframe and inplace is True, convert columns inplace</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>first day in the period of ‘date’ (pd.TimeStamp object).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.date_utils.reset_timing">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.date_utils.</code><code class="sig-name descname">reset_timing</code><span class="sig-paren">(</span><em class="sig-param">date: Union[pandas.core.frame.DataFrame, pandas.core.series.Series, datetime.datetime], inplace=False</em><span class="sig-paren">)</span> &#x2192; Union[pandas.core.frame.DataFrame, pandas.core.series.Series, datetime.datetime]<a class="headerlink" href="#tools.helpers.advanced_utils.date_utils.reset_timing" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set time to 00:00:00</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.date_utils.reset_week">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.date_utils.</code><code class="sig-name descname">reset_week</code><span class="sig-paren">(</span><em class="sig-param">date: datetime.datetime</em>, <em class="sig-param">week_offset: int = 0</em>, <em class="sig-param">reset_time=True</em><span class="sig-paren">)</span> &#x2192; datetime.datetime<a class="headerlink" href="#tools.helpers.advanced_utils.date_utils.reset_week" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the first day of the week of ‘date’ with an offset of ‘week_offset’ week(s).
+Monday is the first day of week (following ISO 8601).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date_1</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># support of datetime.datetime</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reset_week</span><span class="p">(</span><span class="n">date_1</span><span class="p">,</span> <span class="n">week_offset</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">Timestamp(&#39;2017-12-18 00:00:00&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date_2</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">92584</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reset_week</span><span class="p">(</span><span class="n">date_2</span><span class="p">,</span> <span class="n">week_offset</span><span class="o">=+</span><span class="mi">8</span><span class="p">)</span>
+<span class="go">Timestamp(&#39;2018-02-12 00:00:00&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reset_week</span><span class="p">(</span><span class="n">date_2</span><span class="p">,</span> <span class="n">week_offset</span><span class="o">=+</span><span class="mi">8</span><span class="p">,</span> <span class="n">reset_time</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">Timestamp(&#39;2018-02-12 23:54:59.092584&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date_3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># support of pandas TimeStamp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_day</span> <span class="o">=</span> <span class="n">reset_week</span><span class="p">(</span><span class="n">date_3</span><span class="p">,</span> <span class="n">week_offset</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_day</span>
+<span class="go">Timestamp(&#39;2017-12-11 00:00:00&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">first_day</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">first_day</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>date</strong> – selected date in the week.</p></li>
+<li><p><strong>week_offset</strong> – add or remove a certain number of weeks. Default: 0.</p></li>
+<li><p><strong>reset_time</strong> – if True, time (hours, minutes, seconds, milliseconds) are set to 00:00:00</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>first day in the week of ‘date’ (pd.TimeStamp object).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.date_utils.week_delta">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.date_utils.</code><code class="sig-name descname">week_delta</code><span class="sig-paren">(</span><em class="sig-param">date_1</em>, <em class="sig-param">date_2</em>, <em class="sig-param">abs_val=False</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.advanced_utils.date_utils.week_delta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the number of weeks separating date_1 from date_2.
+Monday is the first day of week (following ISO 8601).</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.advanced_utils.text_utils">
+<span id="tools-helpers-advanced-utils-text-utils-module"></span><h2>tools.helpers.advanced_utils.text_utils module<a class="headerlink" href="#module-tools.helpers.advanced_utils.text_utils" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-tools.helpers.advanced_utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-tools.helpers.advanced_utils" title="Permalink to this headline">¶</a></h2>
+<p>Advanced utils that may need import of other modules.</p>
+<p>Modules: date_utils, dataframe_utils</p>
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.get_period">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.</code><code class="sig-name descname">get_period</code><span class="sig-paren">(</span><em class="sig-param">nb_period=1</em>, <em class="sig-param">period_type='week'</em>, <em class="sig-param">date_start=None</em>, <em class="sig-param">date_end=None</em>, <em class="sig-param">first_day_of_period=True</em>, <em class="sig-param">reset_time=True</em>, <em class="sig-param">**askdate_kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.advanced_utils.get_period" title="Permalink to this definition">¶</a></dt>
+<dd><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_period</span><span class="p">(</span><span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;week&#39;</span><span class="p">,</span> <span class="n">date_start</span><span class="o">=</span><span class="s1">&#39;ask&#39;</span><span class="p">,</span> <span class="n">first_day_of_period</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>     <span class="n">default_date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">bypass_dialog</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">(Timestamp(&#39;2018-04-30 00:00:00&#39;), Timestamp(&#39;2018-05-07 00:00:00&#39;))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_period</span><span class="p">(</span><span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="n">date_start</span><span class="o">=</span><span class="s1">&#39;ask&#39;</span><span class="p">,</span> <span class="n">first_day_of_period</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>     <span class="n">default_date</span><span class="o">=</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">bypass_dialog</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">(Timestamp(&#39;2018-05-01 00:00:00&#39;), Timestamp(&#39;2018-06-01 00:00:00&#39;))</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_period</span><span class="p">(</span><span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="n">date_start</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)]),</span> <span class="n">first_day_of_period</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">get_period</span><span class="p">(</span><span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="n">date_start</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)]),</span> <span class="n">first_day_of_period</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>nb_period</strong> – number of periods</p></li>
+<li><p><strong>period_type</strong> – week or month</p></li>
+<li><p><strong>date_start</strong> – first day of the period.
+If None, use date_end to compute date_start.
+If date_start and date_end are None, return None, None
+If ‘ask’, ask the user</p></li>
+<li><p><strong>date_end</strong> – last day of the period.
+If None, use date_start to compute date_end.
+If date_start and date_end are None, return None, None
+If ‘ask’, ask the user
+If ‘latest’, ‘today’ or ‘now’, use today date as date_end</p></li>
+<li><p><strong>first_day_of_period</strong> – if True, the first days of the periods are used for date_start and date_end</p></li>
+<li><p><strong>reset_time</strong> – if True, all times are reset to 00:00:00</p></li>
+<li><p><strong>askdate_kwargs</strong> – keyword arguments for simpledialog.askdate function (in case of use)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>date_start, date_end</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.get_periods">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.</code><code class="sig-name descname">get_periods</code><span class="sig-paren">(</span><em class="sig-param">date_start=None</em>, <em class="sig-param">date_end=None</em>, <em class="sig-param">nb_period=None</em>, <em class="sig-param">period_type=None</em>, <em class="sig-param">reset_periods=True</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.advanced_utils.get_periods" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a list of nb_period periods from date_start and/or to date_end.
+Monday is the first day of week (following ISO 8601).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">datetime</span> <span class="k">import</span> <span class="n">datetime</span> <span class="k">as</span> <span class="n">dt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_periods</span><span class="p">(</span><span class="n">date_end</span> <span class="o">=</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">nb_period</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;week&#39;</span><span class="p">)</span>
+<span class="go">[(Timestamp(&#39;2019-01-28 00:00:00&#39;), Timestamp(&#39;2019-02-04 00:00:00&#39;))]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_periods</span><span class="p">(</span><span class="n">date_end</span> <span class="o">=</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">nb_period</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;week&#39;</span><span class="p">,</span> <span class="n">reset_periods</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">[(Timestamp(&#39;2019-01-29 00:00:00&#39;), Timestamp(&#39;2019-02-05 00:00:00&#39;))]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_periods</span><span class="p">(</span><span class="n">date_start</span> <span class="o">=</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">date_end</span> <span class="o">=</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="go">[(Timestamp(&#39;2019-02-03 00:00:00&#39;), Timestamp(&#39;2019-02-05 00:00:00&#39;))]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_periods</span><span class="p">(</span><span class="n">date_start</span> <span class="o">=</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">date_end</span> <span class="o">=</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;month&#39;</span><span class="p">)</span>  <span class="c1"># None nb_period: auto</span>
+<span class="go">[(Timestamp(&#39;2018-03-01 00:00:00&#39;), Timestamp(&#39;2018-04-01 00:00:00&#39;)), (Timestamp(&#39;2018-04-01 00:00:00&#39;), Timestamp(&#39;2018-05-01 00:00:00&#39;))]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_periods</span><span class="p">(</span><span class="n">date_start</span> <span class="o">=</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">date_end</span> <span class="o">=</span> <span class="n">dt</span><span class="p">(</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;month&#39;</span><span class="p">,</span> <span class="n">nb_period</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">[(Timestamp(&#39;2018-03-01 00:00:00&#39;), Timestamp(&#39;2018-04-01 00:00:00&#39;))]</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>date_start</strong> – minimum date</p></li>
+<li><p><strong>date_end</strong> – maximum date</p></li>
+<li><p><strong>nb_period</strong> – number of periods. If None, nb_period is set to 1 if date_start or date_end are None
+or set to datetime delta between date_start and date_end</p></li>
+<li><p><strong>period_type</strong> – one of: ‘year’, ‘quarter’, ‘month’, ‘week’, ‘day’, ‘hour’, ‘minute’, ‘second’.
+If None, date_start and date_end must be different from None (otherwise, an error is raised),
+nb_period and full_periods arguments are ignored and then [(date_start, date_end)] is returned.</p></li>
+<li><p><strong>reset_periods</strong> – if True, get first date of periods</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of tuples of date_start (to include), date_end (to exclude)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.get_quarter">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.</code><code class="sig-name descname">get_quarter</code><span class="sig-paren">(</span><em class="sig-param">date: datetime.datetime</em>, <em class="sig-param">inplace=False</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.advanced_utils.get_quarter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the quarter of a date</p>
+<p># &gt;&gt;&gt; get_quarter = handle_datetime_dataframe(get_quarter)  # apply decorator for doctest
+&gt;&gt;&gt; date = datetime.datetime(2019, 4, 5, 8, 2, 3)
+&gt;&gt;&gt; get_quarter(date)
+2</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_quarter</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+<span class="go">0    1</span>
+<span class="go">dtype: int64</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_quarter</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+<span class="go">   0</span>
+<span class="go">0  4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">get_quarter</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span>
+<span class="go">   0</span>
+<span class="go">0  4</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.reset_week">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.</code><code class="sig-name descname">reset_week</code><span class="sig-paren">(</span><em class="sig-param">date: datetime.datetime</em>, <em class="sig-param">week_offset: int = 0</em>, <em class="sig-param">reset_time=True</em><span class="sig-paren">)</span> &#x2192; datetime.datetime<a class="headerlink" href="#tools.helpers.advanced_utils.reset_week" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the first day of the week of ‘date’ with an offset of ‘week_offset’ week(s).
+Monday is the first day of week (following ISO 8601).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date_1</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># support of datetime.datetime</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reset_week</span><span class="p">(</span><span class="n">date_1</span><span class="p">,</span> <span class="n">week_offset</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">Timestamp(&#39;2017-12-18 00:00:00&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date_2</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">92584</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reset_week</span><span class="p">(</span><span class="n">date_2</span><span class="p">,</span> <span class="n">week_offset</span><span class="o">=+</span><span class="mi">8</span><span class="p">)</span>
+<span class="go">Timestamp(&#39;2018-02-12 00:00:00&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reset_week</span><span class="p">(</span><span class="n">date_2</span><span class="p">,</span> <span class="n">week_offset</span><span class="o">=+</span><span class="mi">8</span><span class="p">,</span> <span class="n">reset_time</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">Timestamp(&#39;2018-02-12 23:54:59.092584&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date_3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># support of pandas TimeStamp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_day</span> <span class="o">=</span> <span class="n">reset_week</span><span class="p">(</span><span class="n">date_3</span><span class="p">,</span> <span class="n">week_offset</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_day</span>
+<span class="go">Timestamp(&#39;2017-12-11 00:00:00&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">first_day</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">first_day</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>date</strong> – selected date in the week.</p></li>
+<li><p><strong>week_offset</strong> – add or remove a certain number of weeks. Default: 0.</p></li>
+<li><p><strong>reset_time</strong> – if True, time (hours, minutes, seconds, milliseconds) are set to 00:00:00</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>first day in the week of ‘date’ (pd.TimeStamp object).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.reset_month">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.</code><code class="sig-name descname">reset_month</code><span class="sig-paren">(</span><em class="sig-param">date: datetime.datetime</em>, <em class="sig-param">month_offset: int = 0</em>, <em class="sig-param">reset_time=True</em><span class="sig-paren">)</span> &#x2192; datetime.datetime<a class="headerlink" href="#tools.helpers.advanced_utils.reset_month" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the first day of the month of ‘date’ with an offset of ‘month_offset’ month(s).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date_1</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># support of datetime.datetime</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reset_month</span><span class="p">(</span><span class="n">date_1</span><span class="p">)</span>
+<span class="go">Timestamp(&#39;2017-12-01 00:00:00&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date_2</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">59</span><span class="p">,</span> <span class="mi">92584</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reset_month</span><span class="p">(</span><span class="n">date_2</span><span class="p">,</span> <span class="n">month_offset</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">Timestamp(&#39;2018-01-01 00:00:00&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">reset_month</span><span class="p">(</span><span class="n">date_2</span><span class="p">,</span> <span class="n">month_offset</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">reset_time</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">Timestamp(&#39;2018-01-01 23:54:59.092584&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date_3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>  <span class="c1"># support of pandas TimeStamp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_day</span> <span class="o">=</span> <span class="n">reset_month</span><span class="p">(</span><span class="n">date_3</span><span class="p">,</span> <span class="n">month_offset</span><span class="o">=-</span><span class="mi">12</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first_day</span>
+<span class="go">Timestamp(&#39;2016-12-01 00:00:00&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">first_day</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">first_day</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>date</strong> – selected date in the month.</p></li>
+<li><p><strong>month_offset</strong> – add or remove a certain number of months. Default: 0.</p></li>
+<li><p><strong>reset_time</strong> – if True, time (hours, minutes, seconds, milliseconds) are set to 00:00:00</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>first day in the month of ‘date’ (pd.TimeStamp object).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.add_period">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.</code><code class="sig-name descname">add_period</code><span class="sig-paren">(</span><em class="sig-param">date: Union[pandas.core.frame.DataFrame, pandas.core.series.Series, datetime.datetime, None], number_of_period=0, period_type=None, reset_time=False, output_type=&lt;class 'pandas._libs.tslibs.timestamps.Timestamp'&gt;, inplace=False, **kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.advanced_utils.add_period" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a certain number of periods (year, month, week, day, hour, minute, second) to the input date.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">add_period</span> <span class="o">=</span> <span class="n">handle_datetime_pandas_objects</span><span class="p">(</span><span class="n">add_period</span><span class="p">)</span>  <span class="c1"># apply decorator for doctest</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add_period</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;week&#39;</span><span class="p">,</span> <span class="n">reset_time</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">Timestamp(&#39;2019-01-19 00:00:00&#39;)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add_period</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;week&#39;</span><span class="p">,</span> <span class="n">reset_time</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">0   2019-01-26</span>
+<span class="go">dtype: datetime64[ns]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">date</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2019</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add_period</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;week&#39;</span><span class="p">,</span> <span class="n">reset_time</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">           0</span>
+<span class="go">0 2019-02-02</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">add_period</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">period_type</span><span class="o">=</span><span class="s1">&#39;week&#39;</span><span class="p">,</span> <span class="n">reset_time</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">NaT</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>date</strong> – initial date</p></li>
+<li><p><strong>number_of_period</strong> – number of periods to add</p></li>
+<li><p><strong>period_type</strong> – one of: ‘year’, ‘quarter’, ‘month’, ‘week’, ‘day’, ‘hour’, ‘minute’, ‘second’.</p></li>
+<li><p><strong>reset_time</strong> – if True, time is reset to 00:00:00.</p></li>
+<li><p><strong>output_type</strong> – type of the output / function to apply to the output. pd.Timestamp by default.</p></li>
+<li><p><strong>inplace</strong> – if date is a dataframe and inplace is True, convert columns inplace</p></li>
+<li><p><strong>kwargs</strong> – keyword arguments (unused)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>date of type output_type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.add_week">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.</code><code class="sig-name descname">add_week</code><span class="sig-paren">(</span><em class="sig-param">date</em>, <em class="sig-param">number_of_weeks=0</em>, <em class="sig-param">reset_time=False</em>, <em class="sig-param">output_type=&lt;class 'pandas._libs.tslibs.timestamps.Timestamp'&gt;</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.advanced_utils.add_week" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add number_of_weeks weeks to date. number_of_months can be negative or positive.
+Monday is the first day of week (following ISO 8601).</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.advanced_utils.add_month">
+<code class="sig-prename descclassname">tools.helpers.advanced_utils.</code><code class="sig-name descname">add_month</code><span class="sig-paren">(</span><em class="sig-param">date</em>, <em class="sig-param">number_of_months=0</em>, <em class="sig-param">reset_time=False</em>, <em class="sig-param">output_type=&lt;class 'pandas._libs.tslibs.timestamps.Timestamp'&gt;</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.advanced_utils.add_month" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add number_of_months months to date. number_of_months can be negative or positive.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">tools.helpers.advanced_utils package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.advanced_utils.dataframe_utils">tools.helpers.advanced_utils.dataframe_utils module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.advanced_utils.date_utils">tools.helpers.advanced_utils.date_utils module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.advanced_utils.text_utils">tools.helpers.advanced_utils.text_utils module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.advanced_utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tools.helpers.html"
+                        title="previous chapter">tools.helpers package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tools.helpers.config_manager.html"
+                        title="next chapter">tools.helpers.config_manager package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/source/tools.helpers.advanced_utils.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.config_manager.html" title="tools.helpers.config_manager package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.html" title="tools.helpers package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Main tools 1.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >python_utils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >tools package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="tools.helpers.html" >tools.helpers package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright open source.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

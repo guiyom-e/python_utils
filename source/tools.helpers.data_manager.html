@@ -1,0 +1,620 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>tools.helpers.data_manager package &#8212; Main tools 1.3.0 documentation</title>
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="tools.helpers.interface package" href="tools.helpers.interface.html" />
+    <link rel="prev" title="tools.helpers.config_manager package" href="tools.helpers.config_manager.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.interface.html" title="tools.helpers.interface package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.config_manager.html" title="tools.helpers.config_manager package"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Main tools 1.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >python_utils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >tools package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="tools.helpers.html" accesskey="U">tools.helpers package</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tools-helpers-data-manager-package">
+<h1>tools.helpers.data_manager package<a class="headerlink" href="#tools-helpers-data-manager-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-tools.helpers.data_manager.data_loader">
+<span id="tools-helpers-data-manager-data-loader-module"></span><h2>tools.helpers.data_manager.data_loader module<a class="headerlink" href="#module-tools.helpers.data_manager.data_loader" title="Permalink to this headline">¶</a></h2>
+<p>Functions to load CSV and Excel files to dataframes.</p>
+<dl class="function">
+<dt id="tools.helpers.data_manager.data_loader.read_data_file">
+<code class="sig-prename descclassname">tools.helpers.data_manager.data_loader.</code><code class="sig-name descname">read_data_file</code><span class="sig-paren">(</span><em class="sig-param">path=None</em>, <em class="sig-param">config_dict=None</em>, <em class="sig-param">config_key=None</em>, <em class="sig-param">date_columns=None</em>, <em class="sig-param">sheet_name=0</em>, <em class="sig-param">check_path=False</em>, <em class="sig-param">ask_header=False</em>, <em class="sig-param">behaviour_on_error='error'</em>, <em class="sig-param">open_file_kwargs=None</em>, <em class="sig-param">read_kwargs=None</em>, <em class="sig-param">to_datetime_kwargs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.data_manager.data_loader.read_data_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dataframe with the content of the selected CSV or Excel file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – file path. Must be CSV or Excel file (to be checked before with ‘open_file’ function).</p></li>
+<li><p><strong>config_dict</strong> – dictionary-like object containing the configuration</p></li>
+<li><p><strong>config_key</strong> – key of config_dict to get path (replaces path argument)</p></li>
+<li><p><strong>date_columns</strong> – column or list of columns to format as datetime</p></li>
+<li><p><strong>sheet_name</strong> – name or index of the Excel sheet (not used for CSV)</p></li>
+<li><p><strong>check_path</strong> – if True, use open_file to check path</p></li>
+<li><p><strong>ask_header</strong> – if True and key ‘header’ is not in read_kwargs, ask whether the file has a header or not
+and update read_kwargs[‘header’] to 0 or None.</p></li>
+<li><p><strong>behaviour_on_error</strong> – ‘error’ (default): raise an error, ‘ignore’: return None</p></li>
+<li><p><strong>open_file_kwargs</strong> – kwargs for open_file function ONLY.</p></li>
+<li><p><strong>read_kwargs</strong> – kwargs for read functions pd.read_excel ONLY.  # can evolve in the future</p></li>
+<li><p><strong>to_datetime_kwargs</strong> – kwargs for pd.to_datetime function ONLY.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.data_manager.data_writer">
+<span id="tools-helpers-data-manager-data-writer-module"></span><h2>tools.helpers.data_manager.data_writer module<a class="headerlink" href="#module-tools.helpers.data_manager.data_writer" title="Permalink to this headline">¶</a></h2>
+<p>Functions to export data files to Excel or images to PowerPoint.</p>
+<dl class="function">
+<dt id="tools.helpers.data_manager.data_writer.export_img_to_powerpoint">
+<code class="sig-prename descclassname">tools.helpers.data_manager.data_writer.</code><code class="sig-name descname">export_img_to_powerpoint</code><span class="sig-paren">(</span><em class="sig-param">img_paths</em>, <em class="sig-param">output_path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.data_manager.data_writer.export_img_to_powerpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export images to a PowerPoint presentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_paths</strong> – list of images to save in PowerPoint slides</p></li>
+<li><p><strong>output_path</strong> – path to save output file</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.data_manager.data_writer.save_excel_file">
+<code class="sig-prename descclassname">tools.helpers.data_manager.data_writer.</code><code class="sig-name descname">save_excel_file</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">dataframes</em>, <em class="sig-param">sheet_names=None</em>, <em class="sig-param">extension='.xlsx'</em>, <em class="sig-param">check_path=False</em>, <em class="sig-param">to_excel_kwargs=None</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.data_manager.data_writer.save_excel_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write dataframes to disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – Excel file path  (to be checked before with ‘save_file’ function).</p></li>
+<li><p><strong>dataframes</strong> – dataframe or list of dataframes</p></li>
+<li><p><strong>sheet_names</strong> – sheet name or ordered list of sheet names</p></li>
+<li><p><strong>extension</strong> – Excel file extension</p></li>
+<li><p><strong>check_path</strong> – check path with save_file</p></li>
+<li><p><strong>to_excel_kwargs</strong> – keyword arguments for _write_excel function</p></li>
+<li><p><strong>options</strong> – options for save_file function</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>path</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.data_manager.file_utils">
+<span id="tools-helpers-data-manager-file-utils-module"></span><h2>tools.helpers.data_manager.file_utils module<a class="headerlink" href="#module-tools.helpers.data_manager.file_utils" title="Permalink to this headline">¶</a></h2>
+<p>Utils linked to files.</p>
+<dl class="function">
+<dt id="tools.helpers.data_manager.file_utils.add_file_extension">
+<code class="sig-prename descclassname">tools.helpers.data_manager.file_utils.</code><code class="sig-name descname">add_file_extension</code><span class="sig-paren">(</span><em class="sig-param">path: str</em>, <em class="sig-param">extension=None</em>, <em class="sig-param">replace=False</em>, <em class="sig-param">keep_existing=False</em>, <em class="sig-param">force_add=False</em><span class="sig-paren">)</span> &#x2192; tools.helpers.models.path_models.Path<a class="headerlink" href="#tools.helpers.data_manager.file_utils.add_file_extension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a specific extension to ‘path’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – path</p></li>
+<li><p><strong>extension</strong> – extension. None is considered as ‘’ extension</p></li>
+<li><p><strong>replace</strong> – replace instead of append extension</p></li>
+<li><p><strong>keep_existing</strong> – add extension only if it doesn’t already exist</p></li>
+<li><p><strong>force_add</strong> – add extension even if the correct extension already exists (not recommended)</p></li>
+</ul>
+</dd>
+</dl>
+<p>:return Path object</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.data_manager.file_utils.check_extension">
+<code class="sig-prename descclassname">tools.helpers.data_manager.file_utils.</code><code class="sig-name descname">check_extension</code><span class="sig-paren">(</span><em class="sig-param">path: Union[tools.helpers.models.path_models.Path, list, tuple, set], extension=None, filetype=None, check_ext='ignore'</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#tools.helpers.data_manager.file_utils.check_extension" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check extension of path or collection of paths which must arg ‘extension’ or
+extension linked to ‘filetype’, unless they are None</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.data_manager.file_utils.check_path_arguments">
+<code class="sig-prename descclassname">tools.helpers.data_manager.file_utils.</code><code class="sig-name descname">check_path_arguments</code><span class="sig-paren">(</span><em class="sig-param">path: str</em>, <em class="sig-param">config_dict: Dict</em>, <em class="sig-param">config_key: str</em><span class="sig-paren">)</span> &#x2192; str<a class="headerlink" href="#tools.helpers.data_manager.file_utils.check_path_arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>User should use either ‘path’ or ‘config_dict’ and ‘config_key’ arguments to indicate a path.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.data_manager.file_utils.choose_filedialog">
+<code class="sig-prename descclassname">tools.helpers.data_manager.file_utils.</code><code class="sig-name descname">choose_filedialog</code><span class="sig-paren">(</span><em class="sig-param">dialog_type: str</em>, <em class="sig-param">multiple_paths: bool = False</em>, <em class="sig-param">return_on_cancellation: str = None</em>, <em class="sig-param">behavior_on_cancellation: str = 'ignore'</em>, <em class="sig-param">initialdir: str = None</em>, <em class="sig-param">filetypes: list = None</em>, <em class="sig-param">title: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; Union[tuple, tools.helpers.models.path_models.Path]<a class="headerlink" href="#tools.helpers.data_manager.file_utils.choose_filedialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open a filedialog window.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.data_manager.filepath_manager">
+<span id="tools-helpers-data-manager-filepath-manager-module"></span><h2>tools.helpers.data_manager.filepath_manager module<a class="headerlink" href="#module-tools.helpers.data_manager.filepath_manager" title="Permalink to this headline">¶</a></h2>
+<p>Functions to select and validate file or directory paths.</p>
+<dl class="function">
+<dt id="tools.helpers.data_manager.filepath_manager.handle_bad_extension_error">
+<code class="sig-prename descclassname">tools.helpers.data_manager.filepath_manager.</code><code class="sig-name descname">handle_bad_extension_error</code><span class="sig-paren">(</span><em class="sig-param">err</em>, <em class="sig-param">func</em>, <em class="sig-param">path</em>, <em class="sig-param">args=None</em>, <em class="sig-param">kwargs=None</em>, <em class="sig-param">pos_path=0</em>, <em class="sig-param">key_path=None</em>, <em class="sig-param">change_path_func=&lt;function save_file&gt;</em>, <em class="sig-param">title=''</em>, <em class="sig-param">msg=''</em>, <em class="sig-param">extension=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.data_manager.filepath_manager.handle_bad_extension_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>extension: default extension to add to the path. If None, nothing is changed</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.data_manager.filepath_manager.handle_file_error">
+<code class="sig-prename descclassname">tools.helpers.data_manager.filepath_manager.</code><code class="sig-name descname">handle_file_error</code><span class="sig-paren">(</span><em class="sig-param">err</em>, <em class="sig-param">func</em>, <em class="sig-param">path</em>, <em class="sig-param">args=None</em>, <em class="sig-param">kwargs=None</em>, <em class="sig-param">pos_path=0</em>, <em class="sig-param">key_path=None</em>, <em class="sig-param">change_path_func=&lt;function save_file&gt;</em>, <em class="sig-param">title=''</em>, <em class="sig-param">msg=''</em>, <em class="sig-param">return_if_ignore=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.data_manager.filepath_manager.handle_file_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>If PermissionError when opening/saving file, propose to retry, change file path or cancel</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>err</strong> – exception</p></li>
+<li><p><strong>func</strong> – function to execute if the user wants to retry</p></li>
+<li><p><strong>path</strong> – file path</p></li>
+<li><p><strong>args</strong> – args to pass to func</p></li>
+<li><p><strong>kwargs</strong> – kwargs to pass to func</p></li>
+<li><p><strong>pos_path</strong> – position of the positional argument path in func (only if key_path is None)</p></li>
+<li><p><strong>key_path</strong> – name of the keyword argument path in func (if None, positional argument is used)</p></li>
+<li><p><strong>change_path_func</strong> – function to get a new path, with no positional argument and ‘initialdir’ keyword argument</p></li>
+<li><p><strong>title</strong> – title of the error</p></li>
+<li><p><strong>msg</strong> – message of the error</p></li>
+<li><p><strong>return_if_ignore</strong> – return if Ignore option is selected</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.data_manager.filepath_manager.handle_file_not_found_error">
+<code class="sig-prename descclassname">tools.helpers.data_manager.filepath_manager.</code><code class="sig-name descname">handle_file_not_found_error</code><span class="sig-paren">(</span><em class="sig-param">err</em>, <em class="sig-param">func</em>, <em class="sig-param">path</em>, <em class="sig-param">args=None</em>, <em class="sig-param">kwargs=None</em>, <em class="sig-param">pos_path=0</em>, <em class="sig-param">key_path=None</em>, <em class="sig-param">change_path_func=&lt;function save_file&gt;</em>, <em class="sig-param">title=''</em>, <em class="sig-param">msg=''</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.data_manager.filepath_manager.handle_file_not_found_error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.data_manager.filepath_manager.handle_permission_error">
+<code class="sig-prename descclassname">tools.helpers.data_manager.filepath_manager.</code><code class="sig-name descname">handle_permission_error</code><span class="sig-paren">(</span><em class="sig-param">err</em>, <em class="sig-param">func</em>, <em class="sig-param">path</em>, <em class="sig-param">args=None</em>, <em class="sig-param">kwargs=None</em>, <em class="sig-param">pos_path=0</em>, <em class="sig-param">key_path=None</em>, <em class="sig-param">change_path_func=&lt;function save_file&gt;</em>, <em class="sig-param">title=''</em>, <em class="sig-param">msg=''</em>, <em class="sig-param">handle_read_only_error=False</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.data_manager.filepath_manager.handle_permission_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>handle_read_only_error: True to handle the case of a read-only file: the function tries to make the file writable.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.data_manager.filepath_manager.open_dir">
+<code class="sig-prename descclassname">tools.helpers.data_manager.filepath_manager.</code><code class="sig-name descname">open_dir</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; Union[tools.helpers.models.path_models.Path, tools.helpers.models.path_models.PathCollection]<a class="headerlink" href="#tools.helpers.data_manager.filepath_manager.open_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check path and open file dialog(s) to select directory(ies) if needed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dir1</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">open_dir</span><span class="p">(</span><span class="n">dir1</span><span class="p">)</span><span class="o">.</span><span class="n">filename</span>
+<span class="go">Path: data_manager</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">open_dir</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">ask_path</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">Path: None</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">open_dir</span><span class="p">([</span><span class="n">dir1</span><span class="p">,</span> <span class="n">dir1</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">multiple_paths</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ask_path</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">filename</span>
+<span class="go">[Path: data_manager, Path: data_manager, Path: ]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.data_manager.filepath_manager.open_file">
+<code class="sig-prename descclassname">tools.helpers.data_manager.filepath_manager.</code><code class="sig-name descname">open_file</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; Union[tools.helpers.models.path_models.Path, tools.helpers.models.path_models.PathCollection]<a class="headerlink" href="#tools.helpers.data_manager.filepath_manager.open_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check path and open file dialog(s) to select file(s) if needed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">open_file</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">filename</span>
+<span class="go">Path: filepath_manager.py</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">open_file</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">ask_path</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">Path: None</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">open_file</span><span class="p">([</span><span class="vm">__file__</span><span class="p">,</span> <span class="vm">__file__</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">multiple_paths</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ask_path</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">filename</span>
+<span class="go">[Path: filepath_manager.py, Path: filepath_manager.py, Path: ]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.data_manager.filepath_manager.open_file_or_dir">
+<code class="sig-prename descclassname">tools.helpers.data_manager.filepath_manager.</code><code class="sig-name descname">open_file_or_dir</code><span class="sig-paren">(</span><em class="sig-param">path: Union[str</em>, <em class="sig-param">list</em>, <em class="sig-param">tuple</em>, <em class="sig-param">set] = None</em>, <em class="sig-param">config_dict=None</em>, <em class="sig-param">config_key=None</em>, <em class="sig-param">multiple_paths=False</em>, <em class="sig-param">return_on_cancellation: str = None</em>, <em class="sig-param">behavior_on_cancellation='warning'</em>, <em class="sig-param">filetype=None</em>, <em class="sig-param">extension=None</em>, <em class="sig-param">check_ext='ignore'</em>, <em class="sig-param">ask_path=True</em>, <em class="sig-param">path_type='file'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; Union[tools.helpers.models.path_models.Path, tools.helpers.models.path_models.PathCollection]<a class="headerlink" href="#tools.helpers.data_manager.filepath_manager.open_file_or_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check path and open file dialogs if needed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – path to check. If path is None, a file dialog is opened to choose path, unless ‘ask_path’ is False</p></li>
+<li><p><strong>config_dict</strong> – instead of path, use config_dict and config_key. path will be set to config_dict[config_key]</p></li>
+<li><p><strong>config_key</strong> – instead of path, use config_dict and config_key. path will be set to config_dict[config_key]</p></li>
+<li><p><strong>multiple_paths</strong> – if True, multiple files are allowed and returned as PathCollection (instead of Path)</p></li>
+<li><p><strong>return_on_cancellation</strong> – return on user cancellation. Default: Path(None) (highly recommended)</p></li>
+<li><p><strong>behavior_on_cancellation</strong> – error flag used to raise anomaly ‘raise_no_file_selected_anomaly’ on cancellation .
+Must be ‘ask’, ‘ignore’, ‘warning’, or ‘error’.</p></li>
+<li><p><strong>filetype</strong> – filetype in FILETYPE_TO_FILEDIALOG_FILETYPES keys. If filetype is None, extension is not checked.</p></li>
+<li><p><strong>extension</strong> – final extension to check. If extension is None, extension is not checked.</p></li>
+<li><p><strong>check_ext</strong> – error flag used to raise anomaly ‘raise_bad_extension_anomaly’</p></li>
+<li><p><strong>ask_path</strong> – if True and path is None, ask path to the user</p></li>
+<li><p><strong>path_type</strong> – ‘file’ or ‘dir’. ‘file by default</p></li>
+<li><p><strong>kwargs</strong> – keywords arguments for filedialog methods, such as ‘title’, ‘message’, ‘filetypes’, etc.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>path or collection of paths</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.data_manager.filepath_manager.save_file">
+<code class="sig-prename descclassname">tools.helpers.data_manager.filepath_manager.</code><code class="sig-name descname">save_file</code><span class="sig-paren">(</span><em class="sig-param">path: str = None</em>, <em class="sig-param">config_dict=None</em>, <em class="sig-param">config_key=None</em>, <em class="sig-param">return_on_cancellation=Path: None</em>, <em class="sig-param">behavior_on_cancellation='warning'</em>, <em class="sig-param">auto_mkdir=True</em>, <em class="sig-param">extension=None</em>, <em class="sig-param">replace_ext=False</em>, <em class="sig-param">filetype=None</em>, <em class="sig-param">overwrite='ask'</em>, <em class="sig-param">backup=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; tools.helpers.models.path_models.Path<a class="headerlink" href="#tools.helpers.data_manager.filepath_manager.save_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the path to save a file.</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param path</dt>
+<dd class="field-odd"><p>path or None</p>
+</dd>
+<dt class="field-even">param config_dict</dt>
+<dd class="field-even"><p>dictionary-like object containing the configuration</p>
+</dd>
+<dt class="field-odd">param config_key</dt>
+<dd class="field-odd"><p>key of config_dict to get path (replaces path argument)</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>return_on_cancellation</strong> – <p>return on user cancellation. Default: Path(None) (highly recommended)
+:param behavior_on_cancellation: error flag used to raise anomaly ‘raise_no_file_selected_anomaly’ on cancellation .</p>
+<blockquote>
+<div><p>Must be ‘ask’, ‘ignore’, ‘warning’, or ‘error’.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">param auto_mkdir</dt>
+<dd class="field-odd"><p>if True, try to create output directories if they don’t exist</p>
+</dd>
+<dt class="field-even">param filetype</dt>
+<dd class="field-even"><p>filetype in FILETYPE_TO_FILEDIALOG_FILETYPES keys. If filetype is None, extension is not checked.</p>
+</dd>
+<dt class="field-odd">param extension</dt>
+<dd class="field-odd"><p>final extension to check. If extension is None, extension is not checked.</p>
+</dd>
+<dt class="field-even">param replace_ext</dt>
+<dd class="field-even"><p>if True, replaces extension instead of adding one</p>
+</dd>
+<dt class="field-odd">param overwrite</dt>
+<dd class="field-odd"><p>bool or flag ‘ask’, ‘rename’, ‘ignore’, ‘overwrite’, used in case file already exists</p>
+</dd>
+<dt class="field-even">param backup</dt>
+<dd class="field-even"><p>bool, used in case file already exists</p>
+</dd>
+<dt class="field-odd">param kwargs</dt>
+<dd class="field-odd"><p>for filedialog</p>
+</dd>
+<dt class="field-even">return</dt>
+<dd class="field-even"><p>path</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.data_manager.plots">
+<span id="tools-helpers-data-manager-plots-module"></span><h2>tools.helpers.data_manager.plots module<a class="headerlink" href="#module-tools.helpers.data_manager.plots" title="Permalink to this headline">¶</a></h2>
+<p>Functions to save graphs.</p>
+<dl class="function">
+<dt id="tools.helpers.data_manager.plots.save_error_graph">
+<code class="sig-prename descclassname">tools.helpers.data_manager.plots.</code><code class="sig-name descname">save_error_graph</code><span class="sig-paren">(</span><em class="sig-param">plot_path</em>, <em class="sig-param">err_msg=None</em>, <em class="sig-param">**save_file_kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.data_manager.plots.save_error_graph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.data_manager.plots.save_plot">
+<code class="sig-prename descclassname">tools.helpers.data_manager.plots.</code><code class="sig-name descname">save_plot</code><span class="sig-paren">(</span><em class="sig-param">plot_path</em>, <em class="sig-param">overwrite='overwrite'</em>, <em class="sig-param">**save_file_kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.data_manager.plots.save_plot" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-tools.helpers.data_manager">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-tools.helpers.data_manager" title="Permalink to this headline">¶</a></h2>
+<p>Data manager</p>
+<p>Provides high level function to check paths, open and read data files</p>
+<ul class="simple">
+<li><p>file_utils: various functions</p></li>
+<li><p>filepath_manager: functions to check paths, using file dialogs</p></li>
+<li><p>data_loader: functions to open files: CSV or Excel</p></li>
+<li><p>date_writer: functions to write files: Excel or PowerPoint</p></li>
+<li><p>plots: functions to create simple plots</p></li>
+</ul>
+<p>Imports:
+logger, utils, models, interface
+——————————————–</p>
+<blockquote>
+<div><blockquote>
+<div><div class="line-block">
+<div class="line">|               |  |</div>
+</div>
+<p>v                   v               v  v</p>
+</div></blockquote>
+<dl class="simple">
+<dt>file_utils –&gt; filepath_manager –&gt; data_loader</dt><dd><p><a href="#id1"><span class="problematic" id="id2">|</span></a>-&gt; data_writer</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="function">
+<dt id="tools.helpers.data_manager.open_file">
+<code class="sig-prename descclassname">tools.helpers.data_manager.</code><code class="sig-name descname">open_file</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; Union[tools.helpers.models.path_models.Path, tools.helpers.models.path_models.PathCollection]<a class="headerlink" href="#tools.helpers.data_manager.open_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check path and open file dialog(s) to select file(s) if needed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">open_file</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">filename</span>
+<span class="go">Path: filepath_manager.py</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">open_file</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">ask_path</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">Path: None</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">open_file</span><span class="p">([</span><span class="vm">__file__</span><span class="p">,</span> <span class="vm">__file__</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">multiple_paths</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ask_path</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">filename</span>
+<span class="go">[Path: filepath_manager.py, Path: filepath_manager.py, Path: ]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.data_manager.open_dir">
+<code class="sig-prename descclassname">tools.helpers.data_manager.</code><code class="sig-name descname">open_dir</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; Union[tools.helpers.models.path_models.Path, tools.helpers.models.path_models.PathCollection]<a class="headerlink" href="#tools.helpers.data_manager.open_dir" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check path and open file dialog(s) to select directory(ies) if needed.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">dir1</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">open_dir</span><span class="p">(</span><span class="n">dir1</span><span class="p">)</span><span class="o">.</span><span class="n">filename</span>
+<span class="go">Path: data_manager</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">open_dir</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">ask_path</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">Path: None</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">open_dir</span><span class="p">([</span><span class="n">dir1</span><span class="p">,</span> <span class="n">dir1</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">multiple_paths</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ask_path</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">filename</span>
+<span class="go">[Path: data_manager, Path: data_manager, Path: ]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.data_manager.save_file">
+<code class="sig-prename descclassname">tools.helpers.data_manager.</code><code class="sig-name descname">save_file</code><span class="sig-paren">(</span><em class="sig-param">path: str = None</em>, <em class="sig-param">config_dict=None</em>, <em class="sig-param">config_key=None</em>, <em class="sig-param">return_on_cancellation=Path: None</em>, <em class="sig-param">behavior_on_cancellation='warning'</em>, <em class="sig-param">auto_mkdir=True</em>, <em class="sig-param">extension=None</em>, <em class="sig-param">replace_ext=False</em>, <em class="sig-param">filetype=None</em>, <em class="sig-param">overwrite='ask'</em>, <em class="sig-param">backup=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; tools.helpers.models.path_models.Path<a class="headerlink" href="#tools.helpers.data_manager.save_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the path to save a file.</p>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">param path</dt>
+<dd class="field-odd"><p>path or None</p>
+</dd>
+<dt class="field-even">param config_dict</dt>
+<dd class="field-even"><p>dictionary-like object containing the configuration</p>
+</dd>
+<dt class="field-odd">param config_key</dt>
+<dd class="field-odd"><p>key of config_dict to get path (replaces path argument)</p>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>return_on_cancellation</strong> – <p>return on user cancellation. Default: Path(None) (highly recommended)
+:param behavior_on_cancellation: error flag used to raise anomaly ‘raise_no_file_selected_anomaly’ on cancellation .</p>
+<blockquote>
+<div><p>Must be ‘ask’, ‘ignore’, ‘warning’, or ‘error’.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">param auto_mkdir</dt>
+<dd class="field-odd"><p>if True, try to create output directories if they don’t exist</p>
+</dd>
+<dt class="field-even">param filetype</dt>
+<dd class="field-even"><p>filetype in FILETYPE_TO_FILEDIALOG_FILETYPES keys. If filetype is None, extension is not checked.</p>
+</dd>
+<dt class="field-odd">param extension</dt>
+<dd class="field-odd"><p>final extension to check. If extension is None, extension is not checked.</p>
+</dd>
+<dt class="field-even">param replace_ext</dt>
+<dd class="field-even"><p>if True, replaces extension instead of adding one</p>
+</dd>
+<dt class="field-odd">param overwrite</dt>
+<dd class="field-odd"><p>bool or flag ‘ask’, ‘rename’, ‘ignore’, ‘overwrite’, used in case file already exists</p>
+</dd>
+<dt class="field-even">param backup</dt>
+<dd class="field-even"><p>bool, used in case file already exists</p>
+</dd>
+<dt class="field-odd">param kwargs</dt>
+<dd class="field-odd"><p>for filedialog</p>
+</dd>
+<dt class="field-even">return</dt>
+<dd class="field-even"><p>path</p>
+</dd>
+</dl>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.data_manager.read_data_file">
+<code class="sig-prename descclassname">tools.helpers.data_manager.</code><code class="sig-name descname">read_data_file</code><span class="sig-paren">(</span><em class="sig-param">path=None</em>, <em class="sig-param">config_dict=None</em>, <em class="sig-param">config_key=None</em>, <em class="sig-param">date_columns=None</em>, <em class="sig-param">sheet_name=0</em>, <em class="sig-param">check_path=False</em>, <em class="sig-param">ask_header=False</em>, <em class="sig-param">behaviour_on_error='error'</em>, <em class="sig-param">open_file_kwargs=None</em>, <em class="sig-param">read_kwargs=None</em>, <em class="sig-param">to_datetime_kwargs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.data_manager.read_data_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dataframe with the content of the selected CSV or Excel file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – file path. Must be CSV or Excel file (to be checked before with ‘open_file’ function).</p></li>
+<li><p><strong>config_dict</strong> – dictionary-like object containing the configuration</p></li>
+<li><p><strong>config_key</strong> – key of config_dict to get path (replaces path argument)</p></li>
+<li><p><strong>date_columns</strong> – column or list of columns to format as datetime</p></li>
+<li><p><strong>sheet_name</strong> – name or index of the Excel sheet (not used for CSV)</p></li>
+<li><p><strong>check_path</strong> – if True, use open_file to check path</p></li>
+<li><p><strong>ask_header</strong> – if True and key ‘header’ is not in read_kwargs, ask whether the file has a header or not
+and update read_kwargs[‘header’] to 0 or None.</p></li>
+<li><p><strong>behaviour_on_error</strong> – ‘error’ (default): raise an error, ‘ignore’: return None</p></li>
+<li><p><strong>open_file_kwargs</strong> – kwargs for open_file function ONLY.</p></li>
+<li><p><strong>read_kwargs</strong> – kwargs for read functions pd.read_excel ONLY.  # can evolve in the future</p></li>
+<li><p><strong>to_datetime_kwargs</strong> – kwargs for pd.to_datetime function ONLY.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.data_manager.save_excel_file">
+<code class="sig-prename descclassname">tools.helpers.data_manager.</code><code class="sig-name descname">save_excel_file</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">dataframes</em>, <em class="sig-param">sheet_names=None</em>, <em class="sig-param">extension='.xlsx'</em>, <em class="sig-param">check_path=False</em>, <em class="sig-param">to_excel_kwargs=None</em>, <em class="sig-param">**options</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.data_manager.save_excel_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write dataframes to disk.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – Excel file path  (to be checked before with ‘save_file’ function).</p></li>
+<li><p><strong>dataframes</strong> – dataframe or list of dataframes</p></li>
+<li><p><strong>sheet_names</strong> – sheet name or ordered list of sheet names</p></li>
+<li><p><strong>extension</strong> – Excel file extension</p></li>
+<li><p><strong>check_path</strong> – check path with save_file</p></li>
+<li><p><strong>to_excel_kwargs</strong> – keyword arguments for _write_excel function</p></li>
+<li><p><strong>options</strong> – options for save_file function</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.data_manager.export_img_to_powerpoint">
+<code class="sig-prename descclassname">tools.helpers.data_manager.</code><code class="sig-name descname">export_img_to_powerpoint</code><span class="sig-paren">(</span><em class="sig-param">img_paths</em>, <em class="sig-param">output_path=None</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.data_manager.export_img_to_powerpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>Export images to a PowerPoint presentation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>img_paths</strong> – list of images to save in PowerPoint slides</p></li>
+<li><p><strong>output_path</strong> – path to save output file</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>path</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.data_manager.save_plot">
+<code class="sig-prename descclassname">tools.helpers.data_manager.</code><code class="sig-name descname">save_plot</code><span class="sig-paren">(</span><em class="sig-param">plot_path</em>, <em class="sig-param">overwrite='overwrite'</em>, <em class="sig-param">**save_file_kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.data_manager.save_plot" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="tools.helpers.data_manager.save_error_graph">
+<code class="sig-prename descclassname">tools.helpers.data_manager.</code><code class="sig-name descname">save_error_graph</code><span class="sig-paren">(</span><em class="sig-param">plot_path</em>, <em class="sig-param">err_msg=None</em>, <em class="sig-param">**save_file_kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#tools.helpers.data_manager.save_error_graph" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">tools.helpers.data_manager package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.data_manager.data_loader">tools.helpers.data_manager.data_loader module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.data_manager.data_writer">tools.helpers.data_manager.data_writer module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.data_manager.file_utils">tools.helpers.data_manager.file_utils module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.data_manager.filepath_manager">tools.helpers.data_manager.filepath_manager module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.data_manager.plots">tools.helpers.data_manager.plots module</a></li>
+<li><a class="reference internal" href="#module-tools.helpers.data_manager">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tools.helpers.config_manager.html"
+                        title="previous chapter">tools.helpers.config_manager package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tools.helpers.interface.html"
+                        title="next chapter">tools.helpers.interface package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/source/tools.helpers.data_manager.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.interface.html" title="tools.helpers.interface package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tools.helpers.config_manager.html" title="tools.helpers.config_manager package"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Main tools 1.3.0 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >python_utils</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="tools.html" >tools package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="tools.helpers.html" >tools.helpers package</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright open source.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    </div>
+  </body>
+</html>

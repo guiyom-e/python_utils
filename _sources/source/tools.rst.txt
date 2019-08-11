@@ -1,0 +1,38 @@
+tools package
+=============
+
+Subpackages
+-----------
+
+.. toctree::
+
+   tools.helpers
+   tools.tests
+
+Submodules
+----------
+
+tools.exceptions module
+-----------------------
+
+.. automodule:: tools.exceptions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+tools.logger module
+-------------------
+
+.. automodule:: tools.logger
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: tools
+   :members:
+   :undoc-members:
+   :show-inheritance:
