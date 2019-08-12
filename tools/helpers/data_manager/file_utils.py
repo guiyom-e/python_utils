@@ -3,6 +3,8 @@
 """
 Utils linked to files.
 """
+import datetime
+import os
 from typing import Union, Dict
 
 from tools.logger import logger
@@ -119,3 +121,45 @@ def check_extension(path: Union[Path, list, tuple, set], extension=None,
         return False
     raise_bad_extension_anomaly(flag=check_ext, msg=msg)
     return True
+
+
+def get_path_metadata(path, metadata_dict=None):
+    """Returns a dictionary with path information:
+    'path', 'abspath' and 'exists' in all cases;
+    'isabs' (os.path.isabs), 'type' (one of 'dir', 'file', 'link', 'unknown'),
+    'creation_date', 'access_date', 'modification_date', 'size' (in bytes),
+    'readable', 'writable' and 'executable' attributes
+    if the path exists.
+
+    If metadata_dict argument exists and is a dictionary, modify it in place."""
+    metadata_dict = metadata_dict if isinstance(metadata_dict, dict) else {}
+    if os.path.isdir(path):
+        type_path = 'dir'
+    elif os.path.isfile(path):
+        type_path = 'file'
+    elif os.path.islink(path):
+        type_path = 'link'
+    else:
+        type_path = 'unknown'
+    if os.path.exists(path):  # equivalent to Path(path).exists
+        metadata_dict.update({
+            'path': path,
+            'abspath': os.path.abspath(path),
+            'exists': True,
+            'isabs': os.path.isabs(path),
+            'type': type_path,
+            'creation_date': datetime.datetime.fromtimestamp(os.path.getctime(path)),  # datetime type
+            'access_date': datetime.datetime.fromtimestamp(os.path.getatime(path)),  # datetime type
+            'modification_date': datetime.datetime.fromtimestamp(os.path.getmtime(path)),  # datetime type
+            'size': os.path.getsize(path),  # size in bytes
+            'readable': os.access(path, os.R_OK),
+            'writable': os.access(path, os.W_OK),
+            'executable': os.access(path, os.X_OK),
+        })
+    else:
+        metadata_dict.update({
+            'path': path,
+            'abspath': os.path.abspath(path),
+            'exists': False,
+        })
+    return metadata_dict

@@ -8,7 +8,7 @@ import pandas as pd
 from tools.logger import logger
 from tools.helpers.models import Path
 from tools.helpers.interface import messagebox
-from tools.helpers.data_manager.file_utils import check_path_arguments
+from tools.helpers.data_manager.file_utils import check_path_arguments, get_path_metadata
 from tools.helpers.data_manager.filepath_manager import open_file, handle_permission_error
 
 
@@ -16,6 +16,9 @@ def _read_csv(path, **kwargs):
     """CSV reader based on pandas.read_csv, handling permission errors."""
     try:
         df = pd.read_csv(path, **kwargs)
+        metadata_dict = kwargs.get('metadata_dict', None)
+        if metadata_dict:
+            get_path_metadata(path, metadata_dict)
     except PermissionError as err:
         df = handle_permission_error(err, func=_read_csv, path=path, kwargs=kwargs, change_path_func=open_file)
     return df
@@ -25,6 +28,9 @@ def _read_excel(path, sheet_name=0, **kwargs):
     """Excel reader based on pandas.read_excel, handling permission errors."""
     try:
         df = pd.read_excel(path, sheet_name=sheet_name, **kwargs)
+        metadata_dict = kwargs.get('metadata_dict', None)
+        if metadata_dict:
+            get_path_metadata(path, metadata_dict)
     except PermissionError as err:
         kwargs.update({'sheet_name': sheet_name})
         df = handle_permission_error(err, func=_read_excel, path=path, kwargs=kwargs, change_path_func=open_file)
@@ -32,8 +38,8 @@ def _read_excel(path, sheet_name=0, **kwargs):
 
 
 def read_data_file(path=None, config_dict=None, config_key=None, date_columns=None, sheet_name=0,
-                   check_path=False, ask_header=False, behaviour_on_error='error', open_file_kwargs=None,
-                   read_kwargs=None, to_datetime_kwargs=None):
+                   check_path=False, metadata_dict=None, ask_header=False, behaviour_on_error='error',
+                   open_file_kwargs=None, read_kwargs=None, to_datetime_kwargs=None):
     """Returns a dataframe with the content of the selected CSV or Excel file.
 
     :param path: file path. Must be CSV or Excel file (to be checked before with 'open_file' function).
@@ -42,6 +48,7 @@ def read_data_file(path=None, config_dict=None, config_key=None, date_columns=No
     :param date_columns: column or list of columns to format as datetime
     :param sheet_name: name or index of the Excel sheet (not used for CSV)
     :param check_path: if True, use open_file to check path
+    :param metadata_dict: dictionary-like object updated with the actual metadata of the opened file
     :param ask_header: if True and key 'header' is not in read_kwargs, ask whether the file has a header or not
                        and update read_kwargs['header'] to 0 or None.
     :param behaviour_on_error: 'error' (default): raise an error, 'ignore': return None
@@ -51,6 +58,7 @@ def read_data_file(path=None, config_dict=None, config_key=None, date_columns=No
     :return:
     """
     path = check_path_arguments(path, config_dict, config_key)
+    metadata_dict = metadata_dict or {}
     open_file_kwargs = open_file_kwargs or {}
     to_datetime_kwargs = to_datetime_kwargs or {}
     read_kwargs = read_kwargs or {}
@@ -73,7 +81,7 @@ def read_data_file(path=None, config_dict=None, config_key=None, date_columns=No
 
     # CSV or text file. WARN: text files must be encoded properly!
     if ext in ['.csv', '.txt']:
-        df = _read_csv(path, **read_kwargs)
+        df = _read_csv(path, metadata_dict=metadata_dict, **read_kwargs)
         logger.debug('File {} loaded in pandas dataframe.'.format(path))
         if date_columns:
             if isinstance(date_columns, str):
@@ -88,7 +96,7 @@ def read_data_file(path=None, config_dict=None, config_key=None, date_columns=No
 
     # Excel file
     if ext.startswith('.xls'):
-        df = _read_excel(path, sheet_name=sheet_name, **read_kwargs)
+        df = _read_excel(path, sheet_name=sheet_name, metadata_dict=metadata_dict, **read_kwargs)
         logger.debug('File {} loaded in pandas dataframe.'.format(path))
         if config_dict:  # save path in config dict
             config_dict[config_key] = path
