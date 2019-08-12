@@ -3,7 +3,7 @@
 """
 Advanced utils that may need import of other modules.
 
-Modules: date_utils, dataframe_utils
+Modules: date_utils, dataframe_utils, text_utils
 """
 from tools.helpers.advanced_utils.date_utils import (get_period, get_periods, get_quarter, reset_month, reset_week,
                                                      add_period, add_month, add_week, STRFTIME_DICT)

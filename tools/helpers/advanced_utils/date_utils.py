@@ -23,7 +23,7 @@ STRFTIME_DICT = {'year': "%Y", "month": "%Y-%m", "quarter": "%Y-%m",
                  "day": "%Y-%m-%d", None: "%Y-%m-%d",
                  "hour": "%H:%M", "minute": "%H:%M", "second": "%H:%M:%S"}
 
-# todo: integrate pandas.date_range
+# todo: integrate pandas.date_range?
 
 # Reset time
 @handle_datetime_dataframe
