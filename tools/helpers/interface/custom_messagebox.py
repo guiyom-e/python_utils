@@ -57,7 +57,7 @@ class CustomQuestionFrame(ttk.Frame):
         self.result = None  # Result var
         self.result_keys = ''
         self.result_str = ''
-        self.change_res = tk.IntVar(value=0)
+        self.change_res = tk.IntVar(self, value=0)
         self._auto_destroy = auto_quit
         message = '' if message is None else message
         self._choices = _format_list_to_dict(_format_answers(choices), default_key='value')

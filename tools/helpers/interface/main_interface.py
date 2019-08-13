@@ -127,7 +127,7 @@ class MainTk(CustomTk):
         # Info frame
         self.info_frame = ttk.Frame(master=self)
         self.info_frame.pack(fill=tk.BOTH, expand=True)
-        self.func_text = tk.StringVar()
+        self.func_text = tk.StringVar(self)
         self.func_label = ttk.Label(master=self.info_frame, textvariable=self.func_text)
         self.func_label.grid(row=0, column=0, sticky=tk.W)
         self.progressbar = ttk.Progressbar(master=self.info_frame, mode='indeterminate', length=200, value=0)

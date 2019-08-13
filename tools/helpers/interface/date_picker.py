@@ -91,7 +91,7 @@ class Calendar(ttk.Frame):
 
         self._font = tkFont.Font(master)
 
-        self._header_var = StringVar()
+        self._header_var = StringVar(master)
 
         # header frame and its widgets
         hframe = ttk.Frame(self)
@@ -431,7 +431,7 @@ class Datepicker(ttk.Entry):
 
     @current_text.setter
     def current_text(self, text):
-        return self.date_var.set(text)
+        self.date_var.set(text)
 
     @property
     def current_date(self):
@@ -509,7 +509,18 @@ class Datepicker(ttk.Entry):
 class DatePickerFrame(ttk.Frame):
     """Integration of DatePicker in a Frame"""
 
-    def __init__(self, master=None, message: str = None, initial_value=None, dateformat=None, **options):
+    def _init_date_picker(self, initial_value):
+        if initial_value is None:
+            initial_value = datetime.datetime.now()
+        if isinstance(initial_value, datetime.datetime):
+            self.date_picker.current_date = initial_value
+            self.date_picker.current_text = initial_value.strftime(self.dateformat)
+        else:
+            self.date_picker.current_date = None
+            self.date_picker.current_text = ""
+
+    def __init__(self, master=None, message: str = None, initial_value=None,
+                 dateformat=None, **options):
         """Initialization method
 
         :param master: parent ttk Frame object
@@ -525,13 +536,9 @@ class DatePickerFrame(ttk.Frame):
         self.label_msg = ttk.Label(master=self, text=message, wraplengt=290, justify="left", )
         self.label_msg.grid(row=0, column=0, sticky='new', padx=5)
 
-        dateformat = dateformat or "%Y-%m-%d"
-        self.date_picker = Datepicker(self, dateformat=dateformat)
-        if initial_value is None:
-            initial_value = datetime.datetime.now()
-        if isinstance(initial_value, datetime.datetime):
-            self.date_picker.current_date = initial_value
-            self.date_picker.current_text = initial_value.strftime(dateformat)
+        self.dateformat = dateformat or "%Y-%m-%d"
+        self.date_picker = Datepicker(self, dateformat=self.dateformat)
+        self._init_date_picker(initial_value)
         self.date_picker.grid(row=1, column=0, sticky=N + W, pady=5, padx=5)
         self.grid_columnconfigure(0, pad=110, weight=1)
         self.grid_rowconfigure(1, pad=180, weight=1)

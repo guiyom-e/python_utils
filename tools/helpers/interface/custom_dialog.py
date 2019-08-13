@@ -93,7 +93,7 @@ class CheckBoxFrame(ttk.Frame):
         self.label_msg.grid(row=0, column=0, sticky='new', padx=5)
         self._choices = _format_list_to_dict(choices, default_key='value')
 
-        self.all_var, self.none_var = tk.BooleanVar(value=False), tk.BooleanVar(value=False)
+        self.all_var, self.none_var = tk.BooleanVar(self, value=False), tk.BooleanVar(self, value=False)
         all_but = ttk.Checkbutton(master=self, text="[All]", variable=self.all_var, command=self.all_command)
         all_but.grid(row=1, column=0)
         none_but = ttk.Checkbutton(master=self, text="[None]", variable=self.none_var, command=self.none_command)
@@ -105,7 +105,7 @@ class CheckBoxFrame(ttk.Frame):
             name = str(config.get('name', config['value']))
             status = config.get('status', initial_status)
             tooltip = str(config.get('tooltip', ""))
-            config['var'] = tk.BooleanVar(value=status)
+            config['var'] = tk.BooleanVar(self, value=status)
             box = ttk.Checkbutton(master=self._ans_frame, text=name, variable=config['var'], command=self.check)
             if tooltip:
                 ToolTip(box, tooltip)
@@ -169,7 +169,7 @@ class RadioButtonFrame(ttk.Frame):
         self.label_msg.grid(row=0, column=0, sticky='new', padx=5)
         self._choices = _format_list_to_dict(choices, default_key='value')
 
-        self._var = tk.Variable(value=initial_value)
+        self._var = tk.Variable(self, value=initial_value)
         self._changes, self._initial_value = 0, initial_value  # handle case of no choice
         self._ans_frame = ttk.Frame(master=self)
         self._ans_frame.grid(row=0, column=2, rowspan=2, sticky='e')
