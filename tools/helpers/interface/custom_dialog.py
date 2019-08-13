@@ -321,25 +321,28 @@ class MultiSelectorDialog(CustomDialog):
 @dialog_function(OptionMenuDialog)
 def ask_option(title: str = None, message: str = None, choices: Union[list, dict] = None,
                initial_value: bool = None, **options):
-    pass
+    return initial_value
 
 
 @dialog_function(CheckBoxSelectorDialog)
 def ask_checkbox(title: str = None, message: str = None, choices: Union[list, dict] = None,
                  initial_status: bool = None, **options):
-    pass
+    return choices if initial_status else []
 
 
 @dialog_function(RadioSelectorDialog)
 def ask_radio_button(title: str = None, message: str = None, choices: Union[list, dict] = None,
                      initial_value: bool = None, **options):
-    pass
+    return initial_value
 
 
 @dialog_function(MultiSelectorDialog)
 def ask_multiple_questions(title: str = None, message: str = None, choices: Union[list, dict] = None,
-                           initial_status: bool = False, **options):
-    pass
+                           initial_status: bool = False, initial_value=None, nb_columns=10,
+                           date_start=None, date_end=None, dateformat=None,
+                           default_box_type='check_box', max_width=1500, max_height=500, **options):
+    logger.debug("No default answer for 'ask_multiple_questions' dialog. None value is returned.")
+    return None
 
 
 if __name__ == '__main__':

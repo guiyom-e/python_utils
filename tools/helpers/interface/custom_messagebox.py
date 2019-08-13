@@ -7,6 +7,7 @@ from typing import Union
 import tkinter as tk
 from tkinter import ttk
 
+from tools.logger import logger
 from tools.helpers.utils import isiterable
 from tools.helpers.interface.wrappers import dialog_function, CustomDialog, frame_integration, _format_list_to_dict
 from tools.helpers.interface.tooltip import ToolTip
@@ -111,7 +112,8 @@ class CustomQuestionDialog(CustomDialog):
 
 @dialog_function(CustomQuestionDialog)
 def ask_custom_question(title: str = None, message: str = None, choices: Union[list, dict] = None, **options):
-    pass
+    logger.debug("No default answer for 'ask_custom_question' dialog. None value is returned.")
+    return None
 
 
 # For testing purposes

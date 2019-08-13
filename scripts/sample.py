@@ -1,7 +1,7 @@
 import os
 
 from tools.logger import logger
-from tools.helpers.interface import messagebox, get_user_date
+from tools.helpers.interface import messagebox, simpledialog
 
 
 def try_it():
@@ -24,5 +24,9 @@ def try_it():
     logger.info("No error was raised!")
 
     # Test get_user_date
-    message = "This is the end of this sample script ending at {}".format(get_user_date(bypass_dialog=True))
+    message = "This is the end of this sample script ending at {}".format(simpledialog.askdate(bypass_dialog=True))
     messagebox.showinfo(title="This is already the end...", message=message)
+
+
+if __name__ == '__main__':
+    try_it()

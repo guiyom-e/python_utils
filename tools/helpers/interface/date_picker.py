@@ -527,7 +527,7 @@ class DatePickerFrame(ttk.Frame):
         :param message: message to show before the selection
         :param initial_value: default date. If None, the date of the day is used.
         :param dateformat: date format string (ISO 8601 format "%Y-%m-%d by default)
-        :param allow_empty: if True, empty dates are allowed (considered as None values)
+        :param bypass_dialog: if True, the initial_value is directly returned without dialog
         :param options: options for parent
         """
         # Init
@@ -665,14 +665,36 @@ class DateSelectorDialog(CustomDialog):
 
 @dialog_function(DatePickerDialog)
 def askdate(title: str = None, message: str = None, initial_value: datetime.datetime = None, **options):
-    pass
+    """Ask a date to the user.
+
+    :param title: window title
+    :param message: message to show before the entry of dialog
+    :param initial_value: first date to show in the entry of dialog. If None the current date is used.
+    :param bypass_dialog: if True, no dialog is opened and the function is executed, returning either:
+        * initial_value if initial_value is as date (datetime.datetime type)
+        * the current date if initial_value is None
+        * None in the other cases
+    :param options: options for the dialog class
+    :return: datetime.datetime object or None
+    """
+    if initial_value is None:
+        initial_value = datetime.datetime.now()
+    if not isinstance(initial_value, datetime.datetime):
+        initial_value = None
+    return initial_value
 
 
 @dialog_function(DateSelectorDialog)
 def askperiod(title: str = None, message: str = None, mode: str = 'auto', choices: Union[list, dict] = None,
               date_start: datetime.datetime = None, date_end: datetime.datetime = None, dateformat: str = None,
               **options):
-    pass
+    if mode == 'auto':
+        mode = 'filter' if choices else 'tuple'
+    if mode == 'tuple':
+        return date_start, date_end
+    else:
+        logger.debug("No default answer for 'askperiod' dialog with mode 'filter'. None value is returned.")
+        return None
 
 
 class MainDateTk(CustomTk):  # obsolete

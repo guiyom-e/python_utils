@@ -263,12 +263,15 @@ def integrate_frame_in_dialog(frame, okcancel=False, base_dialog=CustomDialog):
 def dialog_function(dialog_cls):
     """Decorator wrapper to create a function that open a dialog window and returns its result.
 
-    The function is completely overwritten, except its signature and docstring (see functools.wraps)
+    The function is completely overwritten, except its signature and docstring (see functools.wraps),
+    except if the keyword argument 'bypass_dialog' is set to True. In this case, the original function is executed.
     """
 
     def wrapper(func):
         @functools.wraps(func)
         def n_func(*args, **kwargs):
+            if kwargs.get('bypass_dialog', False):
+                return func(*args, **kwargs)
             root = Tk()
             root.withdraw()
             dialog = dialog_cls(root, *args, **kwargs)
