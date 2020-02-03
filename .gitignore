@@ -1,17 +1,36 @@
+# virtual environments
 /tools/venv
 /venv
-/tools/venv/
-/tools/logs/
-/docs/developer_doc/
-/docs/.config/source
-/dist/
-/build/
+
+# builds, except configurations and specifications
+/dist/*
+/build/*
 !/build/*.iss
 !/build/main.spec
+!/build/*.txt
+
+# data
+/data/*
+
+# auto-generated developer documentation
+/docs/developer_doc/
+/docs/.config/source
+
+# logs
+/tools/logs/*
+
+# python cache
 **/__pycache__/
-**/.old/
-/data/
-!/**/.keep
-.idea/
-*.exe
 *.pyc
+
+# Pycharm configuration
+.idea/*
+
+# Windows executables
+*.exe
+
+# .old directory
+**/.old/*
+
+# keep .keep files
+!/**/.keep
