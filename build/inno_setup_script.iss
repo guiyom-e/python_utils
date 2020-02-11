@@ -54,6 +54,7 @@ Source: "../scripts/*"; DestDir: "{app}\tools\src\scripts"; Flags: ignoreversion
 Source: "../main.py"; DestDir: "{app}\tools\src"; Flags: ignoreversion
 Source: "../requirements.txt"; DestDir: "{app}\tools\src"; Flags: ignoreversion
 Source: "../README.md"; DestDir: "{app}\tools\src"; Flags: ignoreversion
+Source: "../README.rst"; DestDir: "{app}\tools\src"; Flags: ignoreversion
 
 
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files

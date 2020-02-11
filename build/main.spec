@@ -10,7 +10,7 @@ if distutils.distutils_path.endswith('__init__.py'):
     distutils.distutils_path = os.path.dirname(distutils.distutils_path)
 
 a = Analysis(['../main.py'],
-             pathex=['..'],  # TODO: path to set
+             pathex=[],
              binaries=[],
              datas=[('../tools', '../tools/')], # if needed, also add: ('../venv/Lib/site-packages/pptx/templates/default.pptx', 'pptx/templates/')
              hiddenimports = [],

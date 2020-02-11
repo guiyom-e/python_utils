@@ -6,17 +6,23 @@
 .. highlight:: python
    :linenothreshold: 5
 
-Main tools' documentation
-#########################
+Python utils documentation
+##########################
+
+.. include README.md.
+   It is possible to include markdown thanks to m2r module, using mdinclude
+.. mdinclude:: ../../README.md
 
 Project overview
 ================
 
 .. toctree::
-   :maxdepth: 5
+   :maxdepth: 8
    :titlesonly:
 
-   source/includeme.rst
+   source/get_started.rst
+
+   source/troubleshooting.rst
 
    source/modules.rst
 
@@ -27,10 +33,8 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
-Get started
-===========
-
-.. include:: source/includeme.rst
+.. Include the content of README.rst
+.. include:: ../../README.rst
 
 Examples
 ========

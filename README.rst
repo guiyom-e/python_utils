@@ -1,35 +1,23 @@
-Overview
-========
-
-This repository contains multiple python utils, such as:
-
-* a simple tkinter GUI and enhanced message boxes,
-* a configuration manager,
-* file and dataframe managers,
-* a logger,
-* date utils,
-* various other models or utils.
-
 Basic installation
 ==================
 
-1. Install python 3.5+
+1. Install python 3.5+ (Python 3.7+ recommended in 1.4+ version)
 
-* For Windows, it is possible to install WinPython for example : https://winpython.github.io/
-    Prefer not to use Anaconda as some issues have already occurred with ``pandas`` / ``numpy`` libraries.
-* For Linux distributions based on Debian, ``sudo apt-get install python3`` should work as well.
+ * For Windows, it is possible to install WinPython for example : https://winpython.github.io/
+ * For Linux distributions based on Debian, ``sudo apt-get install python3`` should work as well.
 
 2. Preferably install a virtual environment in ``venv/``
 
-* Open a terminal (cmd in Windows)
-* Type ``pip install virtualenv`` or ``python3 -m pip install virtualenv`` (Linux) / ``python -m pip install virtualenv`` (Windows)
-* Type ``virtualenv venv`` (precise the version of python to use if needed)
+ * Open a terminal (cmd in Windows)
+ * Type ``pip install virtualenv`` or ``python3 -m pip install virtualenv`` (Linux) / ``python -m pip install virtualenv`` (Windows)
+ * Type ``virtualenv venv`` (precise the version of python to use if needed)
 
 3. Install requirements in the virtual environment:
-    ``source tools/venv/Scripts/activate`` (Windows)  or
-    ``source tools/venv/bin/activate`` (Linux)
 
-    ``pip install - requirements.txt``
+ * ``tools/venv/Scripts/activate.bat`` (Windows)  or
+   ``source tools/venv/bin/activate`` (Linux)
+
+ * ``pip install -r requirements.txt``
 
 4. You're done!
 
@@ -45,12 +33,21 @@ To update auto-generated documentation, run ``setup.bat`` (root directory) and s
 
 Linux
 -----
-To update auto-generated documentation, use ``docs/.sphinx_config/Makefile``:
+To update auto-generated documentation, use ``docs/.config/Makefile``:
 
 ::
 
-    cd docs/.sphinx_config/
+    cd docs/.config/
     make html
+
+.. note::
+
+    To re-generate Python packages documentation,
+    when a new module is created for example, delete the unwanted files in ``docs/.config/sources``
+    and run the following commands:
+    ::
+        cd docs/.config/
+        sphinx-apidoc -o source ../../
 
 .. note:: To update github documentation with gh-pages, first configure a repo ``python_utils_docs`` next to
           ``python_utils`` (see https://daler.github.io/sphinxdoc-test/includeme.html ),
@@ -112,6 +109,7 @@ in ``docs/`` or ``build/``.
     |-- .gitignore
     |-- main.bat                    <-- launches main.py
     |-- main.py                     <-- main python file
-    |-- README.rst                  <-- readme
+    |-- README.md                   <-- readme (markdown, overview)
+    |-- README.rst                  <-- readme (ReST, installation process)
     |-- requirements.txt            <-- python requirements
     `-- setup.bat                   <-- script to create an executable version (Windows)

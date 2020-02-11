@@ -163,7 +163,8 @@ This bug can be linked to temporary files created by previous versions.
 
 Ignore all these errors.
 Quit the program.
-Delete C:\Users\USER~1\AppData\Local\Temp\_MEIXXXXXX directory.
-Delete all directories and files in C:\Users\USER~1\AppData\Local\Temp\ that are present in the root of the Python project.
+Delete ``C:\Users\USER~1\AppData\Local\Temp\_MEIXXXXXX`` directory.
+Delete all directories and files in ``C:\Users\USER~1\AppData\Local\Temp\`` that are present
+in the root of the Python project.
 In case of doubt, it is also possible to delete temporary files using recommended cleaning tools and reboot.
 

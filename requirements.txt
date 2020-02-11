@@ -47,6 +47,7 @@ kiwisolver==1.0.1
 lazy-object-proxy==1.4.1
 lxml==4.3.3
 macholib==1.11
+m2r==0.2.1
 MarkupSafe==1.1.1
 matplotlib==3.0.3
 mccabe==0.6.1
@@ -96,7 +97,8 @@ selenium==3.141.0
 Send2Trash==1.5.0
 six==1.12.0
 snowballstemmer==1.9.0
-Sphinx==2.1.2
+Sphinx==2.4.0
+sphinx-autodoc-typehints==1.10.3
 sphinx-rtd-theme==0.4.3
 sphinxcontrib-applehelp==1.0.1
 sphinxcontrib-devhelp==1.0.1

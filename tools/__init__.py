@@ -62,7 +62,7 @@ except ImportError as err:
     pdb.set_trace()
 
 __version__ = '1.3.0'
-__description__ = "Main tools"
+__description__ = "Python utils"
 
 __icon__ = '\n'
 
