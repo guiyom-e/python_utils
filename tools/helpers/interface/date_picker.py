@@ -15,15 +15,13 @@ import datetime
 import pandas as pd
 from typing import Union, List, Tuple  # not compatible with Python2
 
-import tkinter as Tkinter
+import tkinter as tk
 import tkinter.font as tkFont
 import tkinter.ttk as ttk
 
 from tkinter.constants import CENTER, LEFT, N, E, W, S
 from tkinter import StringVar
-from tkinter import Tk, Frame, Label
-from tkinter import TclError
-from tkinter import messagebox
+from tkinter import messagebox  # original messagebox from tkinter
 
 from tools.logger import logger
 from tools.helpers.interface.basics import CustomTk
@@ -114,7 +112,7 @@ class Calendar(ttk.Frame):
 
         for i in range(6):
             for j in range(7):
-                self._day_labels[i, j] = label = Tkinter.Label(self, background="white")
+                self._day_labels[i, j] = label = tk.Label(self, background="white")
 
                 label.grid(row=i + 2, column=j, sticky=N + E + W + S)
                 label.bind("<Enter>",
@@ -352,7 +350,7 @@ class Datepicker(ttk.Entry):
         if datevar is not None:
             self.date_var = datevar
         else:
-            self.date_var = Tkinter.StringVar(master)
+            self.date_var = tk.StringVar(master)
 
         entry_config = {}
         if entrywidth is not None:
@@ -516,7 +514,7 @@ class DatePickerFrame(ttk.Frame):
             self.date_picker.current_date = initial_value
             self.date_picker.current_text = initial_value.strftime(self.dateformat)
         else:
-            self.date_picker.current_date = None
+            self.date_picker.date_var.set(None)
             self.date_picker.current_text = ""
 
     def __init__(self, master=None, message: str = None, initial_value=None,
@@ -723,8 +721,8 @@ class DatePickerTk(MainDateTk):  # obsolete
         self.geometry("400x250")
         self.title(title)
 
-        self.main_frame = Frame(self, pady=15, padx=15)
-        self.main_frame.pack(expand=True, fill="both")
+        self.main_frame = ttk.Frame(self)
+        self.main_frame.pack(expand=True, fill="both", pady=15, padx=15)
 
         ttk.Label(self.main_frame, justify="left", text=message).grid(row=0, columnspan=2, sticky=W + E)
 
