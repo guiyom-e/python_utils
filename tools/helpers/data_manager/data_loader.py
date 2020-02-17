@@ -15,10 +15,11 @@ from tools.helpers.data_manager.filepath_manager import open_file, handle_permis
 def _read_csv(path, **kwargs):
     """CSV reader based on pandas.read_csv, handling permission errors."""
     try:
+        metadata_dict = kwargs.pop('metadata_dict', None)
         df = pd.read_csv(path, **kwargs)
-        metadata_dict = kwargs.get('metadata_dict', None)
         if metadata_dict:
             get_path_metadata(path, metadata_dict)
+            kwargs['metadata_dict'] = True
     except PermissionError as err:
         df = handle_permission_error(err, func=_read_csv, path=path, kwargs=kwargs, change_path_func=open_file)
     return df
@@ -27,10 +28,11 @@ def _read_csv(path, **kwargs):
 def _read_excel(path, sheet_name=0, **kwargs):
     """Excel reader based on pandas.read_excel, handling permission errors."""
     try:
+        metadata_dict = kwargs.pop('metadata_dict', None)
         df = pd.read_excel(path, sheet_name=sheet_name, **kwargs)
-        metadata_dict = kwargs.get('metadata_dict', None)
         if metadata_dict:
             get_path_metadata(path, metadata_dict)
+            kwargs['metadata_dict'] = True
     except PermissionError as err:
         kwargs.update({'sheet_name': sheet_name})
         df = handle_permission_error(err, func=_read_excel, path=path, kwargs=kwargs, change_path_func=open_file)
@@ -79,6 +81,7 @@ def read_data_file(path=None, config_dict=None, config_key=None, date_columns=No
         res = messagebox.askyesno(title="Header", message=msg)
         read_kwargs['header'] = 0 if res else None  # only level 0 can be a header
 
+    logger.debug("Loading file '{}'...".format(path))
     # CSV or text file. WARN: text files must be encoded properly!
     if ext in ['.csv', '.txt']:
         df = _read_csv(path, metadata_dict=metadata_dict, **read_kwargs)
