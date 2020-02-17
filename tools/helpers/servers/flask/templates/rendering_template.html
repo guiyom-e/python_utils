@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rendering template</title>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'hello.js') }}"></script>
+</head>
+<body>
+
+<h2>If condition: score must be above 100 to pass</h2>
+{% if score>100 %}
+<b> Your score is {{score}}: you passed!</b>
+{% else %}
+<b>Your score is {{score}}: you failed!</b>
+{% endif %}
+
+<h2>Table with dict</h2>
+<table border=1>
+    {% for key, value in dico.items() %}
+    <tr>
+        <th> {{ key }}</th>
+        <td> {{ value }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>Run javascript file in static/hello.js</h2>
+<input type="button" onclick="hello('{{ name }}')" value="Press me!"/>
+
+</body>
+</html>
