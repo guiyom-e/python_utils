@@ -88,7 +88,7 @@ class BaseDict:
         return self._cfg.items()
 
     def update(self, other):
-        self.update(other)
+        self._cfg.update(other)
         return None
 
     def pop(self, item, default=None):
