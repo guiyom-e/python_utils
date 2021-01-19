@@ -3,14 +3,27 @@
 """
 Frame, dialog and Tk window with text in it.
 """
-from tkinter import ttk, Scrollbar, N, S, E, Text, W, END, BOTH
+from tkinter import ttk, Scrollbar, N, S, E, Text, W, END, BOTH, NONE, CHAR, WORD
+from typing import Union
+
 from tools.helpers.interface.basics import CustomTk
 from tools.helpers.interface.wrappers import frame_integration, dialog_function, CustomDialog
 
 
 class TextFrame(ttk.Frame):
     """Frame with text in it."""
-    def __init__(self, master=None, text="", height=600, width=500, **options):
+
+    def __init__(self, master=None, text="", height=600, width=500, wrap=CHAR, **options):
+        """Display a frame with text.
+
+        :param master: master component
+        :param text: text to display
+        :param height: height of the text frame
+        :param width: width of the text frame
+        :param wrap: whether to allow text wrapping. Can be CHAR (default), WORD (or True) or NONE (or False).
+        If wrap is NONE (or False), a scrollbar is added on x axis.
+        :param options: options to pass to the tkinter Frame
+        """
         super().__init__(master, height=height, width=width, **options)
         self.grid_propagate(0)
 
@@ -18,10 +31,24 @@ class TextFrame(ttk.Frame):
         self.columnconfigure(1, weight=0)
         self.rowconfigure(0, weight=1)
 
-        self.scrollbar = Scrollbar(self)
-        self.scrollbar.grid(row=0, column=1, sticky=(N, S, E))
+        self.scrollbar_y = Scrollbar(self)
 
-        self.text = Text(self, yscrollcommand=self.scrollbar.set)
+        if wrap in (False, None, NONE):
+            wrap = NONE
+            show_scrollbar_x = True
+        else:
+            if wrap is True:
+                wrap = WORD
+            show_scrollbar_x = False
+
+        if show_scrollbar_x:
+            self.scrollbar_y.grid(row=0, column=1, rowspan=2, sticky=(N, S, E))
+            self.scrollbar_x = Scrollbar(self, orient='horizontal')
+            self.scrollbar_x.grid(row=1, column=0, columnspan=2, sticky=(S, E, W))
+            self.text = Text(self, yscrollcommand=self.scrollbar_y.set, xscrollcommand=self.scrollbar_x.set, wrap=wrap)
+        else:
+            self.scrollbar_y.grid(row=0, column=1, sticky=(N, S, E))
+            self.text = Text(self, yscrollcommand=self.scrollbar_y.set, wrap=wrap)
         self.text.grid(row=0, column=0, sticky=(N, S, E, W))
         text = str(text)
         if text:
@@ -29,7 +56,9 @@ class TextFrame(ttk.Frame):
             self.text.insert(END, text)
             self.text.config(state='disabled')
 
-        self.scrollbar.config(command=self.text.yview)
+        self.scrollbar_y.config(command=self.text.yview)
+        if show_scrollbar_x:
+            self.scrollbar_x.config(command=self.text.xview)
 
 
 class TextTk(CustomTk):
@@ -50,7 +79,7 @@ class TextDialog(CustomDialog):
 
 
 @dialog_function(TextDialog)
-def showtext(title: str = None, text: str = None, **options):
+def showtext(title: str = None, text: str = None, wrap: Union[bool, CHAR, WORD, NONE, None] = CHAR, **options):
     """Show a long text in a dialog"""
     pass
 
