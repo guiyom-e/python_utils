@@ -6,7 +6,7 @@ to avoid empty Tk windows that cannot be closed before the end of the program.
 """
 import tkinter as tk
 from collections import OrderedDict
-from typing import List, Tuple, Union
+from typing import List, Tuple, Union, Type
 import functools
 import pandas as pd
 
@@ -223,7 +223,7 @@ class CustomDialog(tk.Toplevel):
         return getattr(self._frame, 'result_keys', None)
 
 
-def frame_integration(frame: ttk.Frame, okcancel=False):
+def frame_integration(frame: Type[ttk.Frame], okcancel=False):
     """Decorator wrapper to create a Tk window class from a Frame class.
 
     >>> class MyFrame(ttk.Frame): pass
@@ -231,7 +231,7 @@ def frame_integration(frame: ttk.Frame, okcancel=False):
     >>> FrameIntegratedInDialog = frame_integration(MyFrame)(MyDialog)
     """
 
-    def class_decorator(cls: CustomDialog):
+    def class_decorator(cls: Type[CustomDialog]):
         """Decorator to integrate the frame into a Dialog class. __init__ method is overwritten."""
 
         class WrappedClass(cls):
