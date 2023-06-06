@@ -21,7 +21,7 @@ defusedxml==0.6.0
 docutils==0.15.2
 Eel==0.10.4
 entrypoints==0.3
-future==0.17.1
+future==0.18.3
 gevent==1.4.0
 gevent-websocket==0.10.1
 greenlet==0.4.15
